@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { Editor, Raw } from "slate";
 
 const styles = {
   root: {
@@ -21,44 +21,73 @@ const styles = {
     textAlign: "center"
   }
 };
-export default class MyEditor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { editorState: EditorState.createEmpty() };
 
-    this.focus = () => this.refs.editor.focus();
-    this.onChange = editorState => this.setState({ editorState });
-    this.logState = () => console.log(this.state.editorState.toJS());
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
-  }
-  handleKeyCommand(command) {
-    const newState = RichUtils.handleKeyCommand(
-      this.state.editorState,
-      command
-    );
-    if (newState) {
-      this.onChange(newState);
-      return "handled";
+const initialState = Raw.deserialize(
+  {
+    nodes: [
+      {
+        kind: "block",
+        type: "paragraph",
+        nodes: [
+          {
+            kind: "text",
+            text: "A line of text in a paragraph."
+          }
+        ]
+      }
+    ]
+  },
+  { terse: true }
+);
+
+function CodeNode(props) {
+  return (
+    <pre {...props.attributes}>
+      <code>
+        {props.children}
+      </code>
+    </pre>
+  );
+}
+
+export default class JEditor extends React.Component {
+  state = {
+    state: initialState,
+    schema: {
+      nodes: {
+        code: CodeNode
+      }
     }
-    return "not-handled";
-  }
-  _onBoldClick() {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "BOLD"));
-  }
-  render() {
+  };
+
+  onChange = state => {
+    this.setState({ state });
+  };
+
+  onKeyDown = (event, data, state) => {
+    if (event.which !== 67 || !event.metaKey || !event.altKey) return;
+
+    event.preventDefault();
+
+    // Determine whether any of the currently selected blocks are code blocks.
+    const isCode = state.blocks.some(block => block.type === "code");
+
+    // Toggle the block type depending on `isCode`.
+    return state.transform().setBlock(isCode ? "paragraph" : "code").apply();
+  };
+
+  render = () => {
     return (
       <div style={styles.root}>
-        <button onClick={this._onBoldClick.bind(this)}>Bold</button>
-        <div style={styles.editor} onClick={this.focus}>
+        <div style={styles.editor}>
           <Editor
-            editorState={this.state.editorState}
-            handleKeyCommand={this.handleKeyCommand}
+            schema={this.state.schema}
+            state={this.state.state}
             onChange={this.onChange}
-            placeholder="Enter some text..."
-            ref="editor"
+            onKeyDown={this.onKeyDown}
           />
         </div>
       </div>
     );
-  }
+  };
 }
