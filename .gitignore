@@ -20,10 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-<<<<<<< HEAD
 # ignore pdfs
 *.pdf
-=======
 
-.vscode/
->>>>>>> 1e1632ae8d301dabec2519f1b184878aec048d0b
+.vscode/*
+.ipynb_checkpoints/
+examples/.ipynb_checkpoints/
