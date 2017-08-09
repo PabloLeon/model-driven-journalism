@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import MapView from "./MapView";
-import LandingQuestion from "./LandingQuestion";
+import Article from "./Article";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <MapView />
-        <LandingQuestion />
-      </div>
+      <Article />
     );
   }
 }

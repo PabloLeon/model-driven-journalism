@@ -1,3 +1,9 @@
-.App {
-  text-align: center;
+h1 {
+    font-family: Prata;
+    font-size: 3em; /* 40px/16=2.5em */
 }
+
+p {
+    font-family: OpenSans;
+}
+
