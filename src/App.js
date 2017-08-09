@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import Editor from "./components/Editor";
-import Autosuggest from "./components/Autosuggest";
 import "./App.css";
+import MapView from "./MapView";
+import LandingQuestion from "./LandingQuestion";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Editor plugins={[<Autosuggest />]} />
+        <MapView />
+        <LandingQuestion />
       </div>
     );
   }
