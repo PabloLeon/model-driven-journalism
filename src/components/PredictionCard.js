@@ -7,6 +7,8 @@ import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavi
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
+import PredictorListing from './PredictorListing';
+
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import ThumbDown from 'material-ui-icons/ThumbDown';
@@ -40,7 +42,7 @@ const styleSheet = createStyleSheet({
 
 class PredictionCard extends Component {
   render() {
-    const { title, avatar, subheader, classes } = this.props;
+    const { title, avatar, subheader, information, classes, predictors } = this.props;
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -58,9 +60,17 @@ class PredictionCard extends Component {
           subheader={subheader}
         />
         <CardContent className={classes.content}>
-          {<Typography component="p">I don't know anything about Nuffield :/</Typography>}
-          Predictors
+          {
+            <div>
+              {/*  TODO: This should be its own component and text should be enriched with contextual information (at least hyperlink style onhover show info) */}
+              <Typography component="p">
+                {information}
+              </Typography>
+              <PredictorListing predictors={predictors} />
+            </div>
+          }
         </CardContent>
+        {/*  TODO: This should be its own component and also needs space for messages */}
         <BottomNavigation onChange={this.handleChange} showLabels>
           <BottomNavigationButton label="Below" icon={<ThumbDown />} />
           <BottomNavigationButton label="Above" icon={<ThumbUp />} />
