@@ -16,4 +16,6 @@ storiesOf('Button', module)
 
 storiesOf('LandingQuestion', module).add('initial', () => <LandingQuestion />);
 
-storiesOf('Prediction card', module).add('Trust card with no predictors', () => <PredictionCard />);
+storiesOf('Prediction card', module).add('Trust card with no predictors', () =>
+  <PredictionCard title={'Nuffield'} />,
+);
