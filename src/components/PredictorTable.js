@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 
 let id = 0;
 const createPrediction = (trustName, guess, trueValue) => {
@@ -75,6 +76,7 @@ class PredictorTable extends React.Component {
                   </TableCell>
                 </TableRow>),
               )}
+            <Divider />
             <TableRow>
               <TableCell>Total</TableCell>
               <TableCell />
