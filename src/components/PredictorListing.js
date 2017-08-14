@@ -5,9 +5,11 @@ import Chip from 'material-ui/Chip';
 import Predictor from './Predictor';
 
 const styleSheet = createStyleSheet({
-  box: {},
-  selected: {},
-  options: {},
+  box: {
+    display: 'flex',
+    justifyContent: 'left',
+    flexWrap: 'wrap',
+  },
 });
 
 // Fixed size box ( 2 columns?! ) that wraps if more than the size
@@ -16,8 +18,9 @@ const styleSheet = createStyleSheet({
 class PredictorListing extends Component {
   render() {
     const { predictors } = this.props;
+    const classes = this.props.classes;
     return (
-      <div>
+      <div className={classes.box}>
         {predictors &&
           predictors.map(predictor =>
             <Predictor text={predictor} context={predictor} key={predictor} />,
