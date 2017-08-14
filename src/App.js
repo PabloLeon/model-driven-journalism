@@ -5,10 +5,11 @@ import Article from './components/Article';
 import PredictionCard from './components/PredictionCard';
 import Predictor from './components/Predictor';
 import PredictorTable from './components/PredictorTable';
+import TextBlock from './components/TextBlock';
 
 class App extends Component {
   render() {
-    return <PredictorTable />;
+    return <TextBlock />;
   }
 }
 export default App;
