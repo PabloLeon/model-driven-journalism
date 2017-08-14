@@ -5,21 +5,6 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
-let id = 0;
-const createPrediction = (trustName, guess, trueValue) => {
-  id += 1;
-  return { id, trustName, guess, trueValue };
-};
-
-// TODO: For now this is simply a boolean onTarget/not on Target
-const predictionsMock = [
-  createPrediction('Northern Devon', true, true),
-  createPrediction('York', false, false),
-  createPrediction('West London', true, false),
-  createPrediction('North London', false, true),
-  createPrediction('Nuffield', true, true),
-];
-
 const styleSheet = createStyleSheet(theme => ({
   paper: {
     width: '100%',

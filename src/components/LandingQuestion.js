@@ -15,7 +15,6 @@ class LandingQuestion extends Component {
         <div style={headerStyle}>
           <h1> Landing Question </h1>
         </div>
-        <p>Some text</p>
       </div>
     );
   }
