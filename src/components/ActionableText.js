@@ -22,6 +22,16 @@ const styleSheet = createStyleSheet(theme => ({
   },
 }));
 
+// TODO: wrapping the contextual element (option or additional info) into
+// an actionable HOC would be the most flexible, as we will end up with
+// different actionable text elements, e.g. geolocation -> actionable
+// geolocation = pick your area, actionable value -> pick a value (e.g. target days)
+// actionable choice -> pick from a set of options
+
+// for all of these we could provide the following options: defaultValue,
+// onMouseOver/MouseOut (e.g. actionable value could be like in tangle)
+// needsAction value
+
 class ActionableText extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +56,7 @@ class ActionableText extends Component {
     const classes = this.props.classes;
 
     return (
-      <div className={classes.text}>
+      <span className={classes.text}>
         <span
           onClick={this.handleClick}
           onMouseOver={this.handleMouseOver}
@@ -56,7 +66,7 @@ class ActionableText extends Component {
           {this.props.text}
         </span>
         {this.props.needsAction && <Feedback className={classes.svgIcon} />}
-      </div>
+      </span>
     );
   }
 }

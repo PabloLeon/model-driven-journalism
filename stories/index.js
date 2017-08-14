@@ -68,7 +68,8 @@ storiesOf('PredictorTable', module)
   .add('One wrong', () => <PredictorTable data={predictionsMock[2]} />)
   .add('Empty', () => <PredictorTable />);
 
-storiesOf('Text Block', module).add('Basic', () => <TextBlock />);
 storiesOf('Actionable Text', module)
   .add('No action needed', () => <ActionableText text="you can do something with me" />)
   .add('Action needed', () => <ActionableText text="I need action!" needsAction />);
+
+storiesOf('Text Block', module).add('Basic', () => <TextBlock />);
