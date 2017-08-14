@@ -12,6 +12,8 @@ import PredictorListing from '../src/components/PredictorListing';
 import Predictor from '../src/components/Predictor';
 import PredictorTable from '../src/components/PredictorTable';
 import TinderNavigation from '../src/components/TinderNavigation';
+import TextBlock from '../src/components/TextBlock';
+import ActionableText from '../src/components/ActionableText';
 
 const predictorMock = [
   'Number of GPs',
@@ -65,3 +67,8 @@ storiesOf('PredictorTable', module)
   .add('One correct', () => <PredictorTable data={predictionsMock[0]} />)
   .add('One wrong', () => <PredictorTable data={predictionsMock[2]} />)
   .add('Empty', () => <PredictorTable />);
+
+storiesOf('Text Block', module).add('Basic', () => <TextBlock />);
+storiesOf('Actionable Text', module)
+  .add('No action needed', () => <ActionableText text="you can do something with me" />)
+  .add('Action needed', () => <ActionableText text="I need action!" needsAction />);
