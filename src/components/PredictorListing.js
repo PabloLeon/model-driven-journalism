@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
+import Predictor from './Predictor';
 
 const styleSheet = createStyleSheet({
   box: {},
@@ -17,7 +18,10 @@ class PredictorListing extends Component {
     const { predictors } = this.props;
     return (
       <div>
-        {predictors && predictors.map(predictor => <Chip label={predictor} key={predictor} />)}
+        {predictors &&
+          predictors.map(predictor =>
+            <Predictor text={predictor} context={predictor} key={predictor} />,
+          )}
       </div>
     );
   }

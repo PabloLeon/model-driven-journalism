@@ -42,7 +42,7 @@ const styleSheet = createStyleSheet({
 
 class PredictionCard extends Component {
   render() {
-    const { title, avatar, subheader, information, classes, predictors } = this.props;
+    const { title, avatar, subheader, img, information, classes, predictors } = this.props;
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -51,12 +51,7 @@ class PredictionCard extends Component {
               {title}
             </Typography>
           }
-          avatar={
-            <Avatar
-              className={classes.avatar}
-              src={'http://www.nuffieldhealthcareers.com/android-chrome-192x192.png'}
-            />
-          }
+          avatar={<Avatar className={classes.avatar} src={img} />}
           subheader={subheader}
         />
         <CardContent className={classes.content}>
