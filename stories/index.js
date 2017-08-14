@@ -11,6 +11,7 @@ import PredictorSelection from '../src/components/PredictorSelection';
 import PredictorListing from '../src/components/PredictorListing';
 import Predictor from '../src/components/Predictor';
 import PredictorTable from '../src/components/PredictorTable';
+import TinderNavigation from '../src/components/TinderNavigation';
 
 const predictorMock = [
   'Number of GPs',
@@ -46,6 +47,8 @@ storiesOf('LandingQuestion', module).add('initial', () => <LandingQuestion />);
 storiesOf('Predictor', module).add('Basic', () =>
   <Predictor text="Test predictor" context="contextual info" />,
 );
+
+storiesOf('Tinder Navigation').add('Basic', () => <TinderNavigation />);
 
 storiesOf('Prediction card', module).add('Trust card with predictors', () =>
   (<PredictionCard
