@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = {
   paper: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: '6em',
     overflowX: 'auto',
   },
-}));
+};
 
 const getTotals = (d) => {
   const length = d.length;
@@ -92,4 +92,4 @@ PredictorTable.propTypes = {
 PredictorTable.defaultProps = {
   data: [],
 };
-export default withStyles(styleSheet)(PredictorTable);
+export default withStyles(styles, { name: 'PredictiorTable' })(PredictorTable);

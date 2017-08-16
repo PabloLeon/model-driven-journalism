@@ -14,6 +14,8 @@ import PredictorTable from '../src/components/PredictorTable';
 import TinderNavigation from '../src/components/TinderNavigation';
 import TextBlock from '../src/components/TextBlock';
 import ActionableText from '../src/components/ActionableText';
+import Article from '../src/components/Article';
+import MapView from '../src/components/MapView';
 
 const predictorMock = [
   'Number of GPs',
@@ -38,11 +40,21 @@ const predictionsMock = [
   createPrediction('Nuffield', true, true),
 ];
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+// we can pass a link to the stories linking to another story by using linkTo("storyname")
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+storiesOf('Maps', module).add('Basic UK overview', () => <MapView />);
+
+// later on we will need to change the logic (how the current page is loaded, for now simply decorate as in the article view)
+storiesOf('Landing Page', module).add('Question with Map', () =>
+  (<div style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center' }}>
+    <LandingQuestion text="Something about the NHS" />
+    <MapView />
+  </div>),
+);
+
+// storiesOf('Button', module)
+//   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
+//   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
 storiesOf('LandingQuestion', module).add('initial', () => <LandingQuestion />);
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
@@ -10,7 +10,7 @@ import Divider from 'material-ui/Divider';
 import PredictorListing from './PredictorListing';
 import TinderNavigation from './TinderNavigation';
 
-const styleSheet = createStyleSheet({
+const styles = {
   card: {
     minWidth: 400,
     maxWidth: 600,
@@ -34,7 +34,7 @@ const styleSheet = createStyleSheet({
     height: 38,
     width: 38,
   },
-});
+};
 
 class PredictionCard extends Component {
   render() {
@@ -68,4 +68,4 @@ class PredictionCard extends Component {
   }
 }
 
-export default withStyles(styleSheet)(PredictionCard);
+export default withStyles(styles, { name: 'PredictionCard' })(PredictionCard);

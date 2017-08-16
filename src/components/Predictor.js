@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
 import grey from 'material-ui/colors/grey';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = {
   chip: {
-    margin: theme.spacing.unit,
+    margin: '4em',
   },
   svgIcon: {
     color: grey[800],
@@ -16,7 +16,7 @@ const styleSheet = createStyleSheet(theme => ({
     justifyContent: 'center',
     flexWrap: 'wrap',
   },
-}));
+};
 
 class Predictor extends Component {
   constructor(props) {
@@ -58,4 +58,4 @@ class Predictor extends Component {
 Predictor.propTypes = {
   onRequestDelete: PropTypes.func.isRequired,
 };
-export default withStyles(styleSheet)(Predictor);
+export default withStyles(styles, { name: 'Predictor' })(Predictor);

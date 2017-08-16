@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Feedback from 'material-ui-icons/Feedback';
+import { withStyles } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = {
   text: {
     textDecoration: 'underline',
   },
@@ -20,7 +20,7 @@ const styleSheet = createStyleSheet(theme => ({
     bottom: '0.25em',
     position: 'relative',
   },
-}));
+};
 
 // TODO: wrapping the contextual element (option or additional info) into
 // an actionable HOC would be the most flexible, as we will end up with
@@ -79,5 +79,4 @@ ActionableText.defaultProps = {
   needsAction: false,
   onClick: () => console.log('action action'),
 };
-
-export default withStyles(styleSheet)(ActionableText);
+export default withStyles(styles, { name: 'ActionableText' })(ActionableText);

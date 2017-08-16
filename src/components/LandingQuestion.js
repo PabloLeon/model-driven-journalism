@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 
-const landingStyle = {
-  position: 'fixed',
-  top: '40%',
-  left: '15%',
+const styles = {
+  box: {
+    position: 'fixed',
+    top: '40%',
+    left: '15%',
+  },
+  header: {
+    fontFamily: 'Prata',
+    color: 'black',
+  },
 };
-const headerStyle = {
-  fontFamily: 'Prata',
-};
+
 class LandingQuestion extends Component {
   render() {
+    const classes = this.props.classes;
     return (
-      <div style={landingStyle}>
-        <div style={headerStyle}>
-          <h1> Landing Question </h1>
-        </div>
+      <div className={classes.box}>
+        <Typography className={classes.header} type="display3" component="h1">
+          {this.props.text}
+        </Typography>
       </div>
     );
   }
 }
 
-export default LandingQuestion;
+LandingQuestion.propTypes = {
+  text: PropTypes.string.isRequired,
+};
+LandingQuestion.defaultProps = {
+  text: 'default text',
+};
+
+export default withStyles(styles, { name: 'LandingQuestion' })(LandingQuestion);

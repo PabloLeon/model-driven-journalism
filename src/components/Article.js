@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
-import PredictionCard from './PredictionCard';
+
+const styles = {
+  container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
+};
 
 class Article extends Component {
   constructor() {
@@ -25,13 +30,17 @@ class Article extends Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
   render() {
+    const classes = this.props.classes;
     return (
-      <div style={{}}>
+      <div className={classes.container}>
+        <LandingQuestion />
         <MapView />
-        <PredictionCard />
       </div>
     );
   }
 }
 
-export default Article;
+Article.propTypes = {};
+Article.defaultProps = {};
+
+export default withStyles(styles, { name: 'Article' })(Article);

@@ -1,42 +1,15 @@
 import React, { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import marksy from 'marksy/components';
-
+import { withStyles } from 'material-ui/styles';
 import ActionableText from './ActionableText';
 
-const defaultText = `
-  The text can contain any **sort of markdown**,
-  ## Subheaders
-  
-  - List items
-  - And another one
-
-  And also custom components, like actionable items:
-
-  **i am actionable, but i don't know how i should pass all my options**
-
-  maybe just by id?
-`;
-// components: {
-//   Action(props) {
-//     return <ActionableText text={props.text} />;
-//   },
-
-const compile = marksy({
-  createElement,
-  elements: {
-    strong({ id, children }) {
-      return <ActionableText text={children} />;
-    },
-  },
-});
-
-const styleSheet = createStyleSheet(theme => ({
+const styles = {
   block: {},
   svgIcon: {},
   choice: {},
-}));
+};
+
+const defaultText = 'Default text';
 
 class TextBlock extends Component {
   constructor(props) {
@@ -51,10 +24,9 @@ class TextBlock extends Component {
   }
   render() {
     const classes = this.props.classes;
-    const compiledBlock = compile(this.props.mdText);
     return (
       <div>
-        {compiledBlock.tree}
+        {this.props.mdText}
       </div>
     );
   }
@@ -64,4 +36,4 @@ TextBlock.defaultProps = {
   mdText: defaultText,
 };
 
-export default withStyles(styleSheet)(TextBlock);
+export default withStyles(styles, { name: 'TextBlock' })(TextBlock);

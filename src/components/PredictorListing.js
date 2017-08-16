@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
 import Predictor from './Predictor';
 
-const styleSheet = createStyleSheet({
+const styles = {
   box: {
     display: 'flex',
     justifyContent: 'left',
     flexWrap: 'wrap',
   },
-});
+};
 
 // Fixed size box ( 2 columns?! ) that wraps if more than the size
 // maps all the Predictors to that columns
@@ -30,4 +30,4 @@ class PredictorListing extends Component {
   }
 }
 
-export default withStyles(styleSheet)(PredictorListing);
+export default withStyles(styles, { name: 'PredictorListing' })(PredictorListing);
