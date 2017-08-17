@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-
-import { withStyles } from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
 import Predictor from './Predictor';
 
 const styles = {
@@ -18,9 +15,8 @@ const styles = {
 class PredictorListing extends Component {
   render() {
     const { predictors } = this.props;
-    const classes = this.props.classes;
     return (
-      <div className={classes.box}>
+      <div style={styles.box}>
         {predictors &&
           predictors.map(predictor =>
             <Predictor text={predictor} context={predictor} key={predictor} />,
@@ -29,5 +25,4 @@ class PredictorListing extends Component {
     );
   }
 }
-
-export default withStyles(styles, { name: 'PredictorListing' })(PredictorListing);
+export default PredictorListing;

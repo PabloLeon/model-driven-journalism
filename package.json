@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "marksy": "^5.0.0",
-    "material-ui": "next",
+    "material-ui": "^0.19.0",
     "material-ui-icons": "^1.0.0-alpha.19",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -28,6 +28,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "storybook-addon-material-ui": "^0.8.0"
   }
 }

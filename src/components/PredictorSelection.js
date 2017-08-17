@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-
 const styleSheet = createStyleSheet({
   box: {},
   selected: {},

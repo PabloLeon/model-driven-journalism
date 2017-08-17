@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
 
@@ -9,8 +8,8 @@ const styles = {
 };
 
 class Article extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       width: 0,
       height: 0,
@@ -30,9 +29,8 @@ class Article extends Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
   render() {
-    const classes = this.props.classes;
     return (
-      <div className={classes.container}>
+      <div style={styles.container}>
         <LandingQuestion />
         <MapView />
       </div>
@@ -43,4 +41,4 @@ class Article extends Component {
 Article.propTypes = {};
 Article.defaultProps = {};
 
-export default withStyles(styles, { name: 'Article' })(Article);
+export default Article;

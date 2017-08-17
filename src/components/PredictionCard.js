@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
+import Card, { CardContent, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
 
 import PredictorListing from './PredictorListing';
@@ -37,25 +35,25 @@ const styles = {
 
 class PredictionCard extends Component {
   render() {
-    const { title, avatar, subheader, img, information, classes, predictors } = this.props;
+    const { title, avatar, subheader, img, information, predictors } = this.props;
     return (
-      <Card className={classes.card}>
+      <Card style={styles.card}>
         <CardHeader
           title={
-            <Typography type="headline" component="h2">
+            <h2>
               {title}
-            </Typography>
+            </h2>
           }
-          avatar={<Avatar className={classes.avatar} src={img} />}
+          avatar={<Avatar className={styles.avatar} src={img} />}
           subheader={subheader}
         />
-        <CardContent className={classes.content}>
+        <CardContent style={styles.content}>
           {
             <div>
               {/*  TODO: This should be its own component and text should be enriched with contextual information (at least hyperlink style onhover show info) */}
-              <Typography component="p">
+              <p>
                 {information}
-              </Typography>
+              </p>
               <PredictorListing predictors={predictors} />
             </div>
           }
@@ -66,5 +64,4 @@ class PredictionCard extends Component {
     );
   }
 }
-
-export default withStyles(styles, { name: 'PredictionCard' })(PredictionCard);
+export default PredictionCard;

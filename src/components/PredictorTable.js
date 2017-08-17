@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -17,7 +16,7 @@ const getTotals = (d) => {
   const length = d.length;
   if (length > 0) {
     const d_eq = d
-      .map(({ id, guess, trueValue }) => (guess == trueValue ? 1 : 0))
+      .map(({ id, guess, trueValue }) => (guess === trueValue ? 1 : 0))
       .reduce((a, b) => a + b, 0);
     console.log(d_eq);
     return d_eq / length * 100.0;
@@ -33,11 +32,10 @@ class PredictorTable extends React.Component {
     };
   }
   render() {
-    const classes = this.props.classes;
     const data = this.props.data;
     const numberOfEntries = data.length;
     return (
-      <Paper className={classes.paper}>
+      <Paper style={styles.paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -92,4 +90,4 @@ PredictorTable.propTypes = {
 PredictorTable.defaultProps = {
   data: [],
 };
-export default withStyles(styles, { name: 'PredictiorTable' })(PredictorTable);
+export default PredictorTable;

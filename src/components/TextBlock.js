@@ -1,7 +1,5 @@
-import React, { Component, createElement } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import ActionableText from './ActionableText';
 
 const styles = {
   block: {},
@@ -23,7 +21,6 @@ class TextBlock extends Component {
     e.preventDefault();
   }
   render() {
-    const classes = this.props.classes;
     return (
       <div>
         {this.props.mdText}
@@ -36,4 +33,4 @@ TextBlock.defaultProps = {
   mdText: defaultText,
 };
 
-export default withStyles(styles, { name: 'TextBlock' })(TextBlock);
+export default TextBlock;

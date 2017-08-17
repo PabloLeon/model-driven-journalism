@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-
-import PredictorListing from './PredictorListing';
-
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
 import ThumbDown from 'material-ui-icons/ThumbDown';
 import ThumbUp from 'material-ui-icons/ThumbUp';
 
@@ -21,7 +11,7 @@ const styles = {
   },
 };
 
-class TinderNavigation extends React.Component {
+class TinderNavigation extends Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
@@ -32,7 +22,6 @@ class TinderNavigation extends React.Component {
   }
   render() {
     const { onDelete, text, context } = this.props;
-    const classes = this.props.classes;
     return (
       <BottomNavigation onChange={this.handleSelect} showLabels>
         <BottomNavigationButton label="Below" icon={<ThumbDown />} />
@@ -41,4 +30,4 @@ class TinderNavigation extends React.Component {
     );
   }
 }
-export default withStyles(styles, { name: 'TinderNavigation' })(TinderNavigation);
+export default TinderNavigation;

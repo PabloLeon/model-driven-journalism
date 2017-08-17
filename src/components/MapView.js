@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  ComposableMap,
-  ZoomableGroup,
-  Geographies,
-  Geography,
-  Markers,
-  Marker,
-} from 'react-simple-maps';
+import { ComposableMap, ZoomableGroup, Geographies, Geography } from 'react-simple-maps';
 import { Motion, spring } from 'react-motion';
 
 const containerStyle = {
@@ -15,8 +8,8 @@ const containerStyle = {
 };
 
 class MapView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       center: [-15, 80],
       zoom: 1,

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
-import grey from 'material-ui/colors/grey';
 
 const styles = {
   chip: {
     margin: '4em',
   },
   svgIcon: {
-    color: grey[800],
+    color: '#424242',
   },
   row: {
     display: 'flex',
@@ -37,12 +35,10 @@ class Predictor extends Component {
 
   render() {
     const { onDelete, text, context } = this.props;
-    const classes = this.props.classes;
-
     return (
       <div style={{}}>
         <Chip
-          className={classes.chip}
+          style={styles.chip}
           label={text}
           onClick={this.handleClick}
           onRequestDelete={this.handleDelete}
@@ -58,4 +54,4 @@ class Predictor extends Component {
 Predictor.propTypes = {
   onRequestDelete: PropTypes.func.isRequired,
 };
-export default withStyles(styles, { name: 'Predictor' })(Predictor);
+export default Predictor;

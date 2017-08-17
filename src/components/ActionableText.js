@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Feedback from 'material-ui-icons/Feedback';
-import { withStyles } from 'material-ui/styles';
 
 const styles = {
   text: {
@@ -14,7 +13,6 @@ const styles = {
   svgIcon: {
     display: 'inlineFlex',
     alignSelf: 'center',
-    position: 'relative',
     height: '1em',
     width: '1em',
     bottom: '0.25em',
@@ -56,16 +54,16 @@ class ActionableText extends Component {
     const classes = this.props.classes;
 
     return (
-      <span className={classes.text}>
+      <span style={styles.text}>
         <span
           onClick={this.handleClick}
           onMouseOver={this.handleMouseOver}
           onMouseOut={this.handleMouseOut}
-          className={this.state.hover ? classes.onHover : classes.noHover}
+          className={this.state.hover ? styles.onHover : styles.noHover}
         >
           {this.props.text}
         </span>
-        {this.props.needsAction && <Feedback className={classes.svgIcon} />}
+        {this.props.needsAction && <Feedback style={styles.svgIcon} />}
       </span>
     );
   }
@@ -79,4 +77,4 @@ ActionableText.defaultProps = {
   needsAction: false,
   onClick: () => console.log('action action'),
 };
-export default withStyles(styles, { name: 'ActionableText' })(ActionableText);
+export default ActionableText;

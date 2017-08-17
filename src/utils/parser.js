@@ -1,8 +1,6 @@
 import React from 'react';
 import marksy from 'marksy/components';
 
-import slideData, { testMd } from '../data';
-
 const separatorRE = /---/;
 const idRE = /#id\d+ /; // not sure if we need the ()?
 const valRE = /#value\d+/;

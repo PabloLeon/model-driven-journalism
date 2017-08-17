@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Article from './components/Article';
-import PredictionCard from './components/PredictionCard';
-import Predictor from './components/Predictor';
-import PredictorTable from './components/PredictorTable';
-import TextBlock from './components/TextBlock';
 import slideParser from './utils/parser';
 import slideData, { testMd } from './data';
 // What is this [test](123) ?
@@ -35,13 +32,15 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <h1> App </h1>
-        <Article />
+      <MuiThemeProvider>
         <div>
-          {this.state.parseComplete && this.state.parseTree}
+          <h1> App </h1>
+          <Article />
+          <div>
+            {this.state.parseComplete && this.state.parseTree}
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
