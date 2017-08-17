@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+// import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
 const styles = {
@@ -17,10 +17,10 @@ const styles = {
 
 class LandingQuestion extends Component {
   render() {
-    const classes = this.props.classes;
+    // const classes = this.props.classes;
     return (
-      <div className={classes.box}>
-        <Typography className={classes.header} type="display3" component="h1">
+      <div>
+        <Typography type="display3" component="h1">
           {this.props.text}
         </Typography>
       </div>
@@ -35,4 +35,7 @@ LandingQuestion.defaultProps = {
   text: 'default text',
 };
 
-export default withStyles(styles, { name: 'LandingQuestion' })(LandingQuestion);
+export default LandingQuestion;
+
+// For some reason this doesn't work
+// export default withStyles(styles, { name: 'LandingQuestion' })(LandingQuestion);

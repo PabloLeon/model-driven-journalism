@@ -37,6 +37,7 @@ class App extends Component {
     return (
       <div>
         <h1> App </h1>
+        <Article />
         <div>
           {this.state.parseComplete && this.state.parseTree}
         </div>

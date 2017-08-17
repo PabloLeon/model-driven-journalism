@@ -47,16 +47,12 @@ storiesOf('Maps', module).add('Basic UK overview', () => <MapView />);
 // later on we will need to change the logic (how the current page is loaded, for now simply decorate as in the article view)
 storiesOf('Landing Page', module).add('Question with Map', () =>
   (<div style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center' }}>
-    <LandingQuestion text="Something about the NHS" />
+    {/* <LandingQuestion text="Something about the NHS" /> */}
     <MapView />
   </div>),
 );
 
-// storiesOf('Button', module)
-//   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-//   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
-
-storiesOf('LandingQuestion', module).add('initial', () => <LandingQuestion />);
+// storiesOf('LandingQuestion', module).add('initial', () => <LandingQuestion />);
 
 storiesOf('Predictor', module).add('Basic', () =>
   <Predictor text="Test predictor" context="contextual info" />,
