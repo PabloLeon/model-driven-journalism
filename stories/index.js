@@ -19,6 +19,9 @@ import ActionableText from '../src/components/ActionableText';
 import ChoiceBlock from '../src/components/ChoiceBlock';
 import Choice from '../src/components/Choice';
 
+import Range from '../src/components/Range';
+import RangeBlock from '../src/components/RangeBlock';
+
 const predictorsNames = [
   'Number of GPs',
   'Number of Nurses',
@@ -69,6 +72,12 @@ const choiceMockText = [
   'The NHS currently does not distinguish between different cancer types..Laboriosam officiis explicabo. Odio quidem nulla neque eveniet. Voluptatem omnis perferendis..',
   'We could also distinguish between cancer types..Ut nesciunt quis. Adipisci nihil voluptatem atque. Repellendus odit architecto doloremque provident inventore beatae eveniet..',
 ];
+
+storiesOf('Range', module)
+  .add('With marks', () => <Range min={0} max={100} />)
+  .add('No marks', () => <Range />)
+  .add('No marks and no steps', () => <Range />);
+storiesOf('RangeBlock', module).add('Expanded', () => <RangeBlock />);
 
 storiesOf('Choice', module)
   .add('Expanded', () =>

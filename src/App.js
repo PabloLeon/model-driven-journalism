@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Article from './components/Article';
 import slideParser from './utils/parser';
 import slideData, { testMd } from './data';
-import ChoiceBlock from './components/ChoiceBlock';
+import RangeBlock from './components/RangeBlock';
 // What is this [test](123) ?
 
 // app state (later redux store)
@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <ChoiceBlock />
+        <RangeBlock />
         {/* <Article /> */}
       </MuiThemeProvider>
     );
