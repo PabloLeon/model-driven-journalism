@@ -16,16 +16,16 @@ class ChoiceBlock extends Component {
           {info}
         </p>
         {choices &&
-          choices.map((o, idx) => {
-            <Choice
+          choices.map((o, choiceNo) =>
+            (<Choice
               key={o.idx}
-              header={o.choiceHeader}
-              summary={o.summaryText}
+              header={o.header}
+              summary={o.summary}
               text={o.text}
-              selected={idx === selectedId}
-              expanded={idx === expandedId}
-            />;
-          })}
+              selected={choiceNo === selectedId}
+              expanded={choiceNo === expandedId}
+            />),
+          )}
       </div>
     );
   }
@@ -44,4 +44,10 @@ ChoiceBlock.propTypes = {
   onOK: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
+
+ChoiceBlock.defaultProps = {
+  selectedId: undefined,
+  expandedId: undefined,
+};
+
 export default ChoiceBlock;

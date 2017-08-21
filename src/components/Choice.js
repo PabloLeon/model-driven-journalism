@@ -19,7 +19,7 @@ const Choice = (props) => {
         actAsExpander
         showExpandableButton={false}
         subtitle={summary}
-        children={<Checkbox style={styles.checkbox} />}
+        children={<Checkbox style={styles.checkbox} checked={selected} />}
       />
       <CardText expandable>
         {text}

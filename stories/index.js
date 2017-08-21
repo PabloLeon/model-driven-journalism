@@ -89,15 +89,24 @@ storiesOf('Choice', module)
       expanded={false}
     />),
   );
-storiesOf('Choice Block', module).add('choice block with suggestion', () =>
-  (<ChoiceBlock
-    header={choiceMockHeader}
-    info={choiceMockInfo}
-    choices={choiceMockHeaders.map((header, idx) =>
-      createChoice(header, choiceMockSummaries[idx], choiceMockText[idx]),
-    )}
-  />),
+
+const choiceBlocks = choiceMockHeaders.map((header, idx) =>
+  createChoice(header, choiceMockSummaries[idx], choiceMockText[idx]),
 );
+
+storiesOf('Choice Block', module)
+  .add('choice block with suggestion no expanded', () =>
+    <ChoiceBlock header={choiceMockHeader} info={choiceMockInfo} choices={choiceBlocks} />,
+  )
+  .add('choice block with suggestion expanded', () =>
+    (<ChoiceBlock
+      header={choiceMockHeader}
+      info={choiceMockInfo}
+      choices={choiceBlocks}
+      expandedId={1}
+      selectedId={0}
+    />),
+  );
 
 storiesOf('Maps', module).add('Basic UK overview', () => <MapView />);
 storiesOf('Predictor', module).add('Basic', () =>
