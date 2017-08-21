@@ -5,8 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Article from './components/Article';
 import slideParser from './utils/parser';
 import slideData, { testMd } from './data';
+import Choice from './components/Choice';
 // What is this [test](123) ?
-
 
 // app state (later redux store)
 // presentationType= landing, article, prediciton...
@@ -19,20 +19,19 @@ import slideData, { testMd } from './data';
 // question (clickable) + map
 
 // on click of question => update question component to article (interactions)
-// 
+//
 
 class App extends Component {
-
   componentDidMount() {
-    //const parse = slideParser(this.state.rawMD);
-    //this.setState({ parseComplete: true, parseTree: parse });
+    // const parse = slideParser(this.state.rawMD);
+    // this.setState({ parseComplete: true, parseTree: parse });
   }
-
 
   render() {
     return (
       <MuiThemeProvider>
-        <Article />
+        <Choice />
+        {/* <Article /> */}
       </MuiThemeProvider>
     );
   }

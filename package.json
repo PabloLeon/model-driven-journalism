@@ -12,6 +12,7 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
     "react-simple-maps": "^0.7.2",
+    "react-tap-event-plugin": "^2.0.1",
     "redux-tooltip": "^0.7.2"
   },
   "scripts": {
@@ -24,7 +25,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.0",
-    "@storybook/react": "^3.2.3",
+    "@storybook/react": "^3.2.5",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
