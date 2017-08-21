@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Predictor from './Predictor';
 
 const styles = {
@@ -11,12 +10,9 @@ const styles = {
   },
 };
 
-// Fixed size box ( 2 columns?! ) that wraps if more than the size
-// maps all the Predictors to that columns
+// Pass a flag to the predictors here that makes selectable instead of deletable
 
-// TODO: add contextual information here!
-
-class PredictorListing extends Component {
+class PredictorOptions extends Component {
   render() {
     const { predictors } = this.props;
     return (
@@ -29,11 +25,4 @@ class PredictorListing extends Component {
     );
   }
 }
-
-PredictorListing.propTypes = {
-  information: PropTypes.string,
-};
-PredictorListing.defaultProps = {
-  information: 'The predictor listing contains some information text.',
-};
-export default PredictorListing;
+export default PredictorOptions;

@@ -16,6 +16,10 @@ const styles = {
   },
 };
 
+// TODO: Sould allow both delete or add depending on flag
+// on select => generic function either deleting or adding
+// on context => shows additional text
+
 class Predictor extends Component {
   constructor(props) {
     super(props);

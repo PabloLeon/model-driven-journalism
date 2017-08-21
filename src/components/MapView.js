@@ -7,59 +7,65 @@ const containerStyle = {
   backgroundColor: 'lightgrey',
 };
 
+// TODO: filter topojson properties
+// TODO: Markers for cities? => put markers (cities and names) in separate file
+// automatic resize
+// Zoom & move to
+// TODO: Ireland not selectable
+
 class MapView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      center: [-15, 80],
-      zoom: 1,
-    };
   }
   render() {
     return (
       <div style={containerStyle}>
         <ComposableMap
+          width={this.props.width}
+          height={this.props.height}
           projectionConfig={{
-            scale: 4000,
+            scale: 160,
+            xOffset: 0,
+            yOffset: 0,
             rotation: [0, 0, 0],
+            precision: 0.1,
           }}
-          width={980}
-          height={551}
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
+          style={{ backgroundColor: 'darkgrey' }}
         >
-          <ZoomableGroup center={this.state.center} disablePanning>
-            <Geographies geographyUrl="test.json">
+          <ZoomableGroup zoom={this.props.zoom} center={this.props.center} disablePanning>
+            <Geographies geographyUrl={'ukMap/map.json'}>
               {(geographies, projection) =>
-                geographies.map((geography, i) =>
-                  (<Geography
-                    key={i}
-                    geography={geography}
-                    projection={projection}
-                    style={{
-                      default: {
-                        fill: '#ECEFF1',
-                        stroke: '#607D8B',
-                        strokeWidth: 0.7,
-                        outline: 'none',
-                      },
-                      hover: {
-                        fill: '#607D8B',
-                        stroke: '#607D8B',
-                        strokeWidth: 0.7,
-                        outline: 'none',
-                      },
-                      pressed: {
-                        fill: '#FF5722',
-                        stroke: '#607D8B',
-                        strokeWidth: 0.7,
-                        outline: 'none',
-                      },
-                    }}
-                  />),
-                )}
+                geographies.filter(g => g.geometry.type == 'MultiPolygon').map((geography, i) => {
+                  // console.log(geography.properties)
+                  console.log(geography);
+                  return (
+                    <Geography
+                      key={`geography-${i}`}
+                      geography={geography}
+                      projection={projection}
+                      style={{
+                        default: {
+                          fill: '#ECEFF1',
+                          stroke: '#607D8B',
+                          strokeWidth: 0.05,
+                          outline: 'none',
+                        },
+                        hover: {
+                          fill: '#CFD8DC',
+                          stroke: '#607D8B',
+                          strokeWidth: 0.05,
+                          outline: 'none',
+                        },
+                        pressed: {
+                          fill: '#FF5722',
+                          stroke: '#607D8B',
+                          strokeWidth: 0.05,
+                          outline: 'none',
+                        },
+                      }}
+                    />
+                  );
+                })}
             </Geographies>
           </ZoomableGroup>
         </ComposableMap>

@@ -7,39 +7,32 @@ import slideParser from './utils/parser';
 import slideData, { testMd } from './data';
 // What is this [test](123) ?
 
-const testMD = `
-# Some blog title
-Just need to show you some code first:
 
-<Row>
-  <Col>Need to tell you something over here</Col>
-  <Col>And over here</Col>
-</Row>
-`;
+// app state (later redux store)
+// presentationType= landing, article, prediciton...
+// mapParameters= zoom: int, center= [double, double]
+// rawMD
+// parseComplete
+// parseTree
+
+// landing page:
+// question (clickable) + map
+
+// on click of question => update question component to article (interactions)
+// 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rawMD: testMD,
-      parseComplete: false,
-      parseTree: [],
-    };
-  }
+
   componentDidMount() {
-    const parse = slideParser(this.state.rawMD);
-    this.setState({ parseComplete: true, parseTree: parse });
+    //const parse = slideParser(this.state.rawMD);
+    //this.setState({ parseComplete: true, parseTree: parse });
   }
+
+
   render() {
     return (
       <MuiThemeProvider>
-        <div>
-          <h1> App </h1>
-          <Article />
-          <div>
-            {this.state.parseComplete && this.state.parseTree}
-          </div>
-        </div>
+        <Article />
       </MuiThemeProvider>
     );
   }
