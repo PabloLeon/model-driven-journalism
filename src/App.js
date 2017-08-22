@@ -6,6 +6,8 @@ import Article from './components/Article';
 import slideParser from './utils/parser';
 import slideData, { testMd } from './data';
 import RangeBlock from './components/RangeBlock';
+import PredictionCard from './components/PredictionCard';
+import TinderNavigation from './components/TinderNavigation';
 // What is this [test](123) ?
 
 // app state (later redux store)
@@ -30,7 +32,20 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <Article />
+        <div>
+          <TinderNavigation />
+          <PredictionCard
+            title={'Nuffield'}
+            img={'http://www.nuffieldhealthcareers.com/android-chrome-192x192.png'}
+            predictors={[
+              { predictorName: 'Number of GPs', predictorValue: 'below average' },
+              { predictorName: 'Hospital rating', predictorValue: 'average' },
+              { predictorName: 'Number of beds', predictorValue: 'above average' },
+            ]}
+            information=" I don't know anything about Nuffield 😢"
+          />
+          <Article />
+        </div>
       </MuiThemeProvider>
     );
   }

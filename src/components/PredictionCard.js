@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardContent, CardHeader } from 'material-ui/Card';
+import Card, { CardText, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 
@@ -35,7 +35,8 @@ const styles = {
 
 class PredictionCard extends Component {
   render() {
-    const { title, avatar, subheader, img, information, predictors } = this.props;
+    const { title, subheader, img, information, predictors } = this.props;
+    console.log('predictors', this.props);
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -47,21 +48,32 @@ class PredictionCard extends Component {
           avatar={<Avatar className={styles.avatar} src={img} />}
           subheader={subheader}
         />
-        <CardContent style={styles.content}>
-          {
+        <CardText style={styles.content}>
+          <div>
+            {/*  TODO: This should be its own component and text should be enriched with contextual information (at least hyperlink style onhover show info) */}
+            <p>
+              {information}
+            </p>
             <div>
-              {/*  TODO: This should be its own component and text should be enriched with contextual information (at least hyperlink style onhover show info) */}
-              <p>
-                {information}
-              </p>
-              <PredictorListing predictors={predictors} />
+              {predictors.map((p, idx) =>
+                (<p>
+                  `${p.predictorName}: ${p.predictorValue}`
+                </p>),
+              )}
             </div>
-          }
-        </CardContent>
+          </div>
+        </CardText>
         <Divider />
         <TinderNavigation />
       </Card>
     );
   }
 }
+PredictionCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subheader: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+};
+PredictionCard.defaultProps = {};
+
 export default PredictionCard;

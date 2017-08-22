@@ -19,6 +19,7 @@ import ActionableText from '../src/components/ActionableText';
 import ChoiceBlock from '../src/components/ChoiceBlock';
 import Choice from '../src/components/Choice';
 import Navigation from '../src/components/Navigation';
+import PredictionCards from '../src/components/PredictionCards';
 
 import Range from '../src/components/Range';
 import RangeBlock from '../src/components/RangeBlock';
@@ -50,6 +51,7 @@ addDecorator(muiTheme());
 // Stories
 //
 
+storiesOf('Tinder Navigation').add('Basic', () => <TinderNavigation />);
 const parsedText = parser(`
 # Header
 
@@ -59,6 +61,68 @@ Some markdown text, **bold**, _underlined_,...
 - Two
 - Three
 `);
+
+const trustNames = ['Northern Devon', 'York', 'West London', 'North London', 'Nuffield'];
+const trustInfo = [
+  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
+  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
+  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
+  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
+  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
+];
+
+const trustImgs = [
+  'http://lorempixel.com/640/480/business',
+  'http://lorempixel.com/640/480/cats',
+  'http://lorempixel.com/640/480/people',
+  'http://lorempixel.com/640/480/abstract',
+  'http://lorempixel.com/640/480/abstract',
+];
+
+const predictorValues = [
+  {
+    predictorName: 'Number of GPs',
+    predictorValue: 'below average',
+  },
+  { predictorName: 'Hospital Rating', predictorValue: 'average' },
+  { predictorName: 'Number of beds', predictorValue: 'above average' },
+];
+
+let cardId = 0;
+const createPredictionCard = (id) => {
+  cardId += 1;
+  console.log('create prediction', trustNames[id], trustInfo[id], trustImgs[id]);
+  return {
+    id,
+    title: trustNames[id],
+    info: trustInfo[id],
+    img: trustImgs[id],
+    predictors: predictorValues,
+  };
+};
+
+const mockPredictorCards = trustNames.map((v, idx) => createPredictionCard(idx));
+
+storiesOf('Card Tinder').add('flip through a set of trust cards', () =>
+  <PredictionCards cards={mockPredictorCards} currentCardIndex={0} />,
+);
+storiesOf('Predictor selection').add('select predictors', () =>
+  (<PredictorSelection
+    predictors={predictorValues}
+    options={{ id1: 'predictor 1', id2: 'predictor 2' }}
+  />),
+);
+storiesOf('Prediction card', module).add('Trust card with predictors', () =>
+  (<PredictionCard
+    title={'Nuffield'}
+    img={'http://www.nuffieldhealthcareers.com/android-chrome-192x192.png'}
+    predictors={predictorsNames}
+    information=" I don't know anything about Nuffield 😢"
+  />),
+);
+storiesOf('PredictorTable', module)
+  .add('Basic', () => <PredictorTable data={predictionsMock} />)
+  .add('Empty', () => <PredictorTable />);
 
 storiesOf('Article', module).add('plain text', () => <TextBlock content={parsedText} />);
 storiesOf('Article Navigation', module)
@@ -139,15 +203,3 @@ storiesOf('Text Block', module).add('Basic', () => <TextBlock />);
 storiesOf('Actionable Text', module)
   .add('No action needed', () => <ActionableText text="you can do something with me" />)
   .add('Action needed', () => <ActionableText text="I need action!" needsAction />);
-// storiesOf('Tinder Navigation').add('Basic', () => <TinderNavigation />);
-// storiesOf('Prediction card', module).add('Trust card with predictors', () =>
-//   (<PredictionCard
-//     title={'Nuffield'}
-//     img={'http://www.nuffieldhealthcareers.com/android-chrome-192x192.png'}
-//     predictors={predictorMock}
-//     information=" I don't know anything about Nuffield 😢"
-//   />),
-// );
-// storiesOf('PredictorTable', module)
-//   .add('Basic', () => <PredictorTable data={predictionsMock} />)
-//   .add('Empty', () => <PredictorTable />);
