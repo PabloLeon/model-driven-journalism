@@ -18,6 +18,7 @@ import TextBlock from '../src/components/TextBlock';
 import ActionableText from '../src/components/ActionableText';
 import ChoiceBlock from '../src/components/ChoiceBlock';
 import Choice from '../src/components/Choice';
+import Navigation from '../src/components/Navigation';
 
 import Range from '../src/components/Range';
 import RangeBlock from '../src/components/RangeBlock';
@@ -54,6 +55,9 @@ storiesOf('Button', module)
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
 storiesOf('Material-UI', module).add('RaiseButton', () => <RaisedButton label="Default" />);
+storiesOf('Article Navigation', module)
+  .add('Can proceed', () => <Navigation canProceed />)
+  .add('Cannot proceed', () => <Navigation canProceed={false} />);
 
 const choiceMockHeader = 'Same targets for different cancer?';
 const choiceMockInfo =
