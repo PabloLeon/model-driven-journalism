@@ -36,45 +36,21 @@ export const splitFile = (d) => {
 
 // Components look like this: <MyComponent> text </MyComponent>
 // and might contain props
-const compilePipelineStandardMd = marksy({
-  createElement: React.createElement,
+const compilePipelineStandardMd = (data, componentDict, compileOptions, params) =>
+  marksy({
+    createElement: React.createElement,
 
-  elements: {
-    h1(props) {
-      return (
-        <h1 style={{ textDecoration: 'underline' }}>
-          {props.children}
-        </h1>
-      );
+    elements: {
+      h1(props) {
+        return (
+          <h1 style={{ textDecoration: 'underline', color: 'teal' }}>
+            {props.children}
+          </h1>
+        );
+      },
     },
-  },
-  components: {
-    Row({ children }) {
-      return (
-        <div style={{ display: 'flex' }}>
-          {children}
-        </div>
-      );
-    },
-    Col({ children }) {
-      return (
-        <div
-          style={{
-            flex: '1',
-            padding: '10px',
-            backgroundColor: 'red',
-            border: '1px solid #333',
-          }}
-        >
-          {children}
-        </div>
-      );
-    },
-  },
-});
+    components: componentDict,
+  });
 
-const compileStandardMd = (d, param = { blockType: 'standardMarkdown' }) =>
-  compilePipelineStandardMd(d, compileOptions, param);
-// const cp = compileStandardMd(testMd);
-// cp contains the parse [0], cp.tree, cp.toc
-// console.log(cp);
+const compileStandardMd = (d, components, options, param = { blockType: 'standardMarkdown' }) =>
+  compilePipelineStandardMd(d, components, compileOptions, param);

@@ -7,8 +7,6 @@ const styles = {
   choice: {},
 };
 
-const defaultText = 'Default text';
-
 class TextBlock extends Component {
   constructor(props) {
     super(props);
@@ -23,14 +21,13 @@ class TextBlock extends Component {
   render() {
     return (
       <div>
-        {this.props.mdText}
+        <h1>Header</h1>
+        {this.props.content}
       </div>
     );
   }
 }
 TextBlock.propTypes = {};
-TextBlock.defaultProps = {
-  mdText: defaultText,
-};
+TextBlock.defaultProps = {};
 
 export default TextBlock;

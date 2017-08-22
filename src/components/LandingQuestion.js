@@ -23,7 +23,7 @@ class LandingQuestion extends Component {
   }
   handleClick(e) {
     e.preventDefault();
-    this.props.clickQuestion();
+    this.props.onEnter();
   }
   render() {
     // const classes = this.props.classes;
@@ -39,7 +39,7 @@ class LandingQuestion extends Component {
 
 LandingQuestion.propTypes = {
   text: PropTypes.string.isRequired,
-  clickQuestion: PropTypes.func.isRequired,
+  onEnter: PropTypes.func.isRequired,
 };
 LandingQuestion.defaultProps = {
   text: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',

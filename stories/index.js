@@ -23,6 +23,8 @@ import Navigation from '../src/components/Navigation';
 import Range from '../src/components/Range';
 import RangeBlock from '../src/components/RangeBlock';
 
+import parser from '../src/utils/parser';
+
 const predictorsNames = [
   'Number of GPs',
   'Number of Nurses',
@@ -48,13 +50,17 @@ addDecorator(muiTheme());
 // Stories
 //
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+const parsedText = parser(`
+# Header
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+Some markdown text, **bold**, _underlined_,...
 
-storiesOf('Material-UI', module).add('RaiseButton', () => <RaisedButton label="Default" />);
+- One 
+- Two
+- Three
+`);
+
+storiesOf('Article', module).add('plain text', () => <TextBlock content={parsedText} />);
 storiesOf('Article Navigation', module)
   .add('Can proceed', () => <Navigation canProceed />)
   .add('Cannot proceed', () => <Navigation canProceed={false} />);

@@ -5,6 +5,9 @@ import MapView from './MapView';
 import TextBlock from './TextBlock';
 import PredictionCard from './PredictionCard';
 import PredictorSelection from './PredictorSelection';
+import ActionableText from './ActionableText';
+
+import parser from '../utils/parser';
 
 const styles = {
   container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
@@ -12,14 +15,14 @@ const styles = {
 const testMD = `
 # Some blog title
 Just need to show you some code first:
-
-<Row>
-  <Col>Need to tell you something over here</Col>
-  <Col>And over here</Col>
-</Row>
 `;
 
-const dummyPresentations = ['landing', 'predictorSelection', 'article', 'prediction'];
+const componentDict = {
+  Range(props) {
+    return <ActionableText text={'test'} />;
+  },
+};
+const dummyPresentations = ['landing', 'article', 'predictorSelection', 'article', 'prediction'];
 
 class Article extends Component {
   constructor(props) {
@@ -59,15 +62,28 @@ class Article extends Component {
   getArticleComponent(presentationType) {
     switch (presentationType) {
       case 'landing':
-        return <LandingQuestion clickQuestion={() => this.nextSlide()} />;
+        return <LandingQuestion onEnter={() => this.nextSlide()} />;
+        break;
       case 'article':
-        return <TextBlock />;
+        // parsing here??/
+        // TODO: this should probably pass the parser an object with the
+        // components? then we can pass the callbacks down?
+
+        const parsedText = parser(
+          this.state.allSlideSpecs[this.state.currentPresentation],
+          componentDict,
+        );
+        return <TextBlock content={parsedText} onNext={() => this.nextSlide()} />;
+        break;
       case 'predictorSelection':
         return <PredictorSelection />;
+        break;
       case 'predicionCards':
         return <PredictionCard />;
+        break;
       default:
         return <div>Default</div>;
+        break;
     }
   }
   nextSlide() {
