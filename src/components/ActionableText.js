@@ -5,11 +5,8 @@ import Feedback from 'material-ui-icons/Feedback';
 const styles = {
   text: {
     textDecoration: 'underline',
-  },
-  onHover: {
     cursor: 'pointer',
   },
-  noHover: {},
   svgIcon: {
     display: 'inlineFlex',
     alignSelf: 'center',
