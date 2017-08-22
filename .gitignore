@@ -20,9 +20,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# ignore pdfs
-*.pdf
-
 .vscode/*
 .ipynb_checkpoints/
 examples/.ipynb_checkpoints/
