@@ -35,12 +35,14 @@ ChoiceBlock.propTypes = {
   expandedId: PropTypes.number,
   header: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired,
-  choices: PropTypes.shape({
-    idx: PropTypes.number.isRequired,
-    choiceHeader: PropTypes.string.isRequired,
-    summaryText: PropTypes.string.isRequired,
-    text: PropTypes.string,
-  }),
+  choices: PropTypes.arrayOf(
+    PropTypes.shape({
+      idx: PropTypes.number.isRequired,
+      choiceHeader: PropTypes.string.isRequired,
+      summaryText: PropTypes.string.isRequired,
+      text: PropTypes.string,
+    }),
+  ),
   onOK: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };

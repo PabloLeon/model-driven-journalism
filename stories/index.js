@@ -121,7 +121,11 @@ storiesOf('Choice Block', module)
     />),
   );
 
-storiesOf('Maps', module).add('Basic UK overview', () => <MapView />);
+storiesOf('Maps', module).add('Basic UK overview', () =>
+  (<div style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center' }}>
+    <MapView path={'ukMap/map.json'} width={400} height={600} zoom={16} center={[-4.2, 55.5]} />
+  </div>),
+);
 storiesOf('Predictor', module).add('Basic', () =>
   <Predictor text="Test predictor" context="contextual info" />,
 );

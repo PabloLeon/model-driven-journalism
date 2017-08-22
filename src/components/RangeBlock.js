@@ -51,7 +51,7 @@ RangeBlock.defaultProps = {
         style: {
           color: 'orange',
         },
-        label: 'The NHS target',
+        label: '85%: The current NHS target',
       },
       100: '100%',
     },

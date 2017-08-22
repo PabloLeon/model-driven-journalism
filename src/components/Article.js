@@ -84,7 +84,7 @@ class Article extends Component {
     return (
       <div style={styles.container}>
         {this.getArticleComponent(currentSlideStyle)}
-        <MapView width={400} height={600} zoom={16} center={[-4.2, 55.5]} />
+        <MapView path={'ukMap/map.json'} width={400} height={600} zoom={16} center={[-4.2, 55.5]} />
       </div>
     );
   }

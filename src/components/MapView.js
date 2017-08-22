@@ -33,7 +33,7 @@ class MapView extends Component {
           style={{ backgroundColor: 'darkgrey' }}
         >
           <ZoomableGroup zoom={this.props.zoom} center={this.props.center} disablePanning>
-            <Geographies geographyUrl={'ukMap/map.json'}>
+            <Geographies geographyUrl={this.props.path}>
               {(geographies, projection) =>
                 geographies.filter(g => g.geometry.type == 'MultiPolygon').map((geography, i) => {
                   // console.log(geography.properties)

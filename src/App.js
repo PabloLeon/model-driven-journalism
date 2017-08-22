@@ -30,8 +30,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <RangeBlock />
-        {/* <Article /> */}
+        <Article />
       </MuiThemeProvider>
     );
   }
