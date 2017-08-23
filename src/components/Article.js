@@ -73,6 +73,62 @@ class Article extends Component {
       width: 0,
       allSlideSpecs: [
         {
+          type: 'article',
+          text:
+            '[How succesful](#id0) is [the NHS](#id1) at delivering on the targets for referral to treatment for [cancer patients](#id2) in the UK?',
+          links: {
+            id0: {
+              type: 'range',
+              header: 'Measuring success',
+              info:
+                'Success can be measured in **many different ways** and _different measures_ have existed in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
+              rangeSpec: {
+                min: 0,
+                max: 100,
+                step: 1,
+                unit: '%',
+                marks: {
+                  85: {
+                    label: 'The NHS target in England.',
+                    context:
+                      'The NHS *in England* currently aims to refer **85%** of the patients to treatment',
+                  },
+                  95: {
+                    label: 'The NHS target gor Scotland and Wales.',
+                    context: 'In Scotland and Wales the aim is to refer **95%** in time.',
+                  },
+                },
+              },
+            },
+            id1: {
+              type: 'context',
+              header: 'The National Health Service',
+              info:
+                'There is a different organizing body in England and Scotland... We could put other information here',
+            },
+            id2: {
+              type: 'choice',
+              header: 'Same targets for different types of cancer?',
+              info: 'Some text about aggreagating different cancer types.',
+              choiceSpec: {
+                options: [
+                  {
+                    id: 'c1',
+                    header: 'Aggregate all cancer types',
+                    info:
+                      'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
+                  },
+                  {
+                    id: 'c2',
+                    header: 'Split by cancer groups',
+                    info: 'You can also look at the different cancer types.',
+                  },
+                ],
+              },
+            },
+          },
+        },
+        {
           type: 'landing',
         },
         {
@@ -89,7 +145,6 @@ class Article extends Component {
             presentationIds: ['p01', 'p02', 'p03'], // there could also be specs for: 25 closest etc
           },
         },
-        { type: 'article' },
       ],
       parseStatus: 'parsing', // error || success
       currentParseTree: [],
@@ -143,7 +198,30 @@ class Article extends Component {
         return <LandingQuestion text={presentationSpec.text} onEnter={this.nextSlide} />;
         break;
       case 'article':
-        const parsedText = parser(presentationSpec, componentDict);
+        const mainTextRaw = presentationSpec.text; // this has to be parsed to markdown and links have to be parsed with json specs to actionable text
+        // key of this json is the id that has to appear in the main text as a link
+        const contextRaw = presentationSpec.links;
+
+        // TODO: create 3 functions
+        // parse to Choice
+        // parse to Range
+        // parse to Context
+
+        // procedure: run through main text,
+        // when you encounter a link check the context json
+        // Insert: Actionable text with the corresponding choice/range/context element
+
+        // jsons look like this:
+        // type: choice | range | context
+        // header
+        // info
+        // choiceSpec or rangeSpec
+
+        // Simplest way: higher order function 3 components
+        // contextual actionable text
+        // range actionable text
+        // choice actionable text
+
         return <TextBlock content={parsedText} onNext={this.nextSlide} />;
         break;
       case 'predictorSelection':
@@ -218,7 +296,6 @@ class Article extends Component {
   }
 }
 
-// this.state.parseComplete ? <Article presentationType={this.state.presentationType} mapParameters={this.state.mapParameters} /> : <div>Loading</div>
 Article.propTypes = {};
 Article.defaultProps = {};
 
