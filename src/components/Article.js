@@ -4,6 +4,7 @@ import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
 import TextBlock from './TextBlock';
 import PredictionCard from './PredictionCard';
+import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
 import ActionableText from './ActionableText';
 
@@ -80,7 +81,14 @@ class Article extends Component {
           info:
             'Which factors do you think influence the ability of a NHS trust to refer cancer patients in time?',
         },
-        { type: 'prediction' },
+        {
+          type: 'predictionCards',
+          info:
+            'Try to guess if the trust is on target or not with the factors you chose earlier...',
+          presentationSpecs: {
+            presentationIds: ['p01', 'p02', 'p03'], // there could also be specs for: 25 closest etc
+          },
+        },
         { type: 'article' },
       ],
       parseStatus: 'parsing', // error || success
@@ -149,11 +157,23 @@ class Article extends Component {
             onNext={this.nextSlide}
             addPredictor={this.addPredictor}
             removePredictor={this.removePredictor}
+            canProceed={this.state.selectedPredictors.length > 0}
           />
         );
         break;
-      case 'predicionCards':
-        return <PredictionCard />;
+      case 'predictionCards':
+        // we first need to get the cards as an array from the presentationSpecs
+        // as that only contains the ids and the presentation specs potentially live somewhere else
+        // for now cheat and simply use the mock
+
+        return (
+          <PredictionCards
+            cards={mockPredictorCards}
+            info={presentationSpec.info}
+            predictors={this.state.selectedPredictors}
+            onNext={this.nextSlide}
+          />
+        );
         break;
       default:
         return <div>Default</div>;

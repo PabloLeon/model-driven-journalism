@@ -10,21 +10,20 @@ const styles = {
 };
 
 const Navigation = (props) => {
-  const { canProceed, nextSlide } = props;
+  const { onNext } = props;
   return (
     <div style={styles}>
-      {canProceed && <RaisedButton label={'Next'} primary onClick={nextSlide} />}
+      <RaisedButton label={'Next'} primary onClick={onNext} />
     </div>
   );
 };
 Navigation.propTypes = {
   canProceed: PropTypes.bool.isRequired,
-  nextSlide: PropTypes.func.isRequired,
+  onNext: PropTypes.func.isRequired,
 };
 
 Navigation.defaultProps = {
   canProceed: false,
-  nextSlide: () => console.log('navigation next slide default'),
 };
 
 export default Navigation;

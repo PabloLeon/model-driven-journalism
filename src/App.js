@@ -32,20 +32,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
-          <TinderNavigation />
-          <PredictionCard
-            title={'Nuffield'}
-            img={'http://www.nuffieldhealthcareers.com/android-chrome-192x192.png'}
-            predictors={[
-              { predictorName: 'Number of GPs', predictorValue: 'below average' },
-              { predictorName: 'Hospital rating', predictorValue: 'average' },
-              { predictorName: 'Number of beds', predictorValue: 'above average' },
-            ]}
-            information=" I don't know anything about Nuffield 😢"
-          />
-          <Article />
-        </div>
+        <Article />
       </MuiThemeProvider>
     );
   }
