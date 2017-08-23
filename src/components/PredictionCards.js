@@ -3,8 +3,9 @@ import PredictionCard from './PredictionCard';
 
 import PropTypes from 'prop-types';
 
-const PredictionCards = ({ cards, currentCardIndex }) => {
+const PredictionCards = ({ cards, currentCardIndex, userCardSelection }) => {
   const currentCard = cards[currentCardIndex];
+  console.log('prediciton cards', currentCardIndex);
   if (currentCard) {
     return (
       <PredictionCard
@@ -14,15 +15,15 @@ const PredictionCards = ({ cards, currentCardIndex }) => {
         img={currentCard.img}
         information={currentCard.information}
         predictors={currentCard.predictors}
+        onSelect={e => userCardSelection(e)}
       />
     );
   }
-
-  console.log('no current card', cards, currentCardIndex, cards[currentCardIndex]);
   return <div>No cards</div>;
 };
 PredictionCards.PropTypes = {
   currentCardIndex: PropTypes.number.isRequired,
+  userCardSelection: PropTypes.func.isRequired,
   cards:
     PropTypes.arrayOf[
       PropTypes.shape({

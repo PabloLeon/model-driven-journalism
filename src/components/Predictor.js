@@ -6,9 +6,6 @@ const styles = {
   chip: {
     margin: '4em',
   },
-  svgIcon: {
-    color: '#424242',
-  },
   row: {
     display: 'flex',
     justifyContent: 'center',
@@ -20,42 +17,16 @@ const styles = {
 // on select => generic function either deleting or adding
 // on context => shows additional text
 
-class Predictor extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.state = { showContext: false };
-  }
-  handleClick(e) {
-    e.preventDefault();
-    this.setState(prevState => ({
-      showContext: !prevState.showContext,
-    }));
-  }
-  handleDelete(e) {
-    console.log('delete predictor');
-  }
-
-  render() {
-    const { onDelete, text, context } = this.props;
-    return (
-      <div style={{}}>
-        <Chip
-          style={styles.chip}
-          label={text}
-          onClick={this.handleClick}
-          onRequestDelete={this.handleDelete}
-        />
-        {this.state.showContext &&
-          <div>
-            {context}
-          </div>}
-      </div>
-    );
-  }
-}
+const Predictor = ({ onDelete, onClick, onContext, label, context, id }) =>
+  (<div style={{}}>
+    <Chip style={styles.chip} onClick={onContext} onRequestDelete={onDelete} onClick={onClick}>
+      {label}
+    </Chip>
+  </div>);
 Predictor.propTypes = {
-  onRequestDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onContext: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  context: PropTypes.string.isRequired,
 };
 export default Predictor;

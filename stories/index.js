@@ -51,7 +51,6 @@ addDecorator(muiTheme());
 // Stories
 //
 
-storiesOf('Tinder Navigation').add('Basic', () => <TinderNavigation />);
 const parsedText = parser(`
 # Header
 
@@ -93,7 +92,7 @@ const createPredictionCard = (id) => {
   cardId += 1;
   console.log('create prediction', trustNames[id], trustInfo[id], trustImgs[id]);
   return {
-    id,
+    cardId,
     title: trustNames[id],
     info: trustInfo[id],
     img: trustImgs[id],
@@ -102,9 +101,31 @@ const createPredictionCard = (id) => {
 };
 
 const mockPredictorCards = trustNames.map((v, idx) => createPredictionCard(idx));
+storiesOf('Predictor Listing').add('no predicors selected', () =>
+  (<PredictorListing
+    availablePredictors={[
+      { id: 'id0', label: 'predictor1', context: 'Some information about this predictor.' },
+      { id: 'id1', label: 'predictor2', context: 'Some information about this predictor too.' },
+    ]}
+  />),
+);
+storiesOf('Tinder Navigation').add('Basic', () =>
+  <TinderNavigation onSelect={e => console.log(e)} />,
+);
 
+let currentCard = 0;
+
+const mockSubmit = (e) => {
+  const submitAction = action('submitted');
+  currentCard += 1;
+  submitAction(e, currentCard, mockPredictorCards[currentCard]);
+};
 storiesOf('Card Tinder').add('flip through a set of trust cards', () =>
-  <PredictionCards cards={mockPredictorCards} currentCardIndex={0} />,
+  (<PredictionCards
+    cards={mockPredictorCards}
+    currentCardIndex={currentCard}
+    userCardSelection={mockSubmit}
+  />),
 );
 storiesOf('Predictor selection').add('select predictors', () =>
   (<PredictorSelection

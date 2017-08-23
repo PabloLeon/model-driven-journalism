@@ -35,8 +35,7 @@ const styles = {
 
 class PredictionCard extends Component {
   render() {
-    const { title, subheader, img, information, predictors } = this.props;
-    console.log('predictors', this.props);
+    const { title, subheader, img, information, predictors, onSelect } = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -64,7 +63,7 @@ class PredictionCard extends Component {
           </div>
         </CardText>
         <Divider />
-        <TinderNavigation />
+        <TinderNavigation onSelect={e => onSelect(e)} />
       </Card>
     );
   }
@@ -73,6 +72,7 @@ PredictionCard.propTypes = {
   title: PropTypes.string.isRequired,
   subheader: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 PredictionCard.defaultProps = {};
 
