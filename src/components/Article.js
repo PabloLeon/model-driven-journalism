@@ -7,8 +7,9 @@ import PredictionCard from './PredictionCard';
 import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
 import ActionableText from './ActionableText';
-
+import { csv } from 'd3-request'; // this should work differently with the final version
 import parser from '../utils/parser';
+import { getClosestTrust } from '../utils/ops';
 import { slidesNHS, mockPredictorCards } from '../data/';
 
 const styles = {
@@ -22,6 +23,7 @@ class Article extends Component {
       width: 0,
       allSlideSpecs: slidesNHS,
       parseStatus: 'parsing', // error || success
+      loadError: false,
       geolocation: [undefined, undefined],
       localizationStatus: '',
       currentParseTree: [],
@@ -29,7 +31,6 @@ class Article extends Component {
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
       data: {
-        path: '',
         predictors: [
           { id: 'id0', label: 'Number of Gps', context: 'Some information about this predictor.' },
           {
@@ -41,6 +42,9 @@ class Article extends Component {
         predictionCards: [], // dummy, really should only store the ids to some db with the information
         // also we need to be able to get the information (below average...) for the predictors chosen by the participant
         // (selectedPredictors, data, trustDb) => {id, title,info, predictorValues = [{id, name, value}]}
+
+        hospitals: {},
+        waitingTimes: {},
       },
       mapParameters: {
         width: 400,
@@ -61,6 +65,26 @@ class Article extends Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
+    csv('hospitals.csv', (error, d) => {
+      if (error) {
+        console.error('data loding error at hospital data');
+        this.setState({ loadError: true });
+      }
+      this.setState({
+        ...this.state,
+        data: { ...this.state.data, hospitals: d },
+      });
+    });
+    csv('waitingtimes.csv', (error, d) => {
+      if (error) {
+        console.error('data loding error at waiting time data');
+        this.setState({ loadError: true });
+      }
+      this.setState({
+        ...this.state,
+        data: { ...this.state.data, waitingTimes: d },
+      });
+    });
   }
 
   componentWillUnmount() {
@@ -72,6 +96,9 @@ class Article extends Component {
   }
   updateCoordinates(coord) {
     this.setState({ ...this.state, geolocation: coord });
+    // TODO: this should happen asyncronusly in the background!
+    const cT = getClosestTrust(coord, this.state.data.hospitals, this.state.data.waitingTimes);
+    this.setState({ ...this.state, closestTrust: cT });
   }
   updateLocalizationStatus(s) {
     this.setState({ ...this.state, localizationStatus: s });
