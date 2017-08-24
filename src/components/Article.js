@@ -24,28 +24,14 @@ class Article extends Component {
       allSlideSpecs: slidesNHS,
       parseStatus: 'parsing', // error || success
       loadError: false,
-      geolocation: [undefined, undefined],
-      localizationStatus: '',
+      geolocation: this.props.geolocation,
       currentParseTree: [],
       currentPresentation: 0,
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
-      data: {
-        predictors: [
-          { id: 'id0', label: 'Number of Gps', context: 'Some information about this predictor.' },
-          {
-            id: 'id1',
-            label: 'Number of nurses',
-            context: 'Some information about this predictor too.',
-          },
-        ], // dummy for now, later should be inferred from the linked data source(s)?
-        predictionCards: [], // dummy, really should only store the ids to some db with the information
-        // also we need to be able to get the information (below average...) for the predictors chosen by the participant
-        // (selectedPredictors, data, trustDb) => {id, title,info, predictorValues = [{id, name, value}]}
-
-        hospitals: {},
-        waitingTimes: {},
-      },
+      allPredictors: this.props.data.allPredictors,
+      hospitals: this.props.data.hospitals,
+      waitingTimes: this.props.data.waitingTimes,
       mapParameters: {
         width: 400,
         height: 600,
@@ -55,8 +41,6 @@ class Article extends Component {
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    this.updateCoordinates = this.updateCoordinates.bind(this);
-    this.updateLocalizationStatus = this.updateLocalizationStatus.bind(this);
     this.getArticleComponent = this.getArticleComponent.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.addPredictor = this.addPredictor.bind(this);
@@ -65,26 +49,6 @@ class Article extends Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
-    csv('hospitals.csv', (error, d) => {
-      if (error) {
-        console.error('data loding error at hospital data');
-        this.setState({ loadError: true });
-      }
-      this.setState({
-        ...this.state,
-        data: { ...this.state.data, hospitals: d },
-      });
-    });
-    csv('waitingtimes.csv', (error, d) => {
-      if (error) {
-        console.error('data loding error at waiting time data');
-        this.setState({ loadError: true });
-      }
-      this.setState({
-        ...this.state,
-        data: { ...this.state.data, waitingTimes: d },
-      });
-    });
   }
 
   componentWillUnmount() {

@@ -14,3 +14,5 @@ it('it displays available predictors if predictors are selected', () => {
   expect(available.length).toEqual(1);
   expect(available).toEqual([{ id: 2, text: 'test2' }]);
 });
+
+// TODO: test for closest trust? didn't fix boundary cases (no hospital data etc.)
