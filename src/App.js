@@ -3,11 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Article from './components/Article';
-import slideParser from './utils/parser';
-import slideData, { testMd } from './data';
-import RangeBlock from './components/RangeBlock';
-import PredictionCard from './components/PredictionCard';
-import TinderNavigation from './components/TinderNavigation';
 import { csv } from 'd3-request'; // this should work differently with the final version
 
 const predictors = [
@@ -21,6 +16,10 @@ const predictors = [
 // TODO: get predictors from the data coulms + a dictionary with context/readable column names
 // TODO: Get card info from the data + a dictionary with contextual information
 
+// we need to map the data to marker format
+// so go through the city & hospital data
+// map to an object with name: hospital name // coordinates: [long, lat]
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +29,10 @@ class App extends Component {
       canProceed: false,
       hospitals: undefined,
       waitingTimes: undefined,
+      markers: undefined,
     };
     this.loadData = this.loadData.bind(this);
+    this.createMarkers = this.createMarkers.bind(this);
   }
   loadData() {
     console.info('Loading data sources');
@@ -54,11 +55,25 @@ class App extends Component {
         ...this.state,
         waitingTimes: d,
       });
+      // now get the markers
+      this.createMarkers();
+    });
+  }
+  createMarkers() {
+    const marks = this.state.hospitals.map((h, idx) => ({
+      name: h.OrganisationName,
+      coordinates: [h.Longitude, h.Latitude],
+    }));
+    console.info('marks: ', marks);
+    this.setState({
+      ...this.state,
+      markers: marks,
     });
 
     // TODO: there should be some checks here if everything loaded correctly
     this.setState({ canProceed: true });
   }
+  // FIXME: longitude latitude order???
   componentDidMount() {
     console.info('Establishing user location');
     navigator.geolocation.getCurrentPosition(
@@ -66,7 +81,7 @@ class App extends Component {
         console.log('succesfully localized the user: ', position.coords);
         this.setState({
           ...this.state,
-          geolocation: [position.coords.latitude, position.coords.longitude],
+          geolocation: [position.coords.longitude, position.coords.latitude],
         });
 
         this.loadData();
@@ -89,6 +104,7 @@ class App extends Component {
               allPredictors: predictors,
               hospitals: this.state.hospitals,
               waitingTimes: this.state.waitingTimes,
+              markers: this.state.markers,
             }}
           />
           : <div>Loading resources</div>}

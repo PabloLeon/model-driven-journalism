@@ -6,11 +6,15 @@ import TextBlock from './TextBlock';
 import PredictionCard from './PredictionCard';
 import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
-import ActionableText from './ActionableText';
-import { csv } from 'd3-request'; // this should work differently with the final version
+
+import ChoiceBlockWithActionable from './ChoiceBlockWithActionable';
+import RangeBlockWithActionable from './RangeBlockWithActionable';
+import ContextBlockWithActionable from './ContextBlockWithActionable';
+
 import parser from '../utils/parser';
 import { getClosestTrust } from '../utils/ops';
 import { slidesNHS, mockPredictorCards } from '../data/';
+import marksy from 'marksy/components';
 
 const styles = {
   container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
@@ -35,8 +39,9 @@ class Article extends Component {
       mapParameters: {
         width: 400,
         height: 600,
-        zoom: 16,
-        center: [-4.2, 55.5],
+        currentCenter: [-4.2, 55.5],
+        currentZoom: 16, // 16 with current shows all uk
+        markers: this.props.data.markers,
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -45,6 +50,7 @@ class Article extends Component {
     this.nextSlide = this.nextSlide.bind(this);
     this.addPredictor = this.addPredictor.bind(this);
     this.removePredictor = this.removePredictor.bind(this);
+    this.zoomToGeo = this.zoomToGeo.bind(this);
   }
   componentDidMount() {
     this.updateWindowDimensions();
@@ -67,6 +73,17 @@ class Article extends Component {
   updateLocalizationStatus(s) {
     this.setState({ ...this.state, localizationStatus: s });
   }
+  zoomToGeo() {
+    this.setState({
+      ...this.state,
+      mapParameters: {
+        ...this.state.mapParameters,
+        currentCenter: this.state.geolocation,
+        currentZoom: 20,
+      },
+    });
+    this.nextSlide();
+  }
 
   getArticleComponent(presentationType, presentationSpec) {
     switch (presentationType) {
@@ -75,7 +92,7 @@ class Article extends Component {
           <LandingQuestion
             header={presentationSpec.header}
             subheader={presentationSpec.subheader}
-            onEnter={this.nextSlide}
+            onEnter={this.zoomToGeo}
             status={this.state.localizationStatus}
             updateCoordinates={this.updateCoordinates}
             updateLocalizationStatus={this.updateLocalizationStatus}
@@ -87,27 +104,60 @@ class Article extends Component {
         // key of this json is the id that has to appear in the main text as a link
         const contextRaw = presentationSpec.links;
 
-        // TODO: create 3 functions
-        // parse to Choice
-        // parse to Range
-        // parse to Context
+        const compilerMain = marksy({
+          createElement: React.createElement,
+          elements: {
+            a({ href, title, target, children }) {
+              if (href in contextRaw) {
+                // href contains the reference id
+                // children the text that should be displayed
+                const contextType = contextRaw[href].type;
+                const contextSpec = contextRaw[href];
+                switch (contextType) {
+                  case 'choice':
+                    return 
+                      <ChoiceBlockWithActionable
+                        style={styles.text}
+                        inlineText={children}
+                        header={contextSpec.header}
+                        info={contextSpec.info}
+                        choices={contextSpec.options}
+                      />
+                      break;
+                  case 'context':
+                    return 
+                      <ContextBlockWithActionable
+                        style={styles.text}
+                        inlineText={children}
+                        header={contextSpec.header}
+                        info={contextSpec.info}
+                      />;
+                    break;
+                  case 'range':
+                    return 
+                      <RangeBlockWithActionable
+                        style={styles.text}
+                        inlineText={children}
+                        header={contextSpec.header}
+                        info={contextSpec.info}
+                        range={contextSpec.rangeSpec}
+                      />;
+                    break;
+                  case 'default':
+                    return (
+                      <span style={{ backgroundColor: 'red' }}>
+                        Undefined actionable text element
+                      </span>
+                    );
+                }
+              }
+            },
+          },
+        });
 
-        // procedure: run through main text,
-        // when you encounter a link check the context json
-        // Insert: Actionable text with the corresponding choice/range/context element
-
-        // jsons look like this:
-        // type: choice | range | context
-        // header
-        // info
-        // choiceSpec or rangeSpec
-
-        // Simplest way: higher order function 3 components
-        // contextual actionable text
-        // range actionable text
-        // choice actionable text
-
-        return <TextBlock content={presentationSpec.text} onNext={this.nextSlide} />;
+        const compiledText = compilerMain(mainTextRaw).tree;
+        // presentaitonSpec.text
+        return <TextBlock content={compiledText} onNext={this.nextSlide} />;
         break;
       case 'predictorSelection':
         return (
@@ -128,6 +178,9 @@ class Article extends Component {
         // we first need to get the cards as an array from the presentationSpecs
         // as that only contains the ids and the presentation specs potentially live somewhere else
         // for now cheat and simply use the mock
+
+        // TODO: have a dict of contextual information for the cards (text, header, img)
+        // load in for the trust ids at startup
 
         return (
           <PredictionCards
@@ -172,10 +225,20 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
+    const { width, height, currentZoom, currentCenter } = this.state.mapParameters;
     return (
       <div style={styles.container}>
         {this.getArticleComponent(currentSlideType, currentSlideSpec)}
-        <MapView path={'ukMap/map.json'} width={400} height={600} zoom={16} center={[-4.2, 55.5]} />
+        <MapView
+          path={'ukMap/ukMap.json'} // TODO: should also be a parameter
+          width={width}
+          height={height}
+          defaultZoom={currentZoom}
+          defaultCenter={currentCenter}
+          currentZoom={currentZoom}
+          currentCenter={currentCenter}
+          markers={this.state.mapParameters.markers}
+        />
       </div>
     );
   }

@@ -10,14 +10,8 @@ const styles = {
 class TextBlock extends Component {
   constructor(props) {
     super(props);
-    this.selectOption = this.selectOption.bind(this);
-    this.state = { nextOption: 0, canProceed: true };
   }
-  componentDidMount() {}
-  componentWillUnmount() {}
-  selectOption(e) {
-    e.preventDefault();
-  }
+
   render() {
     return (
       <div>

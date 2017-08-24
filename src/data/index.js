@@ -7,7 +7,7 @@ export const slidesNHS = [
   {
     type: 'article',
     text:
-      '[How succesful](#id0) is [the NHS](#id1) at delivering on the targets for referral to treatment for [cancer patients](#id2) in the UK?',
+      '[How succesful](id0) is [the NHS](id1) at delivering on the targets for referral to treatment for [cancer patients](id2) in the UK?',
     links: {
       id0: {
         type: 'range',
@@ -42,21 +42,19 @@ export const slidesNHS = [
         type: 'choice',
         header: 'Same targets for different types of cancer?',
         info: 'Some text about aggreagating different cancer types.',
-        choiceSpec: {
-          options: [
-            {
-              id: 'c1',
-              header: 'Aggregate all cancer types',
-              info:
-                'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
-            },
-            {
-              id: 'c2',
-              header: 'Split by cancer groups',
-              info: 'You can also look at the different cancer types.',
-            },
-          ],
-        },
+        options: [
+          {
+            id: 'c1',
+            header: 'Aggregate all cancer types',
+            info:
+              'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
+          },
+          {
+            id: 'c2',
+            header: 'Split by cancer groups',
+            info: 'You can also look at the different cancer types.',
+          },
+        ],
       },
     },
   },
@@ -110,7 +108,6 @@ const predictorValues = [
 let cardId = 0;
 const createPredictionCard = (id) => {
   cardId += 1;
-  console.log('create prediction', trustNames[id], trustInfo[id], trustImgs[id]);
   return {
     cardId,
     title: trustNames[id],

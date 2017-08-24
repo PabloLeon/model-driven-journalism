@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Range from './Range';
+import withActionable from './withActionable';
 
 const styles = {};
-
-class RangeBlock extends Component {
-  render() {
-    const { header, info, range } = this.props;
-    return (
-      <div>
-        <h1>
-          {header}
-        </h1>
-        <p>
-          {' '}{info}{' '}
-        </p>
-        <Range min={range.min} max={range.max} step={range.step} marks={range.marks} />
-      </div>
-    );
-  }
+{
+  /* <div>
+<h1>
+  {header}
+</h1>
+<p>
+  {' '}{info}{' '}
+</p>
+<Range min={range.min} max={range.max} step={range.step} marks={range.marks} />
+ */
 }
+const RangeBlock = ({ inlineText, header, info, range }) =>
+  (<span>
+    <span onClick={() => console.log('lasdasd')}>
+      {inlineText}
+    </span>
+    {/* {needsAction && <Feedback style={styles.svgIcon} />} */}
+  </span>);
 RangeBlock.propTypes = {
   selectedValue: PropTypes.number,
   hoverMark: PropTypes.number,
@@ -57,5 +59,5 @@ RangeBlock.defaultProps = {
     },
   },
 };
-
-export default RangeBlock;
+const RangeBlockWithActionable = withActionable(RangeBlock);
+export default RangeBlockWithActionable;
