@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
   box: {
@@ -15,34 +16,60 @@ const styles = {
     cursor: 'pointer',
   },
 };
-
 class LandingQuestion extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+
+    this.updateLocalizationStatus = this.props.updateLocalizationStatus.bind(this);
+    this.updateCoordinates = this.props.updateCoordinates.bind(this);
   }
-  handleClick(e) {
-    e.preventDefault();
-    this.props.onEnter();
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log('succesfully localized the user: ', position.coords);
+        this.updateLocalizationStatus('localized');
+        this.updateCoordinates([position.coords.latitude, position.coords.longitude]);
+      },
+      (error) => {
+        console.log('error localizing the user', error.message);
+        this.updateLocalizationStatus('error');
+        this.updateCoordinates([undefined, undefined]);
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
   }
   render() {
-    // const classes = this.props.classes;
+    const {
+      header,
+      subheader,
+      onEnter,
+      status,
+      updateCoordinates,
+      updateLocalizationStatus,
+    } = this.props;
     return (
-      <div onClick={e => this.handleClick(e)} style={styles.box}>
+      <div>
         <h1>
-          {this.props.text}
+          {header}
         </h1>
+        <h2>
+          {subheader}
+        </h2>
+        {status !== 'localized'
+          ? <div>
+              Getting geolocation: {status}
+          </div>
+          : <RaisedButton primary />}
       </div>
     );
   }
 }
-
 LandingQuestion.propTypes = {
-  text: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
+  subheader: PropTypes.string,
+  status: PropTypes.string.isRequired,
   onEnter: PropTypes.func.isRequired,
 };
-LandingQuestion.defaultProps = {
-  text: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
-};
+LandingQuestion.defaultProps = {};
 
 export default LandingQuestion;

@@ -9,144 +9,21 @@ import PredictorSelection from './PredictorSelection';
 import ActionableText from './ActionableText';
 
 import parser from '../utils/parser';
+import { slidesNHS, mockPredictorCards } from '../data/';
 
 const styles = {
   container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
 };
-const testMD = `
-# Some blog title
-Just need to show you some code first:
-`;
-
-const trustNames = ['Northern Devon', 'York', 'West London', 'North London', 'Nuffield'];
-const trustInfo = [
-  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
-  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
-  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
-  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
-  'Alias in corrupti qui cupiditate consequatur voluptas. Voluptate dolorum repellat. Ipsam aliquam excepturi recusandae soluta. Unde debitis quidem fugit fuga repellat doloremque.',
-];
-
-const trustImgs = [
-  'http://lorempixel.com/640/480/business',
-  'http://lorempixel.com/640/480/cats',
-  'http://lorempixel.com/640/480/people',
-  'http://lorempixel.com/640/480/abstract',
-  'http://lorempixel.com/640/480/abstract',
-];
-
-const predictorValues = [
-  {
-    predictorName: 'Number of GPs',
-    predictorValue: 'below average',
-  },
-  { predictorName: 'Hospital Rating', predictorValue: 'average' },
-  { predictorName: 'Number of beds', predictorValue: 'above average' },
-];
-
-let cardId = 0;
-const createPredictionCard = (id) => {
-  cardId += 1;
-  console.log('create prediction', trustNames[id], trustInfo[id], trustImgs[id]);
-  return {
-    cardId,
-    title: trustNames[id],
-    info: trustInfo[id],
-    img: trustImgs[id],
-    predictors: predictorValues,
-  };
-};
-
-const mockPredictorCards = trustNames.map((v, idx) => createPredictionCard(idx));
-
-const componentDict = {
-  Range(props) {
-    return <ActionableText text={'test'} />;
-  },
-};
-
 class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
       height: 0,
       width: 0,
-      allSlideSpecs: [
-        {
-          type: 'article',
-          text:
-            '[How succesful](#id0) is [the NHS](#id1) at delivering on the targets for referral to treatment for [cancer patients](#id2) in the UK?',
-          links: {
-            id0: {
-              type: 'range',
-              header: 'Measuring success',
-              info:
-                'Success can be measured in **many different ways** and _different measures_ have existed in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
-              rangeSpec: {
-                min: 0,
-                max: 100,
-                step: 1,
-                unit: '%',
-                marks: {
-                  85: {
-                    label: 'The NHS target in England.',
-                    context:
-                      'The NHS *in England* currently aims to refer **85%** of the patients to treatment',
-                  },
-                  95: {
-                    label: 'The NHS target gor Scotland and Wales.',
-                    context: 'In Scotland and Wales the aim is to refer **95%** in time.',
-                  },
-                },
-              },
-            },
-            id1: {
-              type: 'context',
-              header: 'The National Health Service',
-              info:
-                'There is a different organizing body in England and Scotland... We could put other information here',
-            },
-            id2: {
-              type: 'choice',
-              header: 'Same targets for different types of cancer?',
-              info: 'Some text about aggreagating different cancer types.',
-              choiceSpec: {
-                options: [
-                  {
-                    id: 'c1',
-                    header: 'Aggregate all cancer types',
-                    info:
-                      'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
-                  },
-                  {
-                    id: 'c2',
-                    header: 'Split by cancer groups',
-                    info: 'You can also look at the different cancer types.',
-                  },
-                ],
-              },
-            },
-          },
-        },
-        {
-          type: 'landing',
-        },
-        {
-          type: 'predictorSelection',
-          header: 'Select a predictor',
-          info:
-            'Which factors do you think influence the ability of a NHS trust to refer cancer patients in time?',
-        },
-        {
-          type: 'predictionCards',
-          info:
-            'Try to guess if the trust is on target or not with the factors you chose earlier...',
-          presentationSpecs: {
-            presentationIds: ['p01', 'p02', 'p03'], // there could also be specs for: 25 closest etc
-          },
-        },
-      ],
+      allSlideSpecs: slidesNHS,
       parseStatus: 'parsing', // error || success
+      geolocation: [undefined, undefined],
+      localizationStatus: '',
       currentParseTree: [],
       currentPresentation: 0,
       canProceed: false,
@@ -174,6 +51,8 @@ class Article extends Component {
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.updateCoordinates = this.updateCoordinates.bind(this);
+    this.updateLocalizationStatus = this.updateLocalizationStatus.bind(this);
     this.getArticleComponent = this.getArticleComponent.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.addPredictor = this.addPredictor.bind(this);
@@ -191,11 +70,26 @@ class Article extends Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
+  updateCoordinates(coord) {
+    this.setState({ ...this.state, geolocation: coord });
+  }
+  updateLocalizationStatus(s) {
+    this.setState({ ...this.state, localizationStatus: s });
+  }
 
   getArticleComponent(presentationType, presentationSpec) {
     switch (presentationType) {
       case 'landing':
-        return <LandingQuestion text={presentationSpec.text} onEnter={this.nextSlide} />;
+        return (
+          <LandingQuestion
+            header={presentationSpec.header}
+            subheader={presentationSpec.subheader}
+            onEnter={this.nextSlide}
+            status={this.state.localizationStatus}
+            updateCoordinates={this.updateCoordinates}
+            updateLocalizationStatus={this.updateLocalizationStatus}
+          />
+        );
         break;
       case 'article':
         const mainTextRaw = presentationSpec.text; // this has to be parsed to markdown and links have to be parsed with json specs to actionable text
@@ -222,7 +116,7 @@ class Article extends Component {
         // range actionable text
         // choice actionable text
 
-        return <TextBlock content={parsedText} onNext={this.nextSlide} />;
+        return <TextBlock content={presentationSpec.text} onNext={this.nextSlide} />;
         break;
       case 'predictorSelection':
         return (
