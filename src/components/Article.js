@@ -122,7 +122,6 @@ class Article extends Component {
   getArticleComponent(presentationType, presentationSpec) {
     const selectContext = (id) => {
       // somehow this inthe switch case return...doesn't refer to the class this..js ey
-      console.log('select context', id);
       this.selectShownContext(id);
     };
     switch (presentationType) {

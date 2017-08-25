@@ -5,22 +5,14 @@ const styles = {};
 
 const ContextBlock = ({ header, info }) =>
   (<div>
-    <div>
-      {(header, info)}
-    </div>
+    <h1>
+      {header}
+    </h1>
+    <p>
+      {info}
+    </p>
   </div>);
-//   (<span>
-//     <span onClick={() => console.log('lasdasd')}>
-//       {inlineText}
-//     </span>
-//     {/* {needsAction && <Feedback style={styles.svgIcon} />} */}
-//   </span>);
-// ContextBlock.propTypes = {
-//   header: PropTypes.string.isRequired,
-//   info: PropTypes.string.isRequired,
-//   // onOK: PropTypes.func.isRequired,
-//   // onCancel: PropTypes.func.isRequired,
-// };
+ContextBlock.propTypes = {};
 
 ContextBlock.defaultProps = {};
 
