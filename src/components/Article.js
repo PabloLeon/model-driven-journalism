@@ -55,6 +55,7 @@ class Article extends Component {
     this.zoomToGeo = this.zoomToGeo.bind(this);
     this.getBlockContext = this.getBlockContext.bind(this);
     this.selectShownContext = this.selectShownContext.bind(this);
+    this.resetCurrentContextShownId = this.resetCurrentContextShownId.bind(this);
   }
   componentDidMount() {
     this.updateWindowDimensions();
@@ -88,23 +89,25 @@ class Article extends Component {
     });
     this.nextSlide();
   }
-
+  resetCurrentContextShownId() {
+    this.setState({
+      ...this.state,
+      currentContextShownID: undefined,
+    });
+  }
   selectShownContext(id) {
     console.log('showing context from article', id);
     this.setState({
       ...this.state,
       currentContextShownID: id,
+      currentContext: this.getBlockContext(id),
     });
   }
 
-  getBlockContext() {
+  getBlockContext(id) {
     const currentS = this.state.allSlideSpecs[this.state.currentPresentation];
-    const currentContId = this.state.currentContextShownID;
-
-    console.log('getting block context', currentS.links, currentContId, currentS);
-    // TODO: simply pass a close block context callback here
-    if (currentContId in currentS.links) {
-      const s = currentS.links;
+    if (id in currentS.links) {
+      const s = currentS.links[id];
       switch (s.type) {
         case 'context':
           return <ContextBlock header={s.header} info={s.info} />;
@@ -157,7 +160,7 @@ class Article extends Component {
                     contextId={href}
                     contextType={contextType}
                     contextSpec={contextSpec}
-                    onAction={() => selectContext(href)}
+                    onAction={selectContext}
                   />
                 );
               }
@@ -173,7 +176,8 @@ class Article extends Component {
             content={compiledText}
             onNext={this.nextSlide}
             currentShowId={this.state.currentContextShownID}
-            getContext={this.getBlockContext}
+            getContext={this.state.currentContext}
+            closeContext={this.resetCurrentContextShownId}
           />
         );
         break;

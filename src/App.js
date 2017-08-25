@@ -20,11 +20,12 @@ const predictors = [
 // so go through the city & hospital data
 // map to an object with name: hospital name // coordinates: [long, lat]
 
+// no internet connection fake center: [-4.2, 55.5],
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      geolocation: [undefined, undefined],
+      geolocation: [-4.2, 55.5],//[undefined, undefined],
       dataPaths: [],
       canProceed: false,
       hospitals: undefined,
@@ -75,23 +76,24 @@ class App extends Component {
   }
   // FIXME: longitude latitude order???
   componentDidMount() {
-    console.info('Establishing user location');
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log('succesfully localized the user: ', position.coords);
-        this.setState({
-          ...this.state,
-          geolocation: [position.coords.longitude, position.coords.latitude],
-        });
+    this.loadData();
+    // console.info('Establishing user location');
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => {
+    //     console.log('succesfully localized the user: ', position.coords);
+    //     this.setState({
+    //       ...this.state,
+    //       geolocation: [position.coords.longitude, position.coords.latitude],
+    //     });
 
-        this.loadData();
-      },
-      (error) => {
-        console.log('error localizing the user', error.message);
-        this.setState({ ...this.state, geolocation: [undefined, undefined], canProceed: false });
-      },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
+    //     this.loadData();
+    //   },
+    //   (error) => {
+    //     console.log('error localizing the user', error.message);
+    //     this.setState({ ...this.state, geolocation: [undefined, undefined], canProceed: false });
+    //   },
+    //   { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+    // );
   }
 
   render() {

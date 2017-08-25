@@ -16,7 +16,7 @@ export const slidesNHS = [
         header: 'Measuring success',
         info:
           'Success can be measured in **many different ways** and _different measures_ have existed in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
-        rangeSpec: {
+        range: {
           min: 0,
           max: 100,
           step: 1,
@@ -44,7 +44,7 @@ export const slidesNHS = [
         type: 'choice',
         header: 'Same targets for different types of cancer?',
         info: 'Some text about aggreagating different cancer types.',
-        options: [
+        choices: [
           {
             id: 'c1',
             header: 'Aggregate all cancer types',

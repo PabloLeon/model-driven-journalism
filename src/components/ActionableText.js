@@ -19,7 +19,7 @@ const ActionableText = ({ inlineText, contextId, contextType, contextSpec, onAct
   console.log('actionable text', contextId, contextType, contextSpec);
   return (
     <span style={styles.text}>
-      <span onClick={() => onAction(contextId, contextType, contextSpec)}>
+      <span onClick={() => onAction(contextId)}>
         {inlineText}
       </span>
     </span>
