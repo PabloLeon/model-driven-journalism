@@ -6,8 +6,10 @@ export const slidesNHS = [
   },
   {
     type: 'article',
+    header: 'NHS targets for referreal to treatment for cancer.',
     text:
       '[How succesful](id0) is [the NHS](id1) at delivering on the targets for referral to treatment for [cancer patients](id2) in the UK?',
+
     links: {
       id0: {
         type: 'range',

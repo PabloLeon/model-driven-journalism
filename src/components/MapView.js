@@ -120,9 +120,9 @@ export default MapView;
 //     y: currentCenter[1],
 //   }}
 //   style={{
-//     zoom: spring(currentZoom, { stiffness: 200, damping: 0.1 }),
-//     x: spring(currentCenter[0], { stiffness: 200, damping: 0.1 }),
-//     y: spring(currentCenter[1], { stiffness: 200, damping: 0.1 }),
+//     zoom: spring(currentZoom, { stiffness: 100, damping: 10 }),
+//     x: spring(currentCenter[0], { stiffness: 100, damping: 10 }),
+//     y: spring(currentCenter[1], { stiffness: 100, damping: 10 }),
 //   }}
 // >
 //   {({ zoom, x, y }) =>

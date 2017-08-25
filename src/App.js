@@ -97,17 +97,19 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        {this.state.canProceed
-          ? <Article
-            geolocation={this.state.geolocation}
-            data={{
-              allPredictors: predictors,
-              hospitals: this.state.hospitals,
-              waitingTimes: this.state.waitingTimes,
-              markers: this.state.markers,
-            }}
-          />
-          : <div>Loading resources</div>}
+        <div style={{ backgroundColor: 'teal', minHeight: '300' }}>
+          {this.state.canProceed
+            ? <Article
+              geolocation={this.state.geolocation}
+              data={{
+                allPredictors: predictors,
+                hospitals: this.state.hospitals,
+                waitingTimes: this.state.waitingTimes,
+                markers: this.state.markers,
+              }}
+            />
+            : <div>Loading resources</div>}
+        </div>
       </MuiThemeProvider>
     );
   }

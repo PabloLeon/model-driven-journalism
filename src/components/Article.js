@@ -7,9 +7,10 @@ import PredictionCard from './PredictionCard';
 import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
 
-import ChoiceBlockWithActionable from './ChoiceBlockWithActionable';
-import RangeBlockWithActionable from './RangeBlockWithActionable';
-import ContextBlockWithActionable from './ContextBlockWithActionable';
+import ActionableText from './ActionableText';
+import ChoiceBlock from './ChoiceBlock';
+import ContextBlock from './ContextBlock';
+import RangeBlock from './RangeBlock';
 
 import parser from '../utils/parser';
 import { getClosestTrust } from '../utils/ops';
@@ -30,6 +31,7 @@ class Article extends Component {
       loadError: false,
       geolocation: this.props.geolocation,
       currentParseTree: [],
+      currentContextShownID: undefined,
       currentPresentation: 0,
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
@@ -51,6 +53,8 @@ class Article extends Component {
     this.addPredictor = this.addPredictor.bind(this);
     this.removePredictor = this.removePredictor.bind(this);
     this.zoomToGeo = this.zoomToGeo.bind(this);
+    this.getBlockContext = this.getBlockContext.bind(this);
+    this.selectShownContext = this.selectShownContext.bind(this);
   }
   componentDidMount() {
     this.updateWindowDimensions();
@@ -85,7 +89,42 @@ class Article extends Component {
     this.nextSlide();
   }
 
+  selectShownContext(id) {
+    console.log('showing context from article', id);
+    this.setState({
+      ...this.state,
+      currentContextShownID: id,
+    });
+  }
+
+  getBlockContext() {
+    const currentS = this.state.allSlideSpecs[this.state.currentPresentation];
+    const currentContId = this.state.currentContextShownID;
+
+    console.log('getting block context', currentS.links, currentContId, currentS);
+    // TODO: simply pass a close block context callback here
+    if (currentContId in currentS.links) {
+      const s = currentS.links;
+      switch (s.type) {
+        case 'context':
+          return <ContextBlock header={s.header} info={s.info} />;
+          break;
+        case 'range':
+          return <RangeBlock header={s.header} info={s.info} range={s.range} />;
+          break;
+        case 'choice':
+          return <ChoiceBlock header={s.header} info={s.info} choices={s.choices} />;
+          break;
+      }
+    }
+  }
+
   getArticleComponent(presentationType, presentationSpec) {
+    const selectContext = (id) => {
+      // somehow this inthe switch case return...doesn't refer to the class this..js ey
+      console.log('select context', id);
+      this.selectShownContext(id);
+    };
     switch (presentationType) {
       case 'landing':
         return (
@@ -113,51 +152,31 @@ class Article extends Component {
                 // children the text that should be displayed
                 const contextType = contextRaw[href].type;
                 const contextSpec = contextRaw[href];
-                switch (contextType) {
-                  case 'choice':
-                    return 
-                      <ChoiceBlockWithActionable
-                        style={styles.text}
-                        inlineText={children}
-                        header={contextSpec.header}
-                        info={contextSpec.info}
-                        choices={contextSpec.options}
-                      />
-                      break;
-                  case 'context':
-                    return 
-                      <ContextBlockWithActionable
-                        style={styles.text}
-                        inlineText={children}
-                        header={contextSpec.header}
-                        info={contextSpec.info}
-                      />;
-                    break;
-                  case 'range':
-                    return 
-                      <RangeBlockWithActionable
-                        style={styles.text}
-                        inlineText={children}
-                        header={contextSpec.header}
-                        info={contextSpec.info}
-                        range={contextSpec.rangeSpec}
-                      />;
-                    break;
-                  case 'default':
-                    return (
-                      <span style={{ backgroundColor: 'red' }}>
-                        Undefined actionable text element
-                      </span>
-                    );
-                }
+                return (
+                  <ActionableText
+                    inlineText={children}
+                    contextId={href}
+                    contextType={contextType}
+                    contextSpec={contextSpec}
+                    onAction={() => selectContext(href)}
+                  />
+                );
               }
             },
           },
         });
 
         const compiledText = compilerMain(mainTextRaw).tree;
-        // presentaitonSpec.text
-        return <TextBlock content={compiledText} onNext={this.nextSlide} />;
+        // TODO: this needs logic -- when can i continue, where are the selected options stored
+        return (
+          <TextBlock
+            header={presentationSpec.header}
+            content={compiledText}
+            onNext={this.nextSlide}
+            currentShowId={this.state.currentContextShownID}
+            getContext={this.getBlockContext}
+          />
+        );
         break;
       case 'predictorSelection':
         return (

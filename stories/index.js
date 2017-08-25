@@ -14,7 +14,6 @@ import PredictorListing from '../src/components/PredictorListing';
 import Predictor from '../src/components/Predictor';
 import PredictorTable from '../src/components/PredictorTable';
 import TinderNavigation from '../src/components/TinderNavigation';
-import TextBlock from '../src/components/TextBlock';
 import ActionableText from '../src/components/ActionableText';
 import ChoiceBlock from '../src/components/ChoiceBlock';
 import Choice from '../src/components/Choice';
@@ -145,7 +144,6 @@ storiesOf('PredictorTable', module)
   .add('Basic', () => <PredictorTable data={predictionsMock} />)
   .add('Empty', () => <PredictorTable />);
 
-storiesOf('Article', module).add('plain text', () => <TextBlock content={parsedText} />);
 storiesOf('Article Navigation', module)
   .add('Can proceed', () => <Navigation canProceed />)
   .add('Cannot proceed', () => <Navigation canProceed={false} />);
@@ -220,7 +218,6 @@ storiesOf('Maps', module).add('Basic UK overview', () =>
 storiesOf('Predictor', module).add('Basic', () =>
   <Predictor text="Test predictor" context="contextual info" />,
 );
-storiesOf('Text Block', module).add('Basic', () => <TextBlock />);
 storiesOf('Actionable Text', module)
   .add('No action needed', () => <ActionableText text="you can do something with me" />)
   .add('Action needed', () => <ActionableText text="I need action!" needsAction />);
