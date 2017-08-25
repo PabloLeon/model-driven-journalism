@@ -43,7 +43,6 @@
     "name": "First treatment within 49 to 62 days",
     "description": "Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 49​ ​ to​ ​ 62​ ​ days."
   },
-
   "wait_63to76": {
     "name": "First treatment within 63 to 76 days",
     "description": "Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 63 ​ to​ ​ 76 ​ days."
@@ -68,12 +67,10 @@
     "name": "Available daybeds",
     "description": "The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (day​ ​ only)​ ​ for​ ​ general​ ​ and acute"
   },
-
   "cat_beds_night": {
     "name": "Available nightbeds",
     "description": "The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (night ​ only)​ ​ for​ ​ general​ ​ and acute"
   },
-
   "cat_Anaesthetics": {
     "name": "Number of Anaesthetics (in FTE)",
     "description": ""
@@ -106,47 +103,38 @@
     "name": "Number of grade 2 medical staff",
     "description": "Number of staff with rating 2."
   },
-
   "cat_clinstaff_grade3": {
     "name": "Number of grade 3 medical staff",
     "description": "Number of staff with rating 3."
   },
-
   "cat_clinstaff_grade4": {
     "name": "Number of grade 4 medical staff",
     "description": "Number of staff with rating 4."
   },
-
   "cat_clinstaff_grade5": {
     "name": "Number of grade 5 medical staff",
     "description": "Number of staff with rating 5 (average) ."
   },
-
   "cat_clinstaff_grade6": {
     "name": "Number of grade 6 medical staff",
     "description": "Number of staff with rating 6."
   },
-
   "cat_clinstaff_grade7": {
     "name": "Number of grade 7 medical staff",
     "description": "Number of staff with rating 7."
   },
-
   "cat_clinstaff_grade8": {
     "name": "Number of grade 8 medical staff",
     "description": "Number of staff with rating 8."
   },
-
   "cat_clinstaff_grade9": {
     "name": "Number of grade 9 medical staff",
     "description": "Number of staff with rating 9."
   },
-
   "cat_clinstaff_grade10": {
     "name": "Number of grade 10 medical staff",
     "description": "Number of staff with rating 10 (highest)."
   },
-
   "cat_Nurse_HealthVisitors": {
     "name": "Nurses and Health visitors",
     "description": "Nurses​ ​ & ​ ​ health​ ​ visitors"
@@ -171,84 +159,76 @@
     "name": "Year-to-date​ ​ (YTD)​ ​ planned financial​ ​ balance​",
     "description": "Year-to-date​ ​ (YTD)​ ​ planned financial​ ​balance​ ​ of​ ​ trust"
   },
-
   "ytd_actual": {
     "name": "Year-to-date​ ​ (YTD)​ ​ actual financial​ ​ balance​",
     "description": "Year-to-date​ ​ (YTD)​ ​ actual financial​ ​ balance​ ​ of​ ​ trust"
   },
-
   "planactual_diff": {
     "name": "Year-to-date difference planned-actual",
     "description": "ytd_plan​ ​ minus​ ​ ytd_actual"
   },
   "ytd_plan_miss": {
     "name": "Financial performance",
-    "description": "1​ ​ = ​ ​ trust​ ​ did​ ​ not​ ​ reach​ ​ planned YTD​ ​ balance,​ ​ 0 ​ ​ = ​ ​ trust​ ​ reached or​ ​ did​ ​ better​ ​ than​ ​ forecasted"
+    "description": "1 = trust​ did​ not​​ reach​​ planned YTD​​ balance,​ 0​ = trust​​ reached or​ ​did​​ better​ than​​ forecasted"
   },
   "deficit": {
     "name": "Financial deficit",
-    "description": "1​ ​ = ​ ​ trusts​ ​ that​ ​ are​ ​ in​ ​ deficit​ ​ i.e. with​ ​ a ​ ​ negative​ ​ balance,​ ​ 0 ​ ​ = trusts​ ​ not​ ​ in​ ​ deficit"
+    "description": "1 = trusts​ that​ are​​ in​​ deficit​ ​i.e with​ a​ negative​​ balance,​ 0​ = trusts​ ​ not​ ​ in​ ​ deficit"
   },
   "hospitalN": {
-      "name": "Number of hospitals",
-      "description": "Number of hospitals in trust"
+    "name": "Number of hospitals",
+    "description": "Number of hospitals in trust"
   },
-  
-  "unadj_score_Q55": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q47": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q44": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q59": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q44": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q37": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q30": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q29": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q25": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q16": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q12": {"name": "Survey Score", "description": "  Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q6": {"name": "Survey Score", "description": "   Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q2": {"name": "Survey Score", "description": "   Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"},
-  "unadj_score_Q1": {"name": "Survey Score", "description": "   Unadjusted​ ​ scores​ ​ by​ ​ cancer
-and​ ​ trust​ ​ for​ ​ questions​ ​ in​ ​ the
-National​ ​ Cancer​ ​ Patient
-Experience​ ​ Survey.​"}
-
+  "unadj_score_Q55": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q47": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q44": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q59": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q37": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q30": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q29": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q25": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q16": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q12": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q6": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q2": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  },
+  "unadj_score_Q1": {
+    "name": "Survey Score",
+    "description": "Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​"
+  }
 }
