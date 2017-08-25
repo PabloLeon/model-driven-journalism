@@ -74,6 +74,10 @@ export const slidesNHS = [
       presentationIds: ['p01', 'p02', 'p03'], // there could also be specs for: 25 closest etc
     },
   },
+  {
+    type: 'predictionEvaluation',
+    info: 'Here is how well you did...',
+  },
 ];
 
 const testMD = `
@@ -120,3 +124,23 @@ const createPredictionCard = (id) => {
 };
 
 export const mockPredictorCards = trustNames.map((v, idx) => createPredictionCard(idx));
+
+const predictorsNames = [
+  'Number of GPs',
+  'Number of Nurses',
+  'Number of administrative staff',
+  'Number of Beds',
+  'Financial situation',
+];
+let id = 0;
+const createPrediction = (trustName, guess, trueValue) => {
+  id += 1;
+  return { id, trustName, guess, trueValue };
+};
+export const predictionsMock = [
+  createPrediction('Northern Devon', true, true),
+  createPrediction('York', false, false),
+  createPrediction('West London', true, false),
+  createPrediction('North London', false, true),
+  createPrediction('Nuffield', true, true),
+];

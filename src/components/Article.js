@@ -6,6 +6,7 @@ import TextBlock from './TextBlock';
 import PredictionCard from './PredictionCard';
 import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
+import PredictorTable from './PredictorTable';
 
 import ActionableText from './ActionableText';
 import ChoiceBlock from './ChoiceBlock';
@@ -178,6 +179,8 @@ class Article extends Component {
             currentShowId={this.state.currentContextShownID}
             getContext={this.state.currentContext}
             closeContext={this.resetCurrentContextShownId}
+            canProceed // TODO: need to change this in general... do once we know how I want to store the selected options etc...
+            onNext={this.nextSlide}
           />
         );
         break;
@@ -187,7 +190,7 @@ class Article extends Component {
             header={presentationSpec.header}
             info={presentationSpec.info}
             selectedPredictors={this.state.selectedPredictors}
-            availablePredictors={this.state.data.predictors}
+            availablePredictors={this.state.allPredictors}
             canProceed={this.state.canProceed}
             onNext={this.nextSlide}
             addPredictor={this.addPredictor}
@@ -213,6 +216,10 @@ class Article extends Component {
           />
         );
         break;
+      case 'predictionEvaluation':
+        return <PredictorTable />;
+        break;
+
       default:
         return <div>Default</div>;
         break;
@@ -223,8 +230,8 @@ class Article extends Component {
     console.log('adding predictor', id);
     // go to data and find the predictor
     // add the object to the predictors
-    const predictorId = this.state.data.predictors.findIndex(v => v.id === id);
-    const predictor = this.state.data.predictors[predictorId];
+    const predictorId = this.state.allPredictors.findIndex(v => v.id === id);
+    const predictor = this.state.allPredictors[predictorId];
     this.setState({
       selectedPredictors: [...this.state.selectedPredictors, predictor],
     });
@@ -238,7 +245,7 @@ class Article extends Component {
     });
   }
   nextSlide() {
-    if (this.state.currentPresentation < this.numberOfSlides) {
+    if (this.state.currentPresentation < this.numberOfSlides - 1) {
       this.setState({
         currentPresentation: this.state.currentPresentation + 1,
       });

@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+// FIXME: have these imports changed?
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import { predictionsMock } from '../data/';
 
 const styles = {
   paper: {
@@ -24,58 +33,50 @@ const getTotals = (d) => {
   return 0.0;
 };
 
-class PredictorTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      percentageCorrect: getTotals(props.data),
-    };
-  }
-  render() {
-    const data = this.props.data;
-    const numberOfEntries = data.length;
-    return (
-      <Paper style={styles.paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Trust</TableCell>
-              <TableCell numeric>Your Guess</TableCell>
-              <TableCell numeric>True Value</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {numberOfEntries > 1 &&
-              data.map(n =>
-                (<TableRow key={n.id}>
-                  <TableCell>
-                    {n.trustName}
-                  </TableCell>
-                  <TableCell numeric>
-                    {n.guess.toString()}
-                  </TableCell>
-                  <TableCell numeric>
-                    {n.trueValue.toString()}
-                  </TableCell>
-                </TableRow>),
-              )}
-            <Divider />
-            <TableRow>
-              <TableCell>Total</TableCell>
-              <TableCell />
-              <TableCell numeric>
-                {`You got ${this.state.percentageCorrect}% correct.`}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-    );
-  }
-}
+const PredictorTable = ({ data }) => {
+  const percentageCorrect = getTotals(data);
+  const numberOfEntries = data.length;
+  console.log('predictor table', data);
+
+  return (
+    <Paper style={styles.paper}>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderColumn>Trust</TableHeaderColumn>
+            <TableHeaderColumn>Your Guess</TableHeaderColumn>
+            <TableHeaderColumn>True Value</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {numberOfEntries > 1 &&
+            data.map(n =>
+              (<TableRow key={n.id}>
+                <TableRowColumn>
+                  {n.trustName}
+                </TableRowColumn>
+                <TableRowColumn>
+                  {n.guess.toString()}
+                </TableRowColumn>
+                <TableRowColumn>
+                  {n.trueValue.toString()}
+                </TableRowColumn>
+              </TableRow>),
+            )}
+          <TableRow>
+            <TableRowColumn>Total</TableRowColumn>
+            <TableRowColumn />
+            <TableRowColumn>
+              {`You got ${percentageCorrect}% correct.`}
+            </TableRowColumn>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Paper>
+  );
+};
 
 PredictorTable.propTypes = {
-  classes: PropTypes.object.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -88,6 +89,6 @@ PredictorTable.propTypes = {
 
 // TODO: need to check for length of tata == 1...
 PredictorTable.defaultProps = {
-  data: [],
+  data: predictionsMock,
 };
 export default PredictorTable;

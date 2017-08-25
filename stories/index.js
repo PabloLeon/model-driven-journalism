@@ -25,25 +25,6 @@ import RangeBlock from '../src/components/RangeBlock';
 
 import parser from '../src/utils/parser';
 
-const predictorsNames = [
-  'Number of GPs',
-  'Number of Nurses',
-  'Number of administrative staff',
-  'Number of Beds',
-  'Financial situation',
-];
-let id = 0;
-const createPrediction = (trustName, guess, trueValue) => {
-  id += 1;
-  return { id, trustName, guess, trueValue };
-};
-const predictionsMock = [
-  createPrediction('Northern Devon', true, true),
-  createPrediction('York', false, false),
-  createPrediction('West London', true, false),
-  createPrediction('North London', false, true),
-  createPrediction('Nuffield', true, true),
-];
 addDecorator(muiTheme());
 
 //

@@ -11,7 +11,15 @@ const styles = {
 };
 
 // TODO: this is actually where the logic lives: need canProceed, onNext, onAction => pass the right contextual element to show in dialog
-const TextBlock = ({ header, content, currentShowId, getContext, closeContext }) =>
+const TextBlock = ({
+  header,
+  content,
+  currentShowId,
+  getContext,
+  closeContext,
+  canProceed,
+  onNext,
+}) =>
   (<div>
     <h1>
       {header}
@@ -25,6 +33,7 @@ const TextBlock = ({ header, content, currentShowId, getContext, closeContext })
         </Dialog>
       }
     </div>
+    <RaisedButton label={'Next'} primary onClick={onNext} />
   </div>);
 
 TextBlock.propTypes = {};
