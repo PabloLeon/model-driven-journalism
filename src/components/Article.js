@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import marksy from 'marksy/components';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
 import TextBlock from './TextBlock';
-import PredictionCard from './PredictionCard';
 import PredictionCards from './PredictionCards';
 import PredictorSelection from './PredictorSelection';
 import PredictorTable from './PredictorTable';
@@ -13,10 +13,8 @@ import ChoiceBlock from './ChoiceBlock';
 import ContextBlock from './ContextBlock';
 import RangeBlock from './RangeBlock';
 
-import parser from '../utils/parser';
 import { getClosestTrust } from '../utils/ops';
-import { slidesNHS, mockPredictorCards } from '../data/';
-import marksy from 'marksy/components';
+import { slidesNHS } from '../data/';
 
 const styles = {
   container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
@@ -37,6 +35,8 @@ class Article extends Component {
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
+      requiredPredictionIDs: ['ADL', 'NCN'],
+      trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
       waitingTimes: this.props.data.waitingTimes,
       mapParameters: {
@@ -119,6 +119,9 @@ class Article extends Component {
         case 'choice':
           return <ChoiceBlock header={s.header} info={s.info} choices={s.choices} />;
           break;
+        default:
+          return <div>Undefined Context </div>;
+          break;
       }
     }
   }
@@ -185,6 +188,7 @@ class Article extends Component {
         );
         break;
       case 'predictorSelection':
+        console.log('article', this.state.selectedPredictors, this.state.allPredictors);
         return (
           <PredictorSelection
             header={presentationSpec.header}
@@ -195,7 +199,7 @@ class Article extends Component {
             onNext={this.nextSlide}
             addPredictor={this.addPredictor}
             removePredictor={this.removePredictor}
-            canProceed={this.state.selectedPredictors.length > 0}
+            canProceed={Object.keys(this.state.selectedPredictors).length > 0}
           />
         );
         break;
@@ -209,7 +213,7 @@ class Article extends Component {
 
         return (
           <PredictionCards
-            cards={mockPredictorCards}
+            cards={this.state.requiredPredictionIDs}
             info={presentationSpec.info}
             predictors={this.state.selectedPredictors}
             onNext={this.nextSlide}
@@ -226,22 +230,15 @@ class Article extends Component {
     }
   }
 
-  addPredictor(id) {
-    console.log('adding predictor', id);
-    // go to data and find the predictor
-    // add the object to the predictors
-    const predictorId = this.state.allPredictors.findIndex(v => v.id === id);
-    const predictor = this.state.allPredictors[predictorId];
+  addPredictor(predictor) {
     this.setState({
       selectedPredictors: [...this.state.selectedPredictors, predictor],
     });
   }
   removePredictor(id) {
-    console.log('removing predictor', id);
-    // remove the predictors
-    const newPredictors = this.state.selectedPredictors.filter(v => v.id != id);
+    const newP = this.state.selectedPredictors.filter(spK => spK !== id);
     this.setState({
-      selectedPredictors: newPredictors,
+      selectedPredictors: newP,
     });
   }
   nextSlide() {

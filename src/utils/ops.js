@@ -1,6 +1,17 @@
+// get two objects and return a new object
+
 export const getAvailablePredictors = (available, selected) => {
-  if (available.length > 0) {
-    return available.filter(v => !selected.map(p => p.id).includes(v.id));
+  // FIXME: Currently broken (add 2 remove one removes all)
+  const availableLength = available.length;
+  const selectedLength = selected.length;
+
+  if (availableLength > 0) {
+    if (selectedLength > 0 && availableLength > 0) {
+      const selectedKeySet = selected.map(p => p.key);
+      const avb = available.filter(avK => !(selectedKeySet.indexOf(avK.key) === -1));
+      return avb;
+    }
+    return available;
   }
   return [];
 };

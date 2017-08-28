@@ -25,47 +25,47 @@ const styles = {
 // Fixed size box ( 2 columns?! ) that wraps if more than the size
 // maps all the Predictors to that columns
 
-// TODO: add contextual information here!
-
 const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, onSelect }) =>
   (<Paper style={styles.box}>
     <div style={styles.selected}>
-      {selectedPredictors.map(s =>
+      {selectedPredictors.map(p =>
         (<Predictor
-          label={s.label}
-          context={s.context}
-          key={s.id}
-          onDelete={() => onDelete(s.id)}
+          label={p.name}
+          context={p.description}
+          key={p.key}
+          onDelete={() => onDelete(p.key)}
         />),
       )}
     </div>
     <div style={styles.options}>
-      {availablePredictors.map(s =>
-        <Predictor label={s.label} context={s.context} key={s.id} onClick={() => onSelect(s.id)} />,
+      {availablePredictors.map(a =>
+        (<Predictor
+          label={a.name}
+          context={a.description}
+          key={a.key}
+          onClick={() => onSelect(a.key)}
+        />),
       )}
     </div>
   </Paper>);
 
 PredictorListing.propTypes = {
-  selectedPredictors: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      context: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  availablePredictors: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      context: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  selectedPredictors: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+  availablePredictors: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+
   onSelect: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 PredictorListing.defaultProps = {
-  availablePredictors: [],
-  selectedPredictors: [],
+  availablePredictors: {},
+  selectedPredictors: {},
 };
 export default PredictorListing;

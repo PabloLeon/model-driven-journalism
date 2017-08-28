@@ -5,8 +5,6 @@ import Predictor from './Predictor';
 import Divider from 'material-ui/Divider';
 import PropTypes from 'prop-types';
 
-import { getAvailablePredictors } from '../utils/ops';
-
 const styles = {
   box: {},
   selected: {},
@@ -18,6 +16,7 @@ const styles = {
   },
 };
 
+// key, spec: {name, info}
 const PredictorSelection = ({
   header,
   info,
@@ -28,7 +27,9 @@ const PredictorSelection = ({
   onNext,
   canProceed,
 }) => {
-  const predictors = getAvailablePredictors(availablePredictors, selectedPredictors);
+  const avblP = Object.keys(availablePredictors)
+    .filter(k => selectedPredictors.indexOf(k) === -1)
+    .map(k => ({ key: k, ...availablePredictors[k] }));
   return (
     <div>
       <h1>
@@ -39,8 +40,8 @@ const PredictorSelection = ({
       </p>
       <Divider />
       <PredictorListing
-        selectedPredictors={selectedPredictors}
-        availablePredictors={predictors}
+        selectedPredictors={selectedPredictors.map(k => ({ key: k, ...availablePredictors[k] }))}
+        availablePredictors={avblP}
         onSelect={addPredictor}
         onDelete={removePredictor}
       />
@@ -51,14 +52,14 @@ const PredictorSelection = ({
 };
 
 PredictorSelection.defaultProps = {
-  selectedPredictors: [],
-  availablePredictors: [],
+  selectedPredictors: {},
+  availablePredictors: {},
 };
 PredictorSelection.propTypes = {
   header: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired,
-  selectedPredictors: PropTypes.array,
-  availablePredictors: PropTypes.array,
+  selectedPredictors: PropTypes.object,
+  availablePredictors: PropTypes.object,
   onNext: PropTypes.func.isRequired,
   canProceed: PropTypes.bool,
 };
