@@ -32,42 +32,49 @@ const styles = {
     width: 38,
   },
 };
+const PredictionCard = ({ title, information, predictors, predictorValues, onSelect }) => {
+  const infoText = `
+  The ${title} trust consists of ${information.hospitals
+  .length} hospitals the ${information.hospitals.map(h => `${h} `)}.
+  The hospitals are located in ${information.city.map(c => `${c} `)}
+  `;
 
-class PredictionCard extends Component {
-  render() {
-    const { title, subheader, img, information, predictors, onSelect } = this.props;
-    return (
-      <Card style={styles.card}>
-        <CardHeader
-          title={
-            <h2>
-              {title}
-            </h2>
-          }
-          avatar={<Avatar className={styles.avatar} src={img} />}
-          subheader={subheader}
-        />
-        <CardText style={styles.content}>
+  return (
+    <Card style={styles.card}>
+      <CardHeader
+        title={
+          <h2>
+            {title}
+          </h2>
+        }
+        avatar={
+          <Avatar
+            className={styles.avatar}
+            src={
+              'http://i2.getwestlondon.co.uk/incoming/article10810299.ece/ALTERNATES/s615/CS43857740.jpg'
+            }
+          />
+        }
+      />
+      <CardText style={styles.content}>
+        <div>
+          <p>
+            {infoText}
+          </p>
           <div>
-            {/*  TODO: This should be its own component and text should be enriched with contextual information (at least hyperlink style onhover show info) */}
-            <p>
-              {information}
-            </p>
-            <div>
-              {predictors.map((p, idx) =>
-                (<p>
-                  `${p.predictorName}: ${p.predictorValue}`
-                </p>),
-              )}
-            </div>
+            {predictors.map((p, idx) =>
+              (<p>
+                `${p.name}: ${predictorValues[idx]}`
+              </p>),
+            )}
           </div>
-        </CardText>
-        <Divider />
-        <TinderNavigation onSelect={e => onSelect(e)} />
-      </Card>
-    );
-  }
-}
+        </div>
+      </CardText>
+      <Divider />
+      <TinderNavigation onSelect={e => onSelect(e)} />
+    </Card>
+  );
+};
 PredictionCard.propTypes = {
   title: PropTypes.string.isRequired,
   subheader: PropTypes.string.isRequired,

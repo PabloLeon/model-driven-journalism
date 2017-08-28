@@ -8,6 +8,11 @@ const styles = {
   block: {},
   svgIcon: {},
   choice: {},
+  dialog: {
+    flex: true,
+    height: 800,
+    width: 1000,
+  },
 };
 
 // TODO: this is actually where the logic lives: need canProceed, onNext, onAction => pass the right contextual element to show in dialog
@@ -27,7 +32,12 @@ const TextBlock = ({
     <div style={styles.block}>
       {content}
       {
-        <Dialog title="Dialog With Actions" modal={false} open={currentShowId !== undefined}>
+        <Dialog
+          style={styles.dialog}
+          title="Dialog With Actions"
+          modal={false}
+          open={currentShowId !== undefined}
+        >
           {currentShowId !== undefined && getContext}
           <RaisedButton label={'OK'} primary onClick={closeContext} />
         </Dialog>

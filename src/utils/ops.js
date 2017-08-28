@@ -1,19 +1,28 @@
-// get two objects and return a new object
+// get center of array of longitude and latitude
+// hacky approximation...simply take the average longitude and average latitude
+// TODO: check how to do this right, a radius would be great too
+// so that later i can use that radius to inform my zoom level
 
-export const getAvailablePredictors = (available, selected) => {
-  // FIXME: Currently broken (add 2 remove one removes all)
-  const availableLength = available.length;
-  const selectedLength = selected.length;
+// FIXME: Actually stupid...mode should be used
+// since many values around london should not shift the center of the map there
 
-  if (availableLength > 0) {
-    if (selectedLength > 0 && availableLength > 0) {
-      const selectedKeySet = selected.map(p => p.key);
-      const avb = available.filter(avK => !(selectedKeySet.indexOf(avK.key) === -1));
-      return avb;
-    }
-    return available;
-  }
-  return [];
+export const getCenterGeo = (arrayOfCoordinates) => {
+  // the array currently looks like this:
+  // [{name: organisationName, coordinates: [Longitude, Latitude]}]
+  let length = 0;
+
+  const [longSum, latSum] = arrayOfCoordinates.reduce(
+    (currVals, a) => {
+      const [currLongSum, currLatSum] = currVals;
+      const [long, lat] = a.coordinates;
+      length += 1;
+      return [currLongSum + parseFloat(long), currLatSum + parseFloat(lat)];
+    },
+    [0.0, 0.0],
+  );
+
+  console.log('length', length, longSum, latSum);
+  return [longSum / length, latSum / length];
 };
 
 // distance for two geopoints in km

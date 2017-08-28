@@ -99,74 +99,9 @@ export const predictionsMock = [
 ];
 
 export const predictorInfo = {
-  ods_code: {
-    name: 'ODS Code',
-    description: 'Organisational​ ​Data​ Service',
-  },
-  nhs_trust: {
-    name: 'Trust name',
-    description: '',
-  },
-  cancer_type: {
-    name: 'Cancer type',
-    description: 'The type of cancer',
-  },
-  care_path: {
-    name: 'Care path',
-    description:
-      'Where the patients admitted to hospital for treatment, not admitted, or outpatients',
-  },
   numtreat_total: {
     name: 'Total treated',
     description: 'Total​ ​number​ of​ ​people receiving​ first​ ​treatment​ ​for cancer',
-  },
-  numtreat_less62days: {
-    name: 'First treatment in less then 62 days',
-    description: 'Number​ of​ ​people​ receiving first​ treatment​ for​ cancer within​ 62​ ​days.',
-  },
-  numtreat_more62days: {
-    name: 'First treatment after 62 days',
-    description: 'Number​ of​ people​​ receiving first treatment​ ​for​ ​cancer​ ​after 62​ days.',
-  },
-  precenttreat_62days: {
-    name: 'First treatment in less then 62 days, proportional',
-    description:
-      'Proportion​ ​of​ patients​ ​that received​ ​ first​ ​ treatment​ ​ before 62​ ​days.',
-  },
-  wait_within31: {
-    name: 'First treatment within 31 days',
-    description:
-      'Number​ of​ ​people​ ​receiving first​ ​treatment​ ​for​ cancer within​ 31​ ​ days',
-  },
-  wait_32to38: {
-    name: 'First treatment within 32 to 38 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 32​ ​ to​ ​ 38​ ​ days.',
-  },
-  wait_49to62: {
-    name: 'First treatment within 49 to 62 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 49​ ​ to​ ​ 62​ ​ days.',
-  },
-  wait_63to76: {
-    name: 'First treatment within 63 to 76 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 63 ​ to​ ​ 76 ​ days.',
-  },
-  wait_77to90: {
-    name: 'First treatment within 77 to 90 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 77 ​ to​ ​ 90 ​ days.',
-  },
-  wait_91to104: {
-    name: 'First treatment within 91 to 104 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receivingfirst​ ​treatment​ ​for​ cancer within​ ​ 91 ​ to​ ​ 104 ​ days.',
-  },
-  wait_104plus: {
-    name: 'First treatment after 104 days',
-    description:
-      'Number​ ​ of​ ​ people​ ​ receiving first​ ​ treatment​ ​ for​ ​ cancer​ ​ after 104​ ​ days.',
   },
   shmi_ind: {
     name: 'SHMI Index',
@@ -292,71 +227,6 @@ export const predictorInfo = {
   hospitalN: {
     name: 'Number of hospitals',
     description: 'Number of hospitals in trust',
-  },
-  unadj_score_Q55: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q47: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q44: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q59: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q37: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q30: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q29: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q25: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q16: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q12: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q6: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q2: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
-  },
-  unadj_score_Q1: {
-    name: 'Survey Score',
-    description:
-      'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
   },
 };
 export const trustInfo = {

@@ -4,7 +4,7 @@ import marksy from 'marksy/components';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
 import TextBlock from './TextBlock';
-import PredictionCards from './PredictionCards';
+import PredictionCard from './PredictionCard';
 import PredictorSelection from './PredictorSelection';
 import PredictorTable from './PredictorTable';
 
@@ -13,7 +13,7 @@ import ChoiceBlock from './ChoiceBlock';
 import ContextBlock from './ContextBlock';
 import RangeBlock from './RangeBlock';
 
-import { getClosestTrust } from '../utils/ops';
+import { getClosestTrust, getCenterGeo } from '../utils/ops';
 import { slidesNHS } from '../data/';
 
 const styles = {
@@ -26,16 +26,16 @@ class Article extends Component {
       height: 0,
       width: 0,
       allSlideSpecs: slidesNHS,
-      parseStatus: 'parsing', // error || success
-      loadError: false,
       geolocation: this.props.geolocation,
       currentParseTree: [],
       currentContextShownID: undefined,
       currentPresentation: 0,
       canProceed: false,
+
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
-      requiredPredictionIDs: ['ADL', 'NCN'],
+      requiredPredictionIDs: ['R1F', 'RAE', 'NCN'],
+      currentCardIdx: 0,
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
       waitingTimes: this.props.data.waitingTimes,
@@ -44,6 +44,7 @@ class Article extends Component {
         height: 600,
         currentCenter: [-4.2, 55.5],
         currentZoom: 16, // 16 with current shows all uk
+        currentMarkers: [],
         markers: this.props.data.markers,
       },
     };
@@ -57,6 +58,9 @@ class Article extends Component {
     this.getBlockContext = this.getBlockContext.bind(this);
     this.selectShownContext = this.selectShownContext.bind(this);
     this.resetCurrentContextShownId = this.resetCurrentContextShownId.bind(this);
+    this.nextCard = this.nextCard.bind(this);
+
+    // this.state.mapParameters.currentCenter =  getCenterGeo(this.props.data.markers)
   }
   componentDidMount() {
     this.updateWindowDimensions();
@@ -69,6 +73,13 @@ class Article extends Component {
 
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+  nextCard() {
+    if (this.state.currentCardIdx < this.state.requiredPredictionIDs.length - 1) {
+      this.setState({ currentCardIdx: this.state.currentCardIdx + 1 });
+    } else {
+      this.nextSlide();
+    }
   }
   updateCoordinates(coord) {
     this.setState({ ...this.state, geolocation: coord });
@@ -204,19 +215,33 @@ class Article extends Component {
         );
         break;
       case 'predictionCards':
-        // we first need to get the cards as an array from the presentationSpecs
-        // as that only contains the ids and the presentation specs potentially live somewhere else
-        // for now cheat and simply use the mock
+        // simply inject currentPrediciton card, selectedPredictors, getNextPrediciton, getNext
 
-        // TODO: have a dict of contextual information for the cards (text, header, img)
-        // load in for the trust ids at startup
+        const currentCardId = this.state.requiredPredictionIDs[this.state.currentCardIdx];
+        const trustInfo = this.state.trustInfo[currentCardId];
 
+        const predictorSpecs = this.state.selectedPredictors.map(k => this.state.allPredictors[k]);
+        const currentIdWaitingTimes = this.state.waitingTimes.filter(
+          v => v.ods_code === currentCardId,
+        );
+        // FIXME: NO idea why ods code is non-unique in the waiting time data!?!!
+        const predictorValues = this.state.selectedPredictors.map(
+          k =>
+            (currentIdWaitingTimes.length > 1
+              ? currentIdWaitingTimes[0][k]
+              : currentIdWaitingTimes[k]),
+        );
+        console.log('trust infos', trustInfo);
+        console.log('trust keys', Object.keys(trustInfo));
+
+        // FIXME: Organization always == name??
         return (
-          <PredictionCards
-            cards={this.state.requiredPredictionIDs}
-            info={presentationSpec.info}
-            predictors={this.state.selectedPredictors}
-            onNext={this.nextSlide}
+          <PredictionCard
+            title={trustInfo.organisation[0]}
+            information={trustInfo}
+            predictors={predictorSpecs}
+            predictorValues={predictorValues}
+            onSelect={this.nextCard}
           />
         );
         break;
@@ -251,7 +276,14 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
-    const { width, height, currentZoom, currentCenter } = this.state.mapParameters;
+    const { width, height, currentZoom, currentCenter, currentMarkers } = this.state.mapParameters;
+
+    // TODO: the map markers should update accordingly
+    // the zoom and center too
+
+    // simple hack:
+    // hardcode zoom and center for the trusts that are fixed currently
+    // marks == filter according to the article type
     return (
       <div style={styles.container}>
         {this.getArticleComponent(currentSlideType, currentSlideSpec)}
@@ -263,7 +295,7 @@ class Article extends Component {
           defaultCenter={currentCenter}
           currentZoom={currentZoom}
           currentCenter={currentCenter}
-          markers={this.state.mapParameters.markers}
+          markers={currentMarkers}
         />
       </div>
     );
