@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import marksy from 'marksy/components';
 import LandingQuestion from './LandingQuestion';
@@ -68,6 +69,7 @@ class Article extends Component {
     this.selectShownContext = this.selectShownContext.bind(this);
     this.resetCurrentContextShownId = this.resetCurrentContextShownId.bind(this);
     this.nextCard = this.nextCard.bind(this);
+    this.getMarkers = this.getMarkers.bind(this);
 
     // this.state.mapParameters.currentCenter =  getCenterGeo(this.props.data.markers)
   }
@@ -78,14 +80,28 @@ class Article extends Component {
       this.nextSlide();
     }
   }
+  getMarkers(sType) {
+    // set the Map coordinates to the center of the hospitals
+    // display the hospitals
+    switch (sType) {
+      case 'predictionCards':
+        return [];
+      case 'default':
+        const trustHospitals = this.state.mapParameters.markers.filter(
+          m => m.odsCode === this.state.requiredPredictionIDs[this.state.currentCardIdx],
+        );
+        return trustHospitals;
+        break;
+    }
+  }
   updateCoordinates(coord) {
-    this.setState({ ...this.state, geolocation: coord });
+    this.setState({ geolocation: coord });
     // TODO: this should happen asyncronusly in the background!
     const cT = getClosestTrust(coord, this.state.data.hospitals, this.state.data.waitingTimes);
-    this.setState({ ...this.state, closestTrust: cT });
+    this.setState({ closestTrust: cT });
   }
   updateLocalizationStatus(s) {
-    this.setState({ ...this.state, localizationStatus: s });
+    this.setState({ localizationStatus: s });
   }
   zoomToGeo() {
     this.setState({
@@ -196,7 +212,6 @@ class Article extends Component {
         );
         break;
       case 'predictorSelection':
-        console.log('article', this.state.selectedPredictors, this.state.allPredictors);
         return (
           <PredictorSelection
             header={presentationSpec.header}
@@ -228,10 +243,8 @@ class Article extends Component {
               ? currentIdWaitingTimes[0][k]
               : currentIdWaitingTimes[k]),
         );
-        console.log('trust infos', trustInfo);
-        console.log('trust keys', Object.keys(trustInfo));
-
         // FIXME: Organization always == name??
+
         return (
           <PredictionCard
             title={trustInfo.organisation[0]}
@@ -273,7 +286,7 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
-    const { currentZoom, currentCenter, currentMarkers } = this.state.mapParameters;
+    const { currentZoom, currentCenter } = this.state.mapParameters;
 
     // TODO: the map markers should update accordingly
     // the zoom and center too
@@ -285,7 +298,9 @@ class Article extends Component {
       <div>
         <div style={styles.leftBox}>
           <div style={styles.leftContent}>
-            {this.getArticleComponent(currentSlideType, currentSlideSpec)}
+            <Paper zDepth={1}>
+              {this.getArticleComponent(currentSlideType, currentSlideSpec)}
+            </Paper>
           </div>
         </div>
         <MapView
@@ -296,7 +311,7 @@ class Article extends Component {
           defaultCenter={currentCenter}
           currentZoom={currentZoom}
           currentCenter={currentCenter}
-          markers={currentMarkers}
+          markers={[]}
         />
       </div>
     );

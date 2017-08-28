@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const styles = {
   header: {
-    color: 'white',
+    color: 'black',
     fontSize: '2em',
     fontVariant: 'small-caps',
   },

@@ -19,16 +19,16 @@ export const slidesNHS = [
         range: {
           min: 0,
           max: 100,
-          step: 1,
+          step: 10,
           unit: '%',
           marks: {
             85: {
-              label: 'NHS target in England.',
+              label: 'NHS England.',
               context:
                 'The NHS *in England* currently aims to refer **85%** of the patients to treatment',
             },
             95: {
-              label: 'NHS target for Scotland and Wales.',
+              label: 'NHS Scotland and Wales.',
               context: 'In Scotland and Wales the aim is to refer **95%** in time.',
             },
           },

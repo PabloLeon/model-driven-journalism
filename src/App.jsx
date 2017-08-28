@@ -78,9 +78,9 @@ class App extends Component {
   createMarkers() {
     const marks = this.state.hospitals.map((h, idx) => ({
       name: h.OrganisationName,
+      odsCode: h.ParentODSCode,
       coordinates: [h.Longitude, h.Latitude],
     }));
-    console.info('marks: ', marks);
     this.setState({
       ...this.state,
       markers: marks,
@@ -92,7 +92,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div style={{ backgroundColor: '#40637F'}}>
+        <div style={{ backgroundColor: '#40637F' }}>
           {this.state.canProceed
             ? <Article
               geolocation={this.state.geolocation}
