@@ -2,27 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const styles = {
-  box: {
-    position: 'fixed',
-    top: '40%',
-    left: '15%',
-    fontFamily: 'Prata',
+  header: {
+    color: 'white',
+    fontSize: '2em',
+    fontVariant: 'small-caps',
+  },
+  subheader: {
     color: 'black',
-    width: '500px',
-    height: '300px',
-    backgroundColor: 'green',
-    overflow: 'auto',
-    cursor: 'pointer',
+    fontStyle: 'italic',
+    fontSize: '1em',
+  },
+  content: {
+    flexDirection: 'column',
   },
 };
 const LandingQuestion = ({ header, subheader, onEnter }) =>
-  (<div onClick={onEnter} style={styles.box}>
-    <h1>
-      {header}
-    </h1>
-    <h2>
-      {subheader}
-    </h2>
+  (<div onClick={onEnter}>
+    <div style={styles.content}>
+      <h1 style={styles.header}>
+        {header}
+      </h1>
+      <h2 style={styles.subheader}>
+        {subheader}
+      </h2>
+    </div>
   </div>);
 LandingQuestion.propTypes = {
   header: PropTypes.string.isRequired,

@@ -3,11 +3,9 @@ import Checkbox from 'material-ui/Checkbox';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
-
+//    maxWidth: 250,
 const styles = {
-  block: {
-    maxWidth: 250,
-  },
+  block: {},
   checkbox: {},
 };
 const Choice = (props) => {

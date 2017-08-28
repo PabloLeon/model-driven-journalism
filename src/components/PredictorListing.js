@@ -8,17 +8,24 @@ import Paper from 'material-ui/Paper';
 const styles = {
   box: {
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'left',
     flexWrap: 'wrap',
+    flexDirection: 'column',
   },
   selected: {
-    backgroundColor: 'orange',
-    minHeight: 100,
+    minHeight: '50px',
+    display: 'flex',
+    maxHeight: '150px',
+    justifyContent: 'left',
+    flexWrap: 'wrap',
+    overflow: 'scroll',
   },
   options: {
-    backgroundColor: 'blue',
-    minHeight: 100,
+    minHeight: '150px',
+    maxHeight: '150px',
+    justifyContent: 'left',
+    flexWrap: 'wrap',
+    overflow: 'scroll',
   },
 };
 

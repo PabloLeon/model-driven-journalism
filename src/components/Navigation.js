@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
-  backgroundColor: 'red',
   float: 'right',
   padding: '0.5em',
 };

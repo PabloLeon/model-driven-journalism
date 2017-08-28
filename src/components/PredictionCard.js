@@ -64,7 +64,7 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
           <div>
             {predictors.map((p, idx) =>
               (<p>
-                `${p.name}: ${predictorValues[idx]}`
+                {`${p.name}: ${predictorValues[idx]}`}
               </p>),
             )}
           </div>

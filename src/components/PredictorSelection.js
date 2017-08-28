@@ -8,12 +8,7 @@ import PropTypes from 'prop-types';
 const styles = {
   box: {},
   selected: {},
-  options: {
-    minHeight: '50px',
-    display: 'flex',
-    justifyContent: 'left',
-    flexWrap: 'wrap',
-  },
+  options: {},
 };
 
 // key, spec: {name, info}

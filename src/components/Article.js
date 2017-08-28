@@ -17,14 +17,26 @@ import { getClosestTrust, getCenterGeo } from '../utils/ops';
 import { slidesNHS } from '../data/';
 
 const styles = {
-  container: { display: 'flex', flexWrap: 'nowrap', alignItems: 'center' },
+  leftBox: {
+    position: 'fixed',
+    left: '0',
+    height: '100%',
+    width: '50%',
+  },
+  leftContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxAlign: 'center',
+  },
 };
 class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: 0,
-      width: 0,
+      height: window.innerHeight,
+      width: window.innerWidth,
       allSlideSpecs: slidesNHS,
       geolocation: this.props.geolocation,
       currentParseTree: [],
@@ -40,8 +52,6 @@ class Article extends Component {
       hospitals: this.props.data.hospitals,
       waitingTimes: this.props.data.waitingTimes,
       mapParameters: {
-        width: 400,
-        height: 600,
         currentCenter: [-4.2, 55.5],
         currentZoom: 16, // 16 with current shows all uk
         currentMarkers: [],
@@ -49,7 +59,6 @@ class Article extends Component {
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.getArticleComponent = this.getArticleComponent.bind(this);
     this.nextSlide = this.nextSlide.bind(this);
     this.addPredictor = this.addPredictor.bind(this);
@@ -61,18 +70,6 @@ class Article extends Component {
     this.nextCard = this.nextCard.bind(this);
 
     // this.state.mapParameters.currentCenter =  getCenterGeo(this.props.data.markers)
-  }
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-
-  updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
   nextCard() {
     if (this.state.currentCardIdx < this.state.requiredPredictionIDs.length - 1) {
@@ -276,7 +273,7 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
-    const { width, height, currentZoom, currentCenter, currentMarkers } = this.state.mapParameters;
+    const { currentZoom, currentCenter, currentMarkers } = this.state.mapParameters;
 
     // TODO: the map markers should update accordingly
     // the zoom and center too
@@ -285,12 +282,16 @@ class Article extends Component {
     // hardcode zoom and center for the trusts that are fixed currently
     // marks == filter according to the article type
     return (
-      <div style={styles.container}>
-        {this.getArticleComponent(currentSlideType, currentSlideSpec)}
+      <div>
+        <div style={styles.leftBox}>
+          <div style={styles.leftContent}>
+            {this.getArticleComponent(currentSlideType, currentSlideSpec)}
+          </div>
+        </div>
         <MapView
           path={'ukMap/ukMap.json'} // TODO: should also be a parameter
-          width={width}
-          height={height}
+          width={this.state.width}
+          height={this.state.height}
           defaultZoom={currentZoom}
           defaultCenter={currentCenter}
           currentZoom={currentZoom}

@@ -92,7 +92,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div style={{ backgroundColor: 'teal', minHeight: '300' }}>
+        <div style={{ backgroundColor: '#40637F'}}>
           {this.state.canProceed
             ? <Article
               geolocation={this.state.geolocation}

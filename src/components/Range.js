@@ -13,6 +13,7 @@ const Range = (props) => {
         step={step}
         onChange={() => console.log('lala')}
         defaultValue={value}
+        style={{ width: 400, margin: 50 }}
         marks={marks}
       />
     </div>

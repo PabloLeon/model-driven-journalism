@@ -4,12 +4,7 @@ import Chip from 'material-ui/Chip';
 
 const styles = {
   chip: {
-    margin: '4em',
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    margin: '0.2em',
   },
 };
 

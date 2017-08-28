@@ -13,7 +13,6 @@ const wrapperStyles = {
   width: '100%',
   maxWidth: 980,
   margin: '0 auto',
-  backgroundColor: 'lightgrey',
 };
 // font awesome hospital icon compressed
 const hospitalSvg =
@@ -40,7 +39,7 @@ const MapView = ({
   markers,
 }) =>
   (<div style={wrapperStyles}>
-    (<ComposableMap
+    <ComposableMap
       width={width}
       height={height}
       projectionConfig={{
@@ -50,7 +49,6 @@ const MapView = ({
         rotation: [0, 0, 0],
         precision: 0.1,
       }}
-      style={{ backgroundColor: 'darkblue' }}
     >
       <ZoomableGroup center={currentCenter} zoom={currentZoom} disablePanning>
         <Geographies geographyUrl={path}>
@@ -69,12 +67,6 @@ const MapView = ({
                   },
                   hover: {
                     fill: '#CFD8DC',
-                    stroke: '#607D8B',
-                    strokeWidth: 0.05,
-                    outline: 'none',
-                  },
-                  pressed: {
-                    fill: '#FF5722',
                     stroke: '#607D8B',
                     strokeWidth: 0.05,
                     outline: 'none',

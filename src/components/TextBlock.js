@@ -10,8 +10,6 @@ const styles = {
   choice: {},
   dialog: {
     flex: true,
-    height: 800,
-    width: 1000,
   },
 };
 
@@ -32,12 +30,7 @@ const TextBlock = ({
     <div style={styles.block}>
       {content}
       {
-        <Dialog
-          style={styles.dialog}
-          title="Dialog With Actions"
-          modal={false}
-          open={currentShowId !== undefined}
-        >
+        <Dialog style={styles.dialog} modal={false} open={currentShowId !== undefined}>
           {currentShowId !== undefined && getContext}
           <RaisedButton label={'OK'} primary onClick={closeContext} />
         </Dialog>
