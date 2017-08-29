@@ -37,8 +37,8 @@ const MapView = ({
   currentZoom,
   currentCenter,
   markers,
-}) =>
-  (<div style={wrapperStyles}>
+}) => (
+  <div style={wrapperStyles}>
     <ComposableMap
       width={width}
       height={height}
@@ -101,7 +101,8 @@ const MapView = ({
         </Markers>
       </ZoomableGroup>
     </ComposableMap>
-  </div>);
+  </div>
+);
 
 export default MapView;
 

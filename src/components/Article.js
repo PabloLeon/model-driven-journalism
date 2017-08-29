@@ -53,7 +53,7 @@ class Article extends Component {
       mapParameters: {
         currentCenter: [-4.2, 55.5],
         currentZoom: 16, // 16 with current shows all uk
-        currentMarkers: [],
+        currentMarkers: this.props.data.markers, // [],
         markers: this.props.data.markers,
       },
     };
@@ -78,19 +78,24 @@ class Article extends Component {
       this.nextSlide();
     }
   }
-  getMarkers(sType) {
+  getMarkers() {
     // set the Map coordinates to the center of the hospitals
     // display the hospitals
+
+    const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
+    const sType = currentSlideSpec.type;
+
     switch (sType) {
       case 'predictionCards':
-        return [];
-      case 'default':
         const trustHospitals = this.state.mapParameters.markers.filter(
           m => m.odsCode === this.state.requiredPredictionIDs[this.state.currentCardIdx],
         );
+        console.log('getMarkers', trustHospitals);
         return trustHospitals;
-        break;
+      case 'default':
+        return [];
     }
+    return [];
   }
   updateCoordinates(coord) {
     this.setState({ geolocation: coord });
@@ -285,6 +290,8 @@ class Article extends Component {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
     const { currentZoom, currentCenter } = this.state.mapParameters;
+    const cM = this.getMarkers();
+    console.log('article map', cM);
 
     // TODO: the map markers should update accordingly
     // the zoom and center too
@@ -309,7 +316,7 @@ class Article extends Component {
           defaultCenter={currentCenter}
           currentZoom={currentZoom}
           currentCenter={currentCenter}
-          markers={[]}
+          markers={cM}
         />
       </div>
     );

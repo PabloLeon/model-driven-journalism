@@ -15,8 +15,16 @@ const styles = {
 const TinderNavigation = ({ onSelect }) =>
   (<Paper zDepth={1}>
     <BottomNavigation>
-      <BottomNavigationItem label="Below" icon={<ThumbDown />} onClick={() => onSelect('below')} />
-      <BottomNavigationItem label="Above" icon={<ThumbUp />} onClick={() => onSelect('above')} />
+      <BottomNavigationItem
+        label="Not on target"
+        icon={<ThumbDown />}
+        onClick={() => onSelect('below')}
+      />
+      <BottomNavigationItem
+        label="On target"
+        icon={<ThumbUp />}
+        onClick={() => onSelect('above')}
+      />
     </BottomNavigation>
   </Paper>);
 export default TinderNavigation;
