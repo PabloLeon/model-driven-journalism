@@ -15,14 +15,14 @@ const styles = {
   selected: {
     minHeight: '50px',
     display: 'flex',
-    maxHeight: '150px',
+    maxHeight: '400px',
     justifyContent: 'left',
     flexWrap: 'wrap',
     overflow: 'scroll',
   },
   options: {
     minHeight: '150px',
-    maxHeight: '150px',
+    maxHeight: '400px',
     justifyContent: 'left',
     flexWrap: 'wrap',
     overflow: 'scroll',

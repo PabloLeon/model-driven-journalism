@@ -201,18 +201,6 @@ export const predictorInfo = {
     name: 'Support​ ​ to​ ​ ST&T​ ​ staff',
     description: 'Support​ ​ to​ ​ ST&T​ ​ staff',
   },
-  hee_region_code: {
-    name: 'Health​ ​ Education​ ​ England regions',
-    description: 'Health​ ​ Education​ ​ England regions',
-  },
-  ytd_plan: {
-    name: 'Year-to-date​ ​ (YTD)​ ​ planned financial​ ​ balance​',
-    description: 'Year-to-date​ ​ (YTD)​ ​ planned financial​ ​balance​ ​ of​ ​ trust',
-  },
-  ytd_actual: {
-    name: 'Year-to-date​ ​ (YTD)​ ​ actual financial​ ​ balance​',
-    description: 'Year-to-date​ ​ (YTD)​ ​ actual financial​ ​ balance​ ​ of​ ​ trust',
-  },
   planactual_diff: {
     name: 'Year-to-date difference planned-actual',
     description: 'ytd_plan​ ​ minus​ ​ ytd_actual',
