@@ -26,10 +26,8 @@ const styles = {
   },
   leftContent: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'center',
-    boxAlign: 'center',
+    alignItems: 'center',
   },
 };
 class Article extends Component {
@@ -298,7 +296,7 @@ class Article extends Component {
       <div>
         <div style={styles.leftBox}>
           <div style={styles.leftContent}>
-            <Paper zDepth={1}>
+            <Paper>
               {this.getArticleComponent(currentSlideType, currentSlideSpec)}
             </Paper>
           </div>

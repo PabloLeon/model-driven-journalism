@@ -2,7 +2,7 @@ export const slidesNHS = [
   {
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
-    subheader: 'some subheader',
+    subheader: 'Which factors determine the ability of your regional NHS to fulfill the cancer waiting time targets?',
   },
   {
     type: 'article',
@@ -15,7 +15,7 @@ export const slidesNHS = [
         type: 'range',
         header: 'Measuring success',
         info:
-          'Success can be measured in **many different ways** and _different measures_ have existed in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
+          'Success can be measured in many different ways and different measures have been used in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
         range: {
           min: 0,
           max: 100,
@@ -23,13 +23,16 @@ export const slidesNHS = [
           unit: '%',
           marks: {
             85: {
-              label: 'NHS England.',
+              label: 'Eng',
+              style:{align: 'left'},
               context:
                 'The NHS *in England* currently aims to refer **85%** of the patients to treatment',
             },
             95: {
-              label: 'NHS Scotland and Wales.',
+              label: 'Scot & Wales',
+              style:{align: 'right'},
               context: 'In Scotland and Wales the aim is to refer **95%** in time.',
+
             },
           },
         },
@@ -43,7 +46,7 @@ export const slidesNHS = [
       id2: {
         type: 'choice',
         header: 'Same targets for different types of cancer?',
-        info: 'Some text about aggreagating different cancer types.',
+        info: 'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. Different targets could be set for different cancer types depending on their mortality index. Another option would be to look at different risks groups in the population and set the targets accordingly.',
         choices: [
           {
             id: 'c1',
