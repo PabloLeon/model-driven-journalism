@@ -15,7 +15,7 @@ export const slidesNHS = [
         type: 'range',
         header: 'Measuring success',
         info:
-          'Success can be measured in many different ways and different measures have been used in the past. The NHSs measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.',
+          'Success can be measured in many different ways and different measures have been used in the past. The NHS measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed. In England the aim is to referr 85% of the patients in 62 days. In Scotland and Wales the target is 95% referrals.',
         range: {
           min: 0,
           max: 100,

@@ -90,7 +90,6 @@ class Article extends Component {
         const trustHospitals = this.state.mapParameters.markers.filter(
           m => m.odsCode === this.state.requiredPredictionIDs[this.state.currentCardIdx],
         );
-        console.log('getMarkers', trustHospitals);
         return trustHospitals;
       case 'default':
         return [];
@@ -124,7 +123,6 @@ class Article extends Component {
     });
   }
   selectShownContext(id) {
-    console.log('showing context from article', id);
     this.setState({
       ...this.state,
       currentContextShownID: id,
