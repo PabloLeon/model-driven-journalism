@@ -24,13 +24,13 @@ export const slidesNHS = [
           marks: {
             85: {
               label: 'Eng',
-              style:{align: 'left'},
+              style: { align: 'left' },
               context:
                 'The NHS *in England* currently aims to refer **85%** of the patients to treatment',
             },
             95: {
               label: 'Scot & Wales',
-              style:{align: 'right'},
+              style: { align: 'right' },
               context: 'In Scotland and Wales the aim is to refer **95%** in time.',
 
             },
@@ -49,13 +49,13 @@ export const slidesNHS = [
         info: 'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. Different targets could be set for different cancer types depending on their mortality index. Another option would be to look at different risks groups in the population and set the targets accordingly.',
         choices: [
           {
-            id: 'c1',
+            choiceId: 'c1',
             header: 'Aggregate all cancer types',
             info:
               'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
           },
           {
-            id: 'c2',
+            choiceId: 'c2',
             header: 'Split by cancer groups',
             info: 'You can also look at the different cancer types.',
           },
@@ -82,11 +82,6 @@ export const slidesNHS = [
     info: 'Here is how well you did...',
   },
 ];
-
-const testMD = `
-# Some blog title
-Just need to show you some code first:
-`;
 
 let id = 0;
 const createPrediction = (trustName, guess, trueValue) => {
@@ -220,6 +215,7 @@ export const predictorInfo = {
     description: 'Number of hospitals in trust',
   },
 };
+
 export const trustInfo = {
   ADL: {
     hospitals: ['Bath Fertility Centre'],

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -16,22 +16,21 @@ const styles = {
     flexDirection: 'column',
   },
 };
-const LandingQuestion = ({ header, subheader, onEnter }) =>
-  (<div onClick={onEnter}>
+const LandingQuestion = ({ header, subheader, onEnter }) => (
+  <div onClick={onEnter} role="button" tabIndex="0">
     <div style={styles.content}>
-      <h1 style={styles.header}>
-        {header}
-      </h1>
-      <h2 style={styles.subheader}>
-        {subheader}
-      </h2>
+      <h1 style={styles.header}>{header}</h1>
+      <h2 style={styles.subheader}>{subheader}</h2>
     </div>
-  </div>);
+  </div>
+);
 LandingQuestion.propTypes = {
   header: PropTypes.string.isRequired,
   subheader: PropTypes.string,
   onEnter: PropTypes.func.isRequired,
 };
-LandingQuestion.defaultProps = {};
+LandingQuestion.defaultProps = {
+  subheader: '',
+};
 
 export default LandingQuestion;

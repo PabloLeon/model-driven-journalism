@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Card, { CardText, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
-
-import PredictorListing from './PredictorListing';
 import TinderNavigation from './TinderNavigation';
 
 const styles = {
@@ -42,11 +40,7 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
   return (
     <Card style={styles.card}>
       <CardHeader
-        title={
-          <h2>
-            {title}
-          </h2>
-        }
+        title={<h2>{title}</h2>}
         avatar={
           <Avatar
             className={styles.avatar}
@@ -58,16 +52,8 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
       />
       <CardText style={styles.content}>
         <div>
-          <p>
-            {infoText}
-          </p>
-          <div>
-            {predictors.map((p, idx) =>
-              (<p>
-                {`${p.name}: ${predictorValues[idx]}`}
-              </p>),
-            )}
-          </div>
+          <p>{infoText}</p>
+          <div>{predictors.map((p, idx) => <p>{`${p.name}: ${predictorValues[idx]}`}</p>)}</div>
         </div>
       </CardText>
       <Divider />
@@ -77,8 +63,11 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
 };
 PredictionCard.propTypes = {
   title: PropTypes.string.isRequired,
-  subheader: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  information: PropTypes.string.isRequired,
+  predictors: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  }).isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 PredictionCard.defaultProps = {};

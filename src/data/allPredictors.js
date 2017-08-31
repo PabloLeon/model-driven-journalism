@@ -1,4 +1,4 @@
-export const allPredicors = {
+const allPredicors = {
   ods_code: {
     name: 'ODS Code',
     description: 'Organisational​ ​Data​ Service',
@@ -259,3 +259,5 @@ export const allPredicors = {
       'Unadjusted​ scores​ by cancer and​​ trust​ for​​ questions​​ in​​ the National​​ Cancer​ Patient Experience​​ Survey.​',
   },
 };
+
+export default allPredicors;

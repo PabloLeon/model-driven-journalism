@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Article from './components/Article';
 import { csv } from 'd3-request'; // this should work differently with the final version
+import Article from './components/Article';
 import { trustInfo, predictorInfo } from './data/';
+import './App.css';
 
 // TODO: get predictors from the data coulms + a dictionary with context/readable column names
 // TODO: Get card info from the data + a dictionary with contextual information
@@ -17,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      geolocation: [-4.2, 55.5], // [undefined, undefined],
+      geolocation: { longitude: -4.2, latitude: 55.5 }, // [undefined, undefined],
       dataPaths: [],
       canProceed: false,
       predictorInfo,
@@ -76,10 +75,10 @@ class App extends Component {
     });
   }
   createMarkers() {
-    const marks = this.state.hospitals.map((h, idx) => ({
+    const marks = this.state.hospitals.map(h => ({
       name: h.OrganisationName,
       odsCode: h.ParentODSCode,
-      coordinates: [h.Longitude, h.Latitude],
+      coordinates: { longitude: h.Longitude, latitude: h.Latitude },
     }));
     this.setState({
       ...this.state,
@@ -92,19 +91,29 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div style={{ backgroundColor: '#40637F' }}>
-          {this.state.canProceed
-            ? <Article
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
+          {this.state.canProceed ? (
+            <Article
               geolocation={this.state.geolocation}
               data={{
-                allPredictors: this.state.predictorInfo, // THIS HAS TO BE AN ARRAY
+                allPredictors: this.state.predictorInfo,
                 hospitals: this.state.hospitals,
                 waitingTimes: this.state.waitingTimes,
                 markers: this.state.markers,
                 trustInfo,
               }}
             />
-            : <div>Loading resources</div>}
+          ) : (
+            <div>Loading resources</div>
+          )}
         </div>
       </MuiThemeProvider>
     );

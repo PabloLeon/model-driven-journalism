@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ThumbDown from 'material-ui-icons/ThumbDown';
 import ThumbUp from 'material-ui-icons/ThumbUp';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 
-const styles = {
-  card: {
-    minWidth: 400,
-    maxWidth: 600,
-  },
-};
-
-const TinderNavigation = ({ onSelect }) =>
-  (<Paper zDepth={1}>
+const TinderNavigation = ({ onSelect }) => (
+  <Paper zDepth={1}>
     <BottomNavigation>
       <BottomNavigationItem
         label="Not on target"
@@ -26,5 +19,11 @@ const TinderNavigation = ({ onSelect }) =>
         onClick={() => onSelect('above')}
       />
     </BottomNavigation>
-  </Paper>);
+  </Paper>
+);
+
+TinderNavigation.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+};
+
 export default TinderNavigation;

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
@@ -17,12 +16,7 @@ const Navigation = (props) => {
   );
 };
 Navigation.propTypes = {
-  canProceed: PropTypes.bool.isRequired,
   onNext: PropTypes.func.isRequired,
-};
-
-Navigation.defaultProps = {
-  canProceed: false,
 };
 
 export default Navigation;

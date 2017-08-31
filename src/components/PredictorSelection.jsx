@@ -1,24 +1,17 @@
-import React, { Component } from 'react';
-import PredictorListing from './PredictorListing';
-import Navigation from './Navigation';
-import Predictor from './Predictor';
+import React from 'react';
 import Divider from 'material-ui/Divider';
 import PropTypes from 'prop-types';
 
-const styles = {
-  box: {},
-  selected: {},
-  options: {},
-};
+import PredictorListing from './PredictorListing';
+import Navigation from './Navigation';
 
-// key, spec: {name, info}
 const PredictorSelection = ({
   header,
   info,
   selectedPredictors,
   availablePredictors,
-  addPredictor,
-  removePredictor,
+  addPrediction,
+  removePrediction,
   onNext,
   canProceed,
 }) => {
@@ -27,18 +20,17 @@ const PredictorSelection = ({
     .map(k => ({ key: k, ...availablePredictors[k] }));
   return (
     <div>
-      <h1>
-        {header}
-      </h1>
-      <p>
-        {info}
-      </p>
+      <h1>{header}</h1>
+      <p>{info}</p>
       <Divider />
       <PredictorListing
-        selectedPredictors={selectedPredictors.map(k => ({ key: k, ...availablePredictors[k] }))}
+        selectedPredictors={selectedPredictors.map(k => ({
+          key: k,
+          ...availablePredictors[k],
+        }))}
         availablePredictors={avblP}
-        onSelect={addPredictor}
-        onDelete={removePredictor}
+        onSelect={addPrediction}
+        onDelete={removePrediction}
       />
       <Divider />
       {canProceed && <Navigation onNext={onNext} />}
@@ -53,10 +45,20 @@ PredictorSelection.defaultProps = {
 PredictorSelection.propTypes = {
   header: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired,
-  selectedPredictors: PropTypes.object,
-  availablePredictors: PropTypes.object,
+  addPrediction: PropTypes.func.isRequired,
+  removePrediction: PropTypes.func.isRequired,
+  selectedPredictors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ),
+  availablePredictors: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
   onNext: PropTypes.func.isRequired,
-  canProceed: PropTypes.bool,
+  canProceed: PropTypes.bool.isRequired,
 };
 
 export default PredictorSelection;

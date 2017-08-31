@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -15,20 +15,17 @@ const styles = {
     position: 'relative',
   },
 };
-const ActionableText = ({ inlineText, contextId, contextType, contextSpec, onAction, hovered }) => {
-  console.log('actionable text', contextId, contextType, contextSpec);
-  return (
-    <span style={styles.text}>
-      <span onClick={() => onAction(contextId)}>
-        {inlineText}
-      </span>
-    </span>
-  );
-};
+const ActionableText = ({ inlineText, contextId, onAction, needsAction }) => (
+  <span style={styles.text} tabIndex={contextId} role="button" onClick={() => onAction(contextId)}>
+    {inlineText}
+  </span>
+);
 
 ActionableText.propTypes = {
   onAction: PropTypes.func.isRequired,
-  inlineText: PropTypes.string.isRequired,
+  inlineText: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
+  contextId: PropTypes.string.isRequired,
+  needsAction: PropTypes.bool.isRequired,
 };
 
 export default ActionableText;
