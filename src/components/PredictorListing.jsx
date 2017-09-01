@@ -48,7 +48,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
           label={a.name}
           context={a.description}
           key={a.key}
-          onClick={() => onSelect(a.key)}
+          onSelect={() => onSelect(a.key)}
         />
       ))}
     </div>

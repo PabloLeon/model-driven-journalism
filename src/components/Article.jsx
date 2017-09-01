@@ -214,13 +214,11 @@ class Article extends Component {
   }
 
   addPredictor(predictor) {
-    console.log('add prediction', predictor, this.state.selectedPredictors);
     this.setState({
       selectedPredictors: [...this.state.selectedPredictors, predictor],
     });
   }
   removePredictor(id) {
-    console.log('add prediction', id, this.state.selectedPredictors);
     const newP = this.state.selectedPredictors.filter(spK => spK !== id);
     this.setState({
       selectedPredictors: newP,

@@ -47,12 +47,7 @@ PredictorSelection.propTypes = {
   info: PropTypes.string.isRequired,
   addPrediction: PropTypes.func.isRequired,
   removePrediction: PropTypes.func.isRequired,
-  selectedPredictors: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      description: PropTypes.string,
-    }),
-  ),
+  selectedPredictors: PropTypes.arrayOf(PropTypes.string),
   availablePredictors: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
