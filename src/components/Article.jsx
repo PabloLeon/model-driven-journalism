@@ -11,6 +11,7 @@ import ActionableText from './ActionableText';
 
 import { slidesNHS } from '../data/';
 import parse from '../utils/parser';
+import { getCenterGeo } from '../utils/ops';
 
 const styles = {
   box: {
@@ -38,18 +39,18 @@ class Article extends Component {
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
       requiredPredictionIds: ['R1F', 'RAE', 'RJC'], // add real ones
-      currentCardIdx: 0,
+      currentCardIdx: -1, // TODO: hacky...fix this
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
       waitingTimes: this.props.data.waitingTimes,
       mapParameters: {
-        currentCenter: {
+        center: {
           longitude: -4.2,
           latitude: 55.5,
         },
-        currentZoom: 16, // 16 with current shows all uk
-        currentMarkers: [],
+        zoom: 16, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
+        currentMarkers: [],
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -59,18 +60,11 @@ class Article extends Component {
     this.removePredictor = this.removePredictor.bind(this);
     this.zoomToGeo = this.zoomToGeo.bind(this);
     this.makePrediction = this.makePrediction.bind(this);
-    this.getMarkers = this.getMarkers.bind(this);
+    this.getMapParameters = this.getMapParameters.bind(this);
     this.closeContext = this.closeContext.bind(this);
     this.selectContext = this.selectContext.bind(this);
     this.makeChoice = this.makeChoice.bind(this);
     this.getRequiredChoices = this.getRequiredChoices.bind(this);
-  }
-  componentWillMount() {
-    const m = this.getMarkers();
-    this.setState({
-      ...this.state,
-      mapParameters: { ...this.state.mapParameters, currentMakers: m },
-    });
   }
 
   getRequiredChoices() {
@@ -144,6 +138,7 @@ class Article extends Component {
           />
         );
       case 'predictionCards': {
+        console.log('prediction cards', article.state.currentCardIdx);
         const currentCardODSId = article.state.requiredPredictionIds[article.state.currentCardIdx];
         const trustInfo = article.state.trustInfo[currentCardODSId];
         const predictorInfo = article.state.selectedPredictors.map(
@@ -156,7 +151,7 @@ class Article extends Component {
         // for the 3 cancer types... I ignored that the whole time
         // the new and final dataset will include ALL cancer types, so that this issue should
         // not occur
-
+        console.log('card values', cardValues, currentCardODSId);
         const predictorValues = article.state.selectedPredictors.map(k => cardValues[k]);
         return (
           <PredictionCard
@@ -202,22 +197,37 @@ class Article extends Component {
     }
   }
 
-  getMarkers() {
-    const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
-    const sType = currentSlideSpec.type;
-
+  getMapParameters(slideSpec, cardIdx) {
+    const sType = slideSpec.type;
+    console.log('get map parameters', sType);
     switch (sType) {
-      case 'predictionCards':
-        return this.state.mapParameters.allMarkers.filter(
-          m => m.odsCode === this.state.requiredPredictionIDs[this.state.currentCardIdx],
+      case 'predictionCards': {
+        console.log('prediction cards');
+        const newMarkers = this.state.mapParameters.allMarkers.filter(
+          m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
+        const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates));
+
+        return {
+          ...this.state.mapParameters,
+          currentMarkers: newMarkers,
+          center: newCenter,
+          zoom: 24,
+        };
+      }
       default:
-        return [];
+        console.log('default');
+        // return this.state.mapParameters.allMarkers;
+        return {
+          ...this.state.mapParameters,
+          zoom: 16,
+          currentMarkers: [],
+          center: { longitude: -4.2, latitude: 55.5 },
+        };
     }
   }
 
   makePrediction({ id, payload }) {
-    console.log('made prediction!', id, payload);
     this.setState({
       predictions: [...this.state.predictions, { id, payload }],
     });
@@ -252,8 +262,13 @@ class Article extends Component {
   }
   nextSlide() {
     if (this.state.currentPresentation < this.numberOfSlides - 1) {
+      const newM = this.getMapParameters(
+        this.state.allSlideSpecs[this.state.currentPresentation + 1],
+        this.state.currentCardIdx + 1,
+      );
       this.setState({
         currentPresentation: this.state.currentPresentation + 1,
+        mapParameters: newM,
       });
     }
   }
@@ -276,7 +291,7 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
-    const { currentCenter, currentZoom, currentMarkers } = this.state.mapParameters;
+    const { center, zoom, currentMarkers } = this.state.mapParameters;
 
     const currentArticleView = this.getArticleView(currentSlideSpec, currentSlideType);
     return (
@@ -289,8 +304,8 @@ class Article extends Component {
             path={'ukMap/ukMap.json'} // TODO: should also be a parameter
             width={this.state.width / 2}
             height={this.state.height}
-            center={currentCenter}
-            zoom={currentZoom}
+            center={center}
+            zoom={zoom}
             markers={currentMarkers}
           />
         </div>

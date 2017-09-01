@@ -8,20 +8,23 @@
 
 export const getCenterGeo = (arrayOfCoordinates) => {
   // the array currently looks like this:
-  // [{name: organisationName, coordinates: [Longitude, Latitude]}]
-  let length = 0;
+  // {Longitude, Latitude}
+  if (arrayOfCoordinates.length > 1) {
+    let length = 0;
+    const [longSum, latSum] = arrayOfCoordinates.reduce(
+      (currVals, a) => {
+        const [currLongSum, currLatSum] = currVals;
+        console.log('in the reducer', a);
+        const { longitude, latitude } = a;
+        length += 1;
+        return [currLongSum + parseFloat(longitude), currLatSum + parseFloat(latitude)];
+      },
+      [0.0, 0.0],
+    );
 
-  const [longSum, latSum] = arrayOfCoordinates.reduce(
-    (currVals, a) => {
-      const [currLongSum, currLatSum] = currVals;
-      const [long, lat] = a.coordinates;
-      length += 1;
-      return [currLongSum + parseFloat(long), currLatSum + parseFloat(lat)];
-    },
-    [0.0, 0.0],
-  );
-
-  return [longSum / length, latSum / length];
+    return { longitude: longSum / length, latitude: latSum / length };
+  }
+  return [arrayOfCoordinates.longitude, arrayOfCoordinates.latitude];
 };
 
 // distance for two geopoints in km
