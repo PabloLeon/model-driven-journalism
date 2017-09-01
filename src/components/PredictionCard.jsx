@@ -64,6 +64,7 @@ const PredictionCard = ({
   predictors,
   predictorValues,
   onSelect,
+  odsCode,
 }) => {
   const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
@@ -89,7 +90,7 @@ const PredictionCard = ({
         </div>
       </CardText>
       <Divider />
-      <TinderNavigation onSelect={e => onSelect(e)} />
+      <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
     </Card>
   );
 };
@@ -100,6 +101,7 @@ PredictionCard.propTypes = {
   predictors: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   predictorValues: PropTypes.arrayOf(PropTypes.string),
   onSelect: PropTypes.func.isRequired,
+  odsCode: PropTypes.string.isRequired,
 };
 PredictionCard.defaultProps = {};
 

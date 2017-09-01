@@ -11,12 +11,12 @@ const TinderNavigation = ({ onSelect }) => (
       <BottomNavigationItem
         label="Not on target"
         icon={<ThumbDown />}
-        onClick={() => onSelect('below')}
+        onClick={() => onSelect('Not on target')}
       />
       <BottomNavigationItem
         label="On target"
         icon={<ThumbUp />}
-        onClick={() => onSelect('above')}
+        onClick={() => onSelect('On target')}
       />
     </BottomNavigation>
   </Paper>

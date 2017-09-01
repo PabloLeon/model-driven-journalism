@@ -33,6 +33,7 @@ class Article extends Component {
       geolocation: this.props.geolocation,
       currentContextShownID: 'undefined',
       choices: [], // contains the choices made in the context
+      predictions: [],
       currentPresentation: 0,
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
@@ -58,7 +59,7 @@ class Article extends Component {
     this.addPredictor = this.addPredictor.bind(this);
     this.removePredictor = this.removePredictor.bind(this);
     this.zoomToGeo = this.zoomToGeo.bind(this);
-    this.nextCard = this.nextCard.bind(this);
+    this.makePrediction = this.makePrediction.bind(this);
     this.getMarkers = this.getMarkers.bind(this);
     this.closeContext = this.closeContext.bind(this);
     this.selectContext = this.selectContext.bind(this);
@@ -158,7 +159,6 @@ class Article extends Component {
         // not occur
 
         const predictorValues = article.state.selectedPredictors.map(k => cardValues[k]);
-        console.log('predictor card', currentSlideSpec, trustInfo, predictorInfo, predictorValues);
         return (
           <PredictionCard
             title={trustInfo.organisation[0]} // FIXME: this is currently an array...clean up the data
@@ -166,7 +166,8 @@ class Article extends Component {
             trustInformation={trustInfo}
             predictors={predictorInfo}
             predictorValues={predictorValues}
-            onSelect={article.nextCard}
+            onSelect={article.makePrediction}
+            odsCode={currentCardODSId}
           />
         );
       }
@@ -191,7 +192,12 @@ class Article extends Component {
         return [];
     }
   }
-  nextCard() {
+
+  makePrediction({ id, payload }) {
+    console.log('made prediction!', id, payload);
+    this.setState({
+      predictions: [...this.state.predictions, { id, payload }],
+    });
     if (this.state.currentCardIdx < this.state.requiredPredictionIds.length - 1) {
       this.setState({ currentCardIdx: this.state.currentCardIdx + 1 });
     } else {
