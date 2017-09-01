@@ -37,7 +37,7 @@ class Article extends Component {
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
-      requiredPredictionIDs: ['R1F', 'RAE', 'RJC'], // add real ones
+      requiredPredictionIds: ['R1F', 'RAE', 'RJC'], // add real ones
       currentCardIdx: 0,
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
@@ -144,30 +144,28 @@ class Article extends Component {
           />
         );
       case 'predictionCards': {
-        const currentCardODSId = article.state.requredPredictionIds[article.state.currentCardIdx];
+        const currentCardODSId = article.state.requiredPredictionIds[article.state.currentCardIdx];
         const trustInfo = article.state.trustInfo[currentCardODSId];
         const predictorInfo = article.state.selectedPredictors.map(
           predictorId => article.state.allPredictors[predictorId],
         );
-        const cardValues = article.state.waitingTimes.filter(
-          wT => wT.ods_code === currentCardODSId,
-        );
+        const cardValues = article.state.waitingTimes.find(wT => wT.ods_code === currentCardODSId);
+
         // FIXME
         // this is only required because currently some trust have more than one statistic
         // for the 3 cancer types... I ignored that the whole time
         // the new and final dataset will include ALL cancer types, so that this issue should
         // not occur
 
-        const cardPredictorValues = article.state.selectedPredictors.map(
-          predictorId =>
-            (cardValues.length > 1 ? cardValues[0][predictorId] : cardValues[predictorId]),
-        );
+        const predictorValues = article.state.selectedPredictors.map(k => cardValues[k]);
+        console.log('predictor card', currentSlideSpec, trustInfo, predictorInfo, predictorValues);
         return (
           <PredictionCard
-            title={currentSlideSpec.currentCardOrganisation}
-            information={trustInfo}
+            title={trustInfo.organisation[0]} // FIXME: this is currently an array...clean up the data
+            info={currentSlideSpec.info}
+            trustInformation={trustInfo}
             predictors={predictorInfo}
-            predictorValues={cardPredictorValues}
+            predictorValues={predictorValues}
             onSelect={article.nextCard}
           />
         );
@@ -194,7 +192,7 @@ class Article extends Component {
     }
   }
   nextCard() {
-    if (this.state.currentCardIdx < this.state.requiredPredictionIDs.length - 1) {
+    if (this.state.currentCardIdx < this.state.requiredPredictionIds.length - 1) {
       this.setState({ currentCardIdx: this.state.currentCardIdx + 1 });
     } else {
       this.nextSlide();

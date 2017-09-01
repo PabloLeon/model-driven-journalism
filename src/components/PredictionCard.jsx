@@ -30,12 +30,42 @@ const styles = {
     width: 38,
   },
 };
-const PredictionCard = ({ title, information, predictors, predictorValues, onSelect }) => {
-  const infoText = `
-  The ${title} trust consists of ${information.hospitals
-  .length} hospitals the ${information.hospitals.map(h => `${h} `)}.
-  The hospitals are located in ${information.city.map(c => `${c} `)}
-  `;
+
+const enumerateToString = (arrElems) => {
+  const l = arrElems.length;
+  if (l < 2) {
+    return `${arrElems.map(e => `${e}`)}`;
+  }
+  if (l === 2) {
+    return `${arrElems[0]} and ${arrElems[1]}`;
+  }
+  const [last, slast, ...rest] = arrElems.reverse();
+  return `${rest.reverse().map(e => ` ${e}`)} ${slast} and ${last}`;
+};
+
+const formatText = (title, hospitals, cities) => {
+  const uniqueHospitals = [...new Set(hospitals)];
+  const uniqueCities = [...new Set(cities)];
+
+  const citiesLen = uniqueCities.length;
+  const hospitalLen = uniqueHospitals.length;
+
+  return `${title} consists of ${hospitalLen} ${hospitalLen > 1 ? 'hospitals' : 'hospital'},  
+  ${hospitalLen > 1 ? enumerateToString(uniqueHospitals) : `${uniqueHospitals[0]}`}.
+  
+  The ${hospitalLen === 1 ? 'hospital is' : 'hospitals are'} located in ${citiesLen > 1
+  ? enumerateToString(uniqueCities)
+  : uniqueCities[0]}.`;
+};
+const PredictionCard = ({
+  title,
+  info,
+  trustInformation,
+  predictors,
+  predictorValues,
+  onSelect,
+}) => {
+  const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
   return (
     <Card style={styles.card}>
@@ -43,7 +73,6 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
         title={<h2>{title}</h2>}
         avatar={
           <Avatar
-            className={styles.avatar}
             src={
               'http://i2.getwestlondon.co.uk/incoming/article10810299.ece/ALTERNATES/s615/CS43857740.jpg'
             }
@@ -52,8 +81,11 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
       />
       <CardText style={styles.content}>
         <div>
+          <p>{info}</p>
           <p>{infoText}</p>
-          <div>{predictors.map((p, idx) => <p>{`${p.name}: ${predictorValues[idx]}`}</p>)}</div>
+          <div>
+            {predictors.map((p, idx) => <p key={idx}>{`${p.name}: ${predictorValues[idx]}`}</p>)}
+          </div>
         </div>
       </CardText>
       <Divider />
@@ -63,11 +95,10 @@ const PredictionCard = ({ title, information, predictors, predictorValues, onSel
 };
 PredictionCard.propTypes = {
   title: PropTypes.string.isRequired,
-  information: PropTypes.string.isRequired,
-  predictors: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  }).isRequired,
+  info: PropTypes.string.isRequired,
+  trustInformation: PropTypes.shape({}).isRequired,
+  predictors: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  predictorValues: PropTypes.arrayOf(PropTypes.string),
   onSelect: PropTypes.func.isRequired,
 };
 PredictionCard.defaultProps = {};

@@ -73,9 +73,6 @@ export const slidesNHS = [
   {
     type: 'predictionCards',
     info: 'Try to guess if the trust is on target or not with the factors you chose earlier...',
-    presentationSpecs: {
-      presentationIds: ['p01', 'p02', 'p03'], // there could also be specs for: 25 closest etc
-    },
   },
   {
     type: 'predictionEvaluation',
