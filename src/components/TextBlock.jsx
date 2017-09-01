@@ -19,14 +19,16 @@ const styles = {
 const showContext = (id, specs, takenChoices, closeContext, choiceFun) => {
   if (id in specs) {
     // get all choices for the id
-    const selected = takenChoices.filter(c => c.id === id);
-    console.log('show context in textblock, selected', selected, id, selected.payload);
-
+    const selectionObj = takenChoices.find(c => c.id === id);
+    let selected = null;
     const s = specs[id];
     switch (s.type) {
       case 'context':
         return <ContextBlock id={id} header={s.header} info={s.info} onClose={closeContext} />;
       case 'range': {
+        if (selectionObj) {
+          selected = selectionObj.payload.rangeValue;
+        }
         return (
           <RangeBlock
             id={id}
@@ -35,22 +37,26 @@ const showContext = (id, specs, takenChoices, closeContext, choiceFun) => {
             range={s.range}
             onChoice={choiceFun}
             onClose={closeContext}
-            value={selected.payload ? selected.payload.value : null}
+            value={selected}
           />
         );
       }
-      case 'choice':
+      case 'choice': {
+        if (selectionObj) {
+          selected = selectionObj.payload.choiceId;
+        }
         return (
           <ChoiceBlock
             id={id}
             header={s.header}
             info={s.info}
-            selected={selected.payload ? selected.payload.choiceId : null}
+            selected={selected}
             choices={s.choices}
             makeChoice={choiceFun}
             onClose={closeContext}
           />
         );
+      }
       default:
         return <div>Undefined Context </div>;
     }
@@ -72,6 +78,7 @@ const TextBlock = ({
     <h1>{header}</h1>
     <div style={styles.block}>
       {content}
+      {JSON.stringify(selected)}
       {
         <Dialog style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
           {currentShowId !== 'undefined' &&

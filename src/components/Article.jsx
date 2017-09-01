@@ -229,23 +229,10 @@ class Article extends Component {
     });
   }
   makeChoice({ id, payload }) {
-    console.log('choice made', id, payload, payload.choiceId);
-    const cId = this.state.choices.map(c => c.id).indexOf(id);
-    if (cId !== -1) {
-      // need to replace the choice in the array
-      const newChoices = this.state.choices.map((c) => {
-        if (c.id === id) {
-          return { id, payload };
-        }
-        return c;
-      });
-
-      this.setState({ choices: newChoices });
-    } else {
-      this.setState({
-        choices: [...this.state.choices, { id, payload }],
-      });
-    }
+    this.setState(previous => ({
+      choices: [...previous.choices.filter(c => c.id !== id), { id, payload }],
+    }));
+    console.log('state after choice', this.state.choices);
   }
 
   render() {
