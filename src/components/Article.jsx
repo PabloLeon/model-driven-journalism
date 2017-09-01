@@ -33,7 +33,6 @@ class Article extends Component {
       geolocation: this.props.geolocation,
       currentContextShownID: 'undefined',
       choices: [], // contains the choices made in the context
-      allContextResolved: true, // FIXME
       currentPresentation: 0,
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
@@ -65,14 +64,30 @@ class Article extends Component {
     this.closeContext = this.closeContext.bind(this);
     this.selectContext = this.selectContext.bind(this);
     this.makeChoice = this.makeChoice.bind(this);
+    this.getRequiredChoices = this.getRequiredChoices.bind(this);
   }
-
   componentWillMount() {
     const m = this.getMarkers();
     this.setState({
       ...this.state,
       mapParameters: { ...this.state.mapParameters, currentMakers: m },
     });
+  }
+
+  getRequiredChoices() {
+    const spec = this.state.allSlideSpecs[this.state.currentPresentation];
+    const slideType = spec.type;
+    switch (slideType) {
+      case 'article': {
+        const nonContex = Object.keys(spec.links).filter(k => spec.links[k].type !== 'context');
+        const nonChose = nonContex.filter(
+          nc => this.state.choices.map(c => c.id).indexOf(nc) === -1,
+        );
+        return nonChose;
+      }
+      default:
+        return [];
+    }
   }
   getArticleView(currentSlideSpec, currentSlideType) {
     const article = this; // since reference get's lost deep down in the switches
@@ -94,7 +109,7 @@ class Article extends Component {
                   inlineText={children}
                   contextId={href}
                   onAction={article.selectContext}
-                  needsAction={article.state.choices.map(c => c.id).indexOf(href) === -1}
+                  needsAction={article.getRequiredChoices().indexOf(href) !== -1}
                 />
               );
             }
@@ -110,7 +125,7 @@ class Article extends Component {
             contextInfo={currentSlideSpec.links}
             makeChoice={article.makeChoice}
             closeContext={article.closeContext}
-            canProceed={article.state.allContextResolved}
+            canProceed={article.getRequiredChoices().length === 0}
             selected={article.state.choices}
             onNext={article.nextSlide}
           />
@@ -232,13 +247,13 @@ class Article extends Component {
     this.setState(previous => ({
       choices: [...previous.choices.filter(c => c.id !== id), { id, payload }],
     }));
-    console.log('state after choice', this.state.choices);
   }
 
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
     const { currentCenter, currentZoom, currentMarkers } = this.state.mapParameters;
+
     const currentArticleView = this.getArticleView(currentSlideSpec, currentSlideType);
     return (
       <div style={{ display: 'flex' }}>

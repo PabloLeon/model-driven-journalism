@@ -78,7 +78,6 @@ const TextBlock = ({
     <h1>{header}</h1>
     <div style={styles.block}>
       {content}
-      {JSON.stringify(selected)}
       {
         <Dialog style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
           {currentShowId !== 'undefined' &&
