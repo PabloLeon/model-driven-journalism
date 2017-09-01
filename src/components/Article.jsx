@@ -171,8 +171,32 @@ class Article extends Component {
           />
         );
       }
-      case 'predictionEvaluation':
-        return <PredictorTable />;
+      case 'predictionEvaluation': {
+        // data format array of object
+        // with o.trustName, o.guess (bool), o.trueValue (bool)
+        // FIXME: currently there is more than one but this should not be
+        // an issue in the final version?
+        const wt = this.state.requiredPredictionIds.map(pid =>
+          this.state.waitingTimes.find(wt => wt.ods_code === pid),
+        );
+        const wtsForPredicted = wt.map(w => ({
+          ods: w.ods_code,
+          percVal: parseFloat(w.percenttreat_62days),
+        }));
+        // FIXME: there should be a tag in the json spec for hte predictor
+        const wtpSelected = this.state.choices.find(c => c.id === 'id0').payload.rangeValue / 100;
+        // FIXME: organisation is an array...shouldbe unique in the final version?
+
+        // FIXME: this is terrible...
+        const guesses = wtsForPredicted.map(waitingTime => ({
+          ods: waitingTime.ods,
+          trustName: this.state.trustInfo[waitingTime.ods].organisation[0],
+          guess: this.state.predictions.find(p => p.id === waitingTime.ods).payload.prediction,
+          trueValue: waitingTime.percVal <= wtpSelected,
+        }));
+
+        return <PredictorTable data={guesses} />;
+      }
 
       default:
         return <div>Default</div>;

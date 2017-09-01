@@ -11,13 +11,9 @@ const TinderNavigation = ({ onSelect }) => (
       <BottomNavigationItem
         label="Not on target"
         icon={<ThumbDown />}
-        onClick={() => onSelect('Not on target')}
+        onClick={() => onSelect(false)}
       />
-      <BottomNavigationItem
-        label="On target"
-        icon={<ThumbUp />}
-        onClick={() => onSelect('On target')}
-      />
+      <BottomNavigationItem label="On target" icon={<ThumbUp />} onClick={() => onSelect(true)} />
     </BottomNavigation>
   </Paper>
 );

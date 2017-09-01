@@ -47,7 +47,7 @@ const PredictorTable = ({ data }) => {
         <TableBody>
           {numberOfEntries > 1 &&
             data.map(n => (
-              <TableRow key={n.id}>
+              <TableRow key={n.ods}>
                 <TableRowColumn>{n.trustName}</TableRowColumn>
                 <TableRowColumn>{n.guess.toString()}</TableRowColumn>
                 <TableRowColumn>{n.trueValue.toString()}</TableRowColumn>
@@ -67,7 +67,7 @@ const PredictorTable = ({ data }) => {
 PredictorTable.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      ods: PropTypes.string.isRequired,
       trustName: PropTypes.string.isRequired,
       guess: PropTypes.bool.isRequired,
       trueValue: PropTypes.bool.isRequired,
