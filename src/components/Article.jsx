@@ -17,7 +17,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     width: '50%',
-    backgroundColor: 'red',
     alignItems: 'center',
     alignContent: 'ceneter',
   },
