@@ -36,7 +36,6 @@ class Article extends Component {
       currentPresentation: 0,
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
-      allPredictionsDone: false,
       allPredictors: this.props.data.allPredictors,
       requiredPredictionIDs: ['R1F', 'RAE', 'RJC'], // add real ones
       currentCardIdx: 0,
@@ -138,7 +137,7 @@ class Article extends Component {
             info={currentSlideSpec.info}
             selectedPredictors={article.state.selectedPredictors}
             availablePredictors={article.state.allPredictors}
-            canProceed={article.state.allPredictionsDone}
+            canProceed={article.state.selectedPredictors.length > 0} // TODO: for now..later set number of min max predcitors
             onNext={article.nextSlide}
             addPrediction={article.addPredictor}
             removePrediction={article.removePredictor}
