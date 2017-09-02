@@ -78,7 +78,7 @@ class App extends Component {
     const marks = this.state.hospitals.map(h => ({
       name: h.OrganisationName,
       odsCode: h.ParentODSCode,
-      coordinates: { longitude: h.Longitude, latitude: h.Latitude },
+      coordinates: [parseFloat(h.Longitude), parseFloat(h.Latitude)],
     }));
     this.setState({
       ...this.state,

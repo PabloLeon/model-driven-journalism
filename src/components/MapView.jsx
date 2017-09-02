@@ -64,24 +64,23 @@ const MapView = ({ path, width, height, zoom, center, markers }) => (
               ))}
         </Geographies>
         <Markers>
-          {markers.map((marker, i) => (
-            <Marker
-              key={`marker-${i}`}
-              marker={[marker.coordinates.longitude, marker.coordinates.latitude]}
-              style={styles.mark}
-            >
-              <circle
-                cx={0}
-                cy={0}
-                r={0.05}
-                style={{
-                  stroke: '#FF5722',
-                  strokeWidth: 0.3,
-                  opacity: 0.9,
-                }}
-              />
-            </Marker>
-          ))}
+          {markers.map((marker, i) => {
+            console.log('markers', marker.coordinates);
+            return (
+              <Marker key={`marker-${i}`} marker={marker} style={styles.mark}>
+                <circle
+                  cx={0}
+                  cy={0}
+                  r={0.05}
+                  style={{
+                    stroke: '#FF5722',
+                    strokeWidth: 0.3,
+                    opacity: 0.9,
+                  }}
+                />
+              </Marker>
+            );
+          })}
         </Markers>
       </ZoomableGroup>
     </ComposableMap>
@@ -100,10 +99,7 @@ MapView.propTypes = {
   markers: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coordinates: PropTypes.shape({
-        longitude: PropTypes.number.isRequired,
-        latitude: PropTypes.number.isRequired,
-      }),
+      coordinates: PropTypes.arrayOf(PropTypes.number.isRequired),
     }),
   ),
 };

@@ -14,17 +14,18 @@ export const getCenterGeo = (arrayOfCoordinates) => {
     const [longSum, latSum] = arrayOfCoordinates.reduce(
       (currVals, a) => {
         const [currLongSum, currLatSum] = currVals;
-        console.log('in the reducer', a);
-        const { longitude, latitude } = a;
+        const [longitude, latitude] = a;
         length += 1;
-        return [currLongSum + parseFloat(longitude), currLatSum + parseFloat(latitude)];
+        return [currLongSum + longitude, currLatSum + latitude];
       },
       [0.0, 0.0],
     );
-
     return { longitude: longSum / length, latitude: latSum / length };
   }
-  return [arrayOfCoordinates.longitude, arrayOfCoordinates.latitude];
+  return {
+    longitude: parseFloat(arrayOfCoordinates[0][0]),
+    latitude: parseFloat(arrayOfCoordinates[0][1]),
+  };
 };
 
 // distance for two geopoints in km

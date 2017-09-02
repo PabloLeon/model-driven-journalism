@@ -39,7 +39,7 @@ class Article extends Component {
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
       requiredPredictionIds: ['R1F', 'RAE', 'RJC'], // add real ones
-      currentCardIdx: -1, // TODO: hacky...fix this
+      currentCardIdx: 0,
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
       waitingTimes: this.props.data.waitingTimes,
@@ -199,25 +199,23 @@ class Article extends Component {
 
   getMapParameters(slideSpec, cardIdx) {
     const sType = slideSpec.type;
-    console.log('get map parameters', sType);
     switch (sType) {
       case 'predictionCards': {
-        console.log('prediction cards');
         const newMarkers = this.state.mapParameters.allMarkers.filter(
           m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
         const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates));
+        console.log('new center', newCenter);
+        console.log('new markers', newMarkers);
 
         return {
           ...this.state.mapParameters,
           currentMarkers: newMarkers,
           center: newCenter,
-          zoom: 24,
+          zoom: 40,
         };
       }
       default:
-        console.log('default');
-        // return this.state.mapParameters.allMarkers;
         return {
           ...this.state.mapParameters,
           zoom: 16,
@@ -232,7 +230,13 @@ class Article extends Component {
       predictions: [...this.state.predictions, { id, payload }],
     });
     if (this.state.currentCardIdx < this.state.requiredPredictionIds.length - 1) {
-      this.setState({ currentCardIdx: this.state.currentCardIdx + 1 });
+      this.setState({
+        currentCardIdx: this.state.currentCardIdx + 1,
+        mapParameters: this.getMapParameters(
+          this.state.allSlideSpecs[this.state.currentPresentation],
+          this.state.currentCardIdx + 1,
+        ),
+      });
     } else {
       this.nextSlide();
     }
@@ -262,14 +266,26 @@ class Article extends Component {
   }
   nextSlide() {
     if (this.state.currentPresentation < this.numberOfSlides - 1) {
-      const newM = this.getMapParameters(
-        this.state.allSlideSpecs[this.state.currentPresentation + 1],
-        this.state.currentCardIdx + 1,
-      );
-      this.setState({
-        currentPresentation: this.state.currentPresentation + 1,
-        mapParameters: newM,
-      });
+      // there is another presentation
+
+      // if the next presentation slide is a prediction presentatiaon
+      const nextSlide = this.state.allSlideSpecs[this.state.currentPresentation + 1];
+      console.log('next slide');
+      if (nextSlide.type === 'predictionCards' && this.state.currentCardIdx === 0) {
+        // set the map Parameters
+        this.setState({
+          currentPresentation: this.state.currentPresentation + 1,
+          mapParameters: this.getMapParameters(nextSlide, 0),
+        });
+      } else {
+        this.setState({
+          currentPresentation: this.state.currentPresentation + 1,
+          mapParameters: this.getMapParameters(
+            this.state.allSlideSpecs[this.state.currentPresentation + 1],
+            this.state.currentCardIdx,
+          ),
+        });
+      }
     }
   }
   selectContext(id) {
