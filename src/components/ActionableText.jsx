@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'semantic-ui-react';
 
 const styles = {
   text: {
@@ -13,11 +14,14 @@ const styles = {
     width: '1em',
     bottom: '0.25em',
     position: 'relative',
+    textDecoration: 'none',
   },
 };
 const ActionableText = ({ inlineText, contextId, onAction, needsAction }) => (
   <span style={styles.text} tabIndex={contextId} role="button" onClick={() => onAction(contextId)}>
     {inlineText}
+    {!needsAction && <Icon name="info" style={styles.svgIcon} />}
+    {needsAction && <Icon name="idea" style={styles.svgIcon} />}
   </span>
 );
 
