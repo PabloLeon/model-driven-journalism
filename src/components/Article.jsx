@@ -221,13 +221,13 @@ class Article extends Component {
           ...this.state.mapParameters,
           currentMarkers: newMarkers,
           center: newCenter,
-          zoom: 45,
+          zoom: 140,
         };
       }
       default:
         return {
           ...this.state.mapParameters,
-          zoom: 22,
+          zoom: 20,
           currentMarkers: [],
           center: { longitude: -4.2, latitude: 55.5 },
         };
