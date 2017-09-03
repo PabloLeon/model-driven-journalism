@@ -15,6 +15,9 @@ import PropTypes from 'prop-types';
 // TODO: Ireland not selectable
 
 const styles = {
+  general: {
+    backgroundColor: '#40627f',
+  },
   geo: {
     default: {
       fill: '#ECEFF1',
@@ -37,7 +40,7 @@ const styles = {
 };
 
 const MapView = ({ path, width, height, zoom, center, markers }) => (
-  <div style={styles}>
+  <div style={styles.general}>
     <ComposableMap
       width={width}
       height={height}

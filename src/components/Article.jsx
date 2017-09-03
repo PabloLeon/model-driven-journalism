@@ -14,11 +14,18 @@ import { getCenterGeo } from '../utils/ops';
 
 const styles = {
   box: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '50%',
-    alignItems: 'center',
-    alignContent: 'ceneter',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+  },
+  wrapper: {
+    height: '100%',
+  },
+  map: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: '0',
   },
 };
 
@@ -47,7 +54,7 @@ class Article extends Component {
           longitude: -4.2,
           latitude: 55.5,
         },
-        zoom: 16, // 16 with current shows all uk
+        zoom: 18, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
         currentMarkers: [],
       },
@@ -310,17 +317,19 @@ class Article extends Component {
 
     const currentArticleView = this.getArticleView(currentSlideSpec, currentSlideType);
     return (
-      <div style={{ display: 'flex' }}>
-        <div style={styles.box}>{currentArticleView}</div>
-        <div style={styles.box}>
+      <div>
+        <div style={styles.map}>
           <MapView
             path={'ukMap/ukMap.json'} // TODO: should also be a parameter
-            width={this.state.width / 2}
+            width={this.state.width}
             height={this.state.height}
             center={center}
             zoom={zoom}
             markers={currentMarkers}
           />
+        </div>
+        <div style={styles.wrapper}>
+          <div style={styles.box}>{currentArticleView}</div>
         </div>
       </div>
     );
