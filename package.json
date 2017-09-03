@@ -5,19 +5,16 @@
   "dependencies": {
     "d3-request": "^1.0.5",
     "marksy": "^5.0.0",
-    "material-ui": "^0.19.0",
-    "material-ui-icons": "^1.0.0-alpha.19",
     "prop-types": "^15.5.10",
     "rc-slider": "^8.3.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-geolocation": "^1.0.3",
     "react-motion": "^0.5.0",
-    "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
     "react-simple-maps": "^0.7.2",
-    "react-tap-event-plugin": "^2.0.1",
-    "redux-tooltip": "^0.7.2"
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.72.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,6 +25,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
     "@storybook/addon-actions": "^3.2.0",
     "@storybook/react": "^3.2.5",
     "babel-eslint": "^7.2.3",
@@ -36,8 +34,6 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
-    "prettier-eslint": "^7.1.0",
-    "storybook-addon-material-ui": "^0.8.0",
-    "@kadira/storybook": "^2.21.0"
+    "prettier-eslint": "^7.1.0"
   }
 }

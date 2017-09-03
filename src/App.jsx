@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { csv } from 'd3-request'; // this should work differently with the final version
 import Article from './components/Article';
 import { trustInfo, predictorInfo } from './data/';
 import './App.css';
 
-// TODO: get predictors from the data coulms + a dictionary with context/readable column names
-// TODO: Get card info from the data + a dictionary with contextual information
-
-// we need to map the data to marker format
-// so go through the city & hospital data
-// map to an object with name: hospital name // coordinates: [long, lat]
-// no internet connection fake center: [-4.2, 55.5],
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +21,6 @@ class App extends Component {
     this.loadData = this.loadData.bind(this);
     this.createMarkers = this.createMarkers.bind(this);
   }
-  // FIXME: longitude latitude order???
   componentDidMount() {
     this.loadData();
     // console.info('Establishing user location');
@@ -90,32 +81,30 @@ class App extends Component {
   }
   render() {
     return (
-      <MuiThemeProvider>
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            alignContent: 'center',
-          }}
-        >
-          {this.state.canProceed ? (
-            <Article
-              geolocation={this.state.geolocation}
-              data={{
-                allPredictors: this.state.predictorInfo,
-                hospitals: this.state.hospitals,
-                waitingTimes: this.state.waitingTimes,
-                markers: this.state.markers,
-                trustInfo,
-              }}
-            />
-          ) : (
-            <div>Loading resources</div>
-          )}
-        </div>
-      </MuiThemeProvider>
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          alignContent: 'center',
+        }}
+      >
+        {this.state.canProceed ? (
+          <Article
+            geolocation={this.state.geolocation}
+            data={{
+              allPredictors: this.state.predictorInfo,
+              hospitals: this.state.hospitals,
+              waitingTimes: this.state.waitingTimes,
+              markers: this.state.markers,
+              trustInfo,
+            }}
+          />
+        ) : (
+          <div>Loading resources</div>
+        )}
+      </div>
     );
   }
 }

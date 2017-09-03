@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from 'material-ui/Chip';
+import { Icon } from 'semantic-ui-react';
 
 const styles = {
   chip: {
@@ -8,11 +8,11 @@ const styles = {
   },
 };
 
+// TODO: onledete functionality
 const Predictor = ({ onDelete, onSelect, label }) => (
-  <div style={{}}>
-    <Chip style={styles.chip} onClick={onSelect} onRequestDelete={onDelete}>
-      {label}
-    </Chip>
+  <div style={styles.chip} onClick={onSelect}>
+    {onDelete && <Icon remove name="remove" onClick={onDelete} />}
+    {label}
   </div>
 );
 Predictor.propTypes = {

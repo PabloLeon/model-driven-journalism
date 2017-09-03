@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
+import { Button, Modal } from 'semantic-ui-react';
 
 import ContextBlock from './ContextBlock';
 import RangeBlock from './RangeBlock';
@@ -79,14 +78,17 @@ const TextBlock = ({
     <div style={styles.block}>
       {content}
       {
-        <Dialog style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
-          {currentShowId !== 'undefined' &&
-            showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
-          <RaisedButton label={'OK'} primary onClick={closeContext} />
-        </Dialog>
+        <Modal style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
+          }>
+          <Modal.Content image>
+            {currentShowId !== 'undefined' &&
+              showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
+            <Button label={'OK'} onClick={closeContext} />
+          </Modal.Content>
+        </Modal>
       }
     </div>
-    {canProceed && <RaisedButton label={'Next'} primary onClick={onNext} />}
+    {canProceed && <Button label={'Next'} onClick={onNext} />}
   </div>
 );
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import Checkbox from 'material-ui/Checkbox';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
+import { Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -10,12 +9,12 @@ const styles = {
 const Choice = (props) => {
   const { choiceId, header, summary, text, selected, expanded, onChoice } = props;
   return (
-    <Card expanded={expanded}>
-      <CardHeader title={header} actAsExpander showExpandableButton={false} subtitle={summary}>
-        <Checkbox style={styles.checkbox} checked={selected} onCheck={() => onChoice(choiceId)} />
-      </CardHeader>
-      <CardText expandable>{text}</CardText>
-    </Card>
+    <div>
+      <h1>{header}</h1>
+      <p>{summary}</p>
+      <p>{text}</p>
+      <Checkbox style={styles.checkbox} checked={selected} onChange={() => onChoice(choiceId)} />
+    </div>
   );
 };
 

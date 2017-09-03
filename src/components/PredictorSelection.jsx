@@ -1,5 +1,4 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import PropTypes from 'prop-types';
 
 import PredictorListing from './PredictorListing';
@@ -22,7 +21,6 @@ const PredictorSelection = ({
     <div>
       <h1>{header}</h1>
       <p>{info}</p>
-      <Divider />
       <PredictorListing
         selectedPredictors={selectedPredictors.map(k => ({
           key: k,
@@ -32,7 +30,6 @@ const PredictorSelection = ({
         onSelect={addPrediction}
         onDelete={removePrediction}
       />
-      <Divider />
       {canProceed && <Navigation onNext={onNext} />}
     </div>
   );

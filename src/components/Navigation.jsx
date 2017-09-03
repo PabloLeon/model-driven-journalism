@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Button } from 'semantic-ui-react';
 
 const styles = {
   float: 'right',
@@ -11,7 +11,7 @@ const Navigation = (props) => {
   const { onNext } = props;
   return (
     <div style={styles}>
-      <RaisedButton label={'Next'} primary onClick={onNext} />
+      <Button label={'Next'} onClick={onNext} />
     </div>
   );
 };

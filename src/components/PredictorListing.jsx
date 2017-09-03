@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
 import Predictor from './Predictor';
 
 const styles = {
@@ -31,7 +30,7 @@ const styles = {
 // maps all the Predictors to that columns
 
 const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, onSelect }) => (
-  <Paper style={styles.box}>
+  <div style={styles.box}>
     <div style={styles.selected}>
       {selectedPredictors.map(p => (
         <Predictor
@@ -52,7 +51,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
         />
       ))}
     </div>
-  </Paper>
+  </div>
 );
 
 PredictorListing.propTypes = {

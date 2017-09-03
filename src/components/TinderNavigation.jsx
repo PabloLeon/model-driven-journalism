@@ -1,21 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ThumbDown from 'material-ui-icons/ThumbDown';
-import ThumbUp from 'material-ui-icons/ThumbUp';
-import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
-import Paper from 'material-ui/Paper';
+import { Grid, Button } from 'semantic-ui-react';
 
 const TinderNavigation = ({ onSelect }) => (
-  <Paper zDepth={1}>
-    <BottomNavigation>
-      <BottomNavigationItem
-        label="Not on target"
-        icon={<ThumbDown />}
+  <Grid columns={2} relaxed>
+    <Grid.Column>
+      <Button
+        content="Not on target"
+        icon="thumbs up"
+        labelPosition="right"
         onClick={() => onSelect(false)}
       />
-      <BottomNavigationItem label="On target" icon={<ThumbUp />} onClick={() => onSelect(true)} />
-    </BottomNavigation>
-  </Paper>
+    </Grid.Column>
+    <Grid.Column>
+      <Button
+        content="On target"
+        icon="thumbs down"
+        labelPosition="left"
+        onClick={() => onSelect(true)}
+      />
+    </Grid.Column>
+  </Grid>
 );
 
 TinderNavigation.propTypes = {

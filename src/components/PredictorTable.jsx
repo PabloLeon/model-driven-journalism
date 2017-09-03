@@ -1,14 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
+import { Table } from 'semantic-ui-react';
 import { predictionsMock } from '../data/';
 
 const styles = {
@@ -35,32 +27,30 @@ const PredictorTable = ({ data }) => {
   const percentageCorrect = getTotals(data);
   const numberOfEntries = data.length;
   return (
-    <Paper style={styles.paper}>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>Trust</TableHeaderColumn>
-            <TableHeaderColumn>Your Guess</TableHeaderColumn>
-            <TableHeaderColumn>True Value</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {numberOfEntries > 1 &&
-            data.map(n => (
-              <TableRow key={n.ods}>
-                <TableRowColumn>{n.trustName}</TableRowColumn>
-                <TableRowColumn>{n.guess.toString()}</TableRowColumn>
-                <TableRowColumn>{n.trueValue.toString()}</TableRowColumn>
-              </TableRow>
-            ))}
-          <TableRow>
-            <TableRowColumn>Total</TableRowColumn>
-            <TableRowColumn />
-            <TableRowColumn>{`You got ${percentageCorrect}% correct.`}</TableRowColumn>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Paper>
+    <Table celled>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Trust</Table.HeaderCell>
+          <Table.HeaderCell>Your Guess</Table.HeaderCell>
+          <Table.HeaderCell>True Value</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {numberOfEntries > 1 &&
+          data.map(n => (
+            <Table.Row key={n.ods}>
+              <Table.Cell>{n.trustName}</Table.Cell>
+              <Table.Cell>{n.guess.toString()}</Table.Cell>
+              <Table.Cell>{n.trueValue.toString()}</Table.Cell>
+            </Table.Row>
+          ))}
+        <Table.Row>
+          <Table.Cell>Total correct</Table.Cell>
+          <Table.Cell />
+          <Table.Cell>{`You got ${percentageCorrect}% correct.`}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
   );
 };
 

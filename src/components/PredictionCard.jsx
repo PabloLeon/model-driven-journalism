@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardText, CardHeader } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Divider from 'material-ui/Divider';
+import { Card } from 'semantic-ui-react';
 import TinderNavigation from './TinderNavigation';
 
 const styles = {
@@ -69,28 +67,24 @@ const PredictionCard = ({
   const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
   return (
-    <Card style={styles.card}>
-      <CardHeader
-        title={<h2>{title}</h2>}
-        avatar={
-          <Avatar
-            src={
-              'http://i2.getwestlondon.co.uk/incoming/article10810299.ece/ALTERNATES/s615/CS43857740.jpg'
-            }
-          />
-        }
-      />
-      <CardText style={styles.content}>
-        <div>
-          <p>{info}</p>
-          <p>{infoText}</p>
-          <div>
-            {predictors.map((p, idx) => <p key={idx}>{`${p.name}: ${predictorValues[idx]}`}</p>)}
-          </div>
-        </div>
-      </CardText>
-      <Divider />
-      <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
+    <Card>
+      <Card.Content>
+        <Card.Header>{title}</Card.Header>
+        <Card.Description>
+          {
+            <div>
+              <p>{info}</p>
+              <p>{infoText}</p>
+            </div>
+          }
+        </Card.Description>
+        <Card.Content extra>
+          {predictors.map((p, idx) => <p key={idx}>{`${p.name}: ${predictorValues[idx]}`}</p>)}
+        </Card.Content>
+        <Card.Content extra>
+          <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
+        </Card.Content>
+      </Card.Content>
     </Card>
   );
 };

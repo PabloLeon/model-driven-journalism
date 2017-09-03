@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
@@ -312,9 +311,7 @@ class Article extends Component {
     const currentArticleView = this.getArticleView(currentSlideSpec, currentSlideType);
     return (
       <div style={{ display: 'flex' }}>
-        <div style={styles.box}>
-          <Paper>{currentArticleView}</Paper>
-        </div>
+        <div style={styles.box}>{currentArticleView}</div>
         <div style={styles.box}>
           <MapView
             path={'ukMap/ukMap.json'} // TODO: should also be a parameter
