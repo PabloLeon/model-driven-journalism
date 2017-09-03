@@ -2,15 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Predictor from './Predictor';
 
+import { Header, Segment, Container, Card } from 'semantic-ui-react';
+
 const styles = {
-  box: {
-    display: 'flex',
-    justifyContent: 'left',
-    flexWrap: 'wrap',
-    flexDirection: 'column',
-  },
   selected: {
-    minHeight: '50px',
     display: 'flex',
     maxHeight: '400px',
     justifyContent: 'left',
@@ -18,7 +13,7 @@ const styles = {
     overflow: 'scroll',
   },
   options: {
-    minHeight: '150px',
+    display: 'flex',
     maxHeight: '400px',
     justifyContent: 'left',
     flexWrap: 'wrap',
@@ -26,33 +21,46 @@ const styles = {
   },
 };
 
-// Fixed size box ( 2 columns?! ) that wraps if more than the size
-// maps all the Predictors to that columns
+const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, onSelect }) => {
+  // TODO: really should check how many predictors there are and only show say 6
+  // have pagination below for more ...back etc
+  const noPredictors = availablePredictors.length;
 
-const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, onSelect }) => (
-  <div style={styles.box}>
-    <div style={styles.selected}>
-      {selectedPredictors.map(p => (
-        <Predictor
-          label={p.name}
-          context={p.description}
-          key={p.key}
-          onDelete={() => onDelete(p.key)}
-        />
-      ))}
-    </div>
-    <div style={styles.options}>
-      {availablePredictors.map(a => (
-        <Predictor
-          label={a.name}
-          context={a.description}
-          key={a.key}
-          onSelect={() => onSelect(a.key)}
-        />
-      ))}
-    </div>
-  </div>
-);
+  return (
+    <Container>
+      <Segment padded size="small">
+        <Header>Choose from all available predictors:</Header>
+        <Container style={{}}>
+          <Card.Group itemsPerRow={3}>
+            {availablePredictors.map(a => (
+              <Predictor
+                label={a.name}
+                context={a.description}
+                key={a.key}
+                onSelect={() => onSelect(a.key)}
+              />
+            ))}
+          </Card.Group>
+        </Container>
+      </Segment>
+      <Segment padded size="small">
+        <Header>Selected predictors</Header>
+        <Container style={{}}>
+          <Card.Group itemsPerRow={3}>
+            {selectedPredictors.map(p => (
+              <Predictor
+                label={p.name}
+                context={p.description}
+                key={p.key}
+                onDelete={() => onDelete(p.key)}
+              />
+            ))}
+          </Card.Group>
+        </Container>
+      </Segment>
+    </Container>
+  );
+};
 
 PredictorListing.propTypes = {
   selectedPredictors: PropTypes.arrayOf(

@@ -79,7 +79,6 @@ const TextBlock = ({
       {content}
       {
         <Modal style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
-          }>
           <Modal.Content image>
             {currentShowId !== 'undefined' &&
               showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}

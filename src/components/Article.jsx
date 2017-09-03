@@ -21,6 +21,9 @@ const styles = {
   wrapper: {
     height: '100%',
   },
+  content: {
+    padding: '50',
+  },
   map: {
     position: 'absolute',
     width: '100%',
@@ -54,7 +57,7 @@ class Article extends Component {
           longitude: -4.2,
           latitude: 55.5,
         },
-        zoom: 18, // 16 with current shows all uk
+        zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
         currentMarkers: [],
       },
@@ -329,7 +332,9 @@ class Article extends Component {
           />
         </div>
         <div style={styles.wrapper}>
-          <div style={styles.box}>{currentArticleView}</div>
+          <div style={styles.box}>
+            <div style={styles.content}>{currentArticleView}</div>
+          </div>
         </div>
       </div>
     );

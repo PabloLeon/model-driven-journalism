@@ -138,47 +138,7 @@ export const predictorInfo = {
     name: 'Number of surgical staff (in FTE)',
     description: '',
   },
-  cat_clinstaff_grade1: {
-    name: 'Number of grade 1 medical staff',
-    description: 'Number of staff with rating 1 (lowest).',
-  },
-  cat_clinstaff_grade2: {
-    name: 'Number of grade 2 medical staff',
-    description: 'Number of staff with rating 2.',
-  },
-  cat_clinstaff_grade3: {
-    name: 'Number of grade 3 medical staff',
-    description: 'Number of staff with rating 3.',
-  },
-  cat_clinstaff_grade4: {
-    name: 'Number of grade 4 medical staff',
-    description: 'Number of staff with rating 4.',
-  },
-  cat_clinstaff_grade5: {
-    name: 'Number of grade 5 medical staff',
-    description: 'Number of staff with rating 5 (average) .',
-  },
-  cat_clinstaff_grade6: {
-    name: 'Number of grade 6 medical staff',
-    description: 'Number of staff with rating 6.',
-  },
-  cat_clinstaff_grade7: {
-    name: 'Number of grade 7 medical staff',
-    description: 'Number of staff with rating 7.',
-  },
-  cat_clinstaff_grade8: {
-    name: 'Number of grade 8 medical staff',
-    description: 'Number of staff with rating 8.',
-  },
-  cat_clinstaff_grade9: {
-    name: 'Number of grade 9 medical staff',
-    description: 'Number of staff with rating 9.',
-  },
-  cat_clinstaff_grade10: {
-    name: 'Number of grade 10 medical staff',
-    description: 'Number of staff with rating 10 (highest).',
-  },
-  cat_Nurse_HealthVisitors: {
+ cat_Nurse_HealthVisitors: {
     name: 'Nurses and Health visitors',
     description: 'Nurses​ ​ & ​ ​ health​ ​ visitors',
   },

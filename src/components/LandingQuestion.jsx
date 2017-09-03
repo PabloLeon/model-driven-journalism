@@ -12,16 +12,14 @@ const styles = {
   content: {
     flexDirection: 'column',
   },
-  box: {
-    padding: '50px',
-  },
+  box: {},
 };
 const LandingQuestion = ({ header, subheader, onEnter }) => (
   <Container text style={styles.box}>
     <Segment>
       <Header size="huge">{header} </Header>
       <Container>{subheader}</Container>
-      <Divider />
+      <br />
       <Button content="Next" icon="right arrow" labelPosition="right" onClick={onEnter} />
     </Segment>
   </Container>
