@@ -36,16 +36,14 @@ const PredictorSelection = ({
           onSelect={addPrediction}
           onDelete={removePrediction}
         />
-      </Segment>
-      {canProceed && (
         <Button
-          style={{ float: 'right' }}
+          disabled={!canProceed}
           content="Next"
           icon="right arrow"
           labelPosition="right"
           onClick={onNext}
         />
-      )}
+      </Segment>
     </Container>
   );
 };

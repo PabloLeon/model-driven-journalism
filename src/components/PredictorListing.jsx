@@ -30,33 +30,29 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
     <Container>
       <Segment size="small">
         <Header>Choose from all available predictors:</Header>
-        <Container style={{}}>
-          <Card.Group itemsPerRow={4}>
-            {availablePredictors.map(a => (
-              <Predictor
-                label={a.name}
-                context={a.description}
-                key={a.key}
-                onSelect={() => onSelect(a.key)}
-              />
-            ))}
-          </Card.Group>
-        </Container>
+        <Card.Group itemsPerRow={4}>
+          {availablePredictors.map(a => (
+            <Predictor
+              label={a.name}
+              context={a.description}
+              key={a.key}
+              onSelect={() => onSelect(a.key)}
+            />
+          ))}
+        </Card.Group>
       </Segment>
       <Segment size="small">
         <Header>Selected predictors</Header>
-        <Container style={{}}>
-          <Card.Group itemsPerRow={4}>
-            {selectedPredictors.map(p => (
-              <Predictor
-                label={p.name}
-                context={p.description}
-                key={p.key}
-                onDelete={() => onDelete(p.key)}
-              />
-            ))}
-          </Card.Group>
-        </Container>
+        <Card.Group itemsPerRow={4}>
+          {selectedPredictors.map(p => (
+            <Predictor
+              label={p.name}
+              context={p.description}
+              key={p.key}
+              onDelete={() => onDelete(p.key)}
+            />
+          ))}
+        </Card.Group>
       </Segment>
     </Container>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Segment, Container, Header, Modal } from 'semantic-ui-react';
 
 import ContextBlock from './ContextBlock';
 import RangeBlock from './RangeBlock';
@@ -73,22 +73,30 @@ const TextBlock = ({
   selected,
   onNext,
 }) => (
-  <div>
-    <h1>{header}</h1>
-    <div style={styles.block}>
-      {content}
+  <Container>
+    <Segment>
+      <Header size="huge">{header}</Header>
+      <p>{content}</p>
       {
-        <Modal style={styles.dialog} modal={false} open={currentShowId !== 'undefined'}>
-          <Modal.Content image>
-            {currentShowId !== 'undefined' &&
-              showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
-            <Button label={'OK'} onClick={closeContext} />
-          </Modal.Content>
+        <Modal style={{}} modal={false} open={currentShowId !== 'undefined'}>
+          <Container>
+            <Modal.Content image>
+              {currentShowId !== 'undefined' &&
+                showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
+            </Modal.Content>
+            <Button content={'OK'} onClick={closeContext} />
+          </Container>
         </Modal>
       }
-    </div>
-    {canProceed && <Button label={'Next'} onClick={onNext} />}
-  </div>
+      <Button
+        disabled={!canProceed}
+        content="Next"
+        icon="right arrow"
+        labelPosition="right"
+        onClick={onNext}
+      />
+    </Segment>
+  </Container>
 );
 
 TextBlock.propTypes = {

@@ -51,7 +51,7 @@ const PredictorTable = ({ data }) => {
         <Table.Row>
           <Table.Cell>Total correct</Table.Cell>
           <Table.Cell />
-          <Table.Cell>{`You got ${percentageCorrect.toFixed(2)}% correct.`}</Table.Cell>
+          <Table.Cell>{`You got ${percentageCorrect.toFixed(1)}% correct.`}</Table.Cell>
         </Table.Row>
       </Table.Body>
     </Table>

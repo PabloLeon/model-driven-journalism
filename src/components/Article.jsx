@@ -85,6 +85,7 @@ class Article extends Component {
         const nonChose = nonContex.filter(
           nc => this.state.choices.map(c => c.id).indexOf(nc) === -1,
         );
+        console.log("required choices for article", nonChose)
         return nonChose;
       }
       default:
