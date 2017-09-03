@@ -27,27 +27,25 @@ const PredictorSelection = ({
       <Segment>
         <Header size="huge">{header} </Header>
         <p>{info}</p>
-        <Segment>
-          <PredictorListing
-            selectedPredictors={selectedPredictors.map(k => ({
-              key: k,
-              ...availablePredictors[k],
-            }))}
-            availablePredictors={avblP}
-            onSelect={addPrediction}
-            onDelete={removePrediction}
-          />
-        </Segment>
-        {canProceed && (
-          <Button
-            style={{ float: 'right' }}
-            content="Next"
-            icon="right arrow"
-            labelPosition="right"
-            onClick={onNext}
-          />
-        )}
+        <PredictorListing
+          selectedPredictors={selectedPredictors.map(k => ({
+            key: k,
+            ...availablePredictors[k],
+          }))}
+          availablePredictors={avblP}
+          onSelect={addPrediction}
+          onDelete={removePrediction}
+        />
       </Segment>
+      {canProceed && (
+        <Button
+          style={{ float: 'right' }}
+          content="Next"
+          icon="right arrow"
+          labelPosition="right"
+          onClick={onNext}
+        />
+      )}
     </Container>
   );
 };

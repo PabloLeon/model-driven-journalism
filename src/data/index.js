@@ -73,7 +73,7 @@ export const slidesNHS = [
   },
   {
     type: 'predictionCards',
-    info: 'Try to guess if the trust is on target or not with the factors you chose earlier...',
+    info: 'Based on your predictors, do you think the trust is on target?'
   },
   {
     type: 'predictionEvaluation',
@@ -115,27 +115,27 @@ export const predictorInfo = {
       'The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (night ​ only)​ ​ for​ ​ general​ ​ and acute',
   },
   cat_Anaesthetics: {
-    name: 'Number of Anaesthetics (in FTE)',
+    name: 'Number of Anaesthetics',
     description: '',
   },
   cat_Clinical_oncology: {
-    name: 'Number of clinical oncologists (in FTE)',
+    name: 'Number of clinical oncologists',
     description: '',
   },
   cat_Emergency_Medicine: {
-    name: 'Number of emergency medicine staff (in FTE)',
+    name: 'Number of emergency medicine staff',
     description: '',
   },
   cat_General_medicine_group: {
-    name: 'Number of general medicine staff (in FTE)',
+    name: 'Number of general medicine staff',
     description: '',
   },
   cat_Radiology_group: {
-    name: 'Number of radiology staff (in FTE)',
+    name: 'Number of radiology staff',
     description: '',
   },
   cat_Surgical_group: {
-    name: 'Number of surgical staff (in FTE)',
+    name: 'Number of surgical staff',
     description: '',
   },
  cat_Nurse_HealthVisitors: {
@@ -143,19 +143,19 @@ export const predictorInfo = {
     description: 'Nurses​ ​ & ​ ​ health​ ​ visitors',
   },
   cat_STT: {
-    name: 'Scientific, therapeutic and technical staff',
+    name: 'Scientific & technical staff',
     description: 'Scientific,​ ​ therapeutic​ ​ & technical​ ​ (STT)​ ​ staff',
   },
   cat_Support_Clinical: {
-    name: 'Support​ ​ to​ ​ doctors,​ ​ nurses​ ​& midwives',
+    name: 'Support​​ Staff medical',
     description: 'Support​ ​ to​ ​ doctors,​ ​ nurses​ ​ & midwives',
   },
   cat_Support_STT: {
-    name: 'Support​ ​ to​ ​ ST&T​ ​ staff',
+    name: 'Support​ staff ST&T​',
     description: 'Support​ ​ to​ ​ ST&T​ ​ staff',
   },
   planactual_diff: {
-    name: 'Year-to-date difference planned-actual',
+    name: '£ difference planned-actual',
     description: 'ytd_plan​ ​ minus​ ​ ytd_actual',
   },
   ytd_plan_miss: {

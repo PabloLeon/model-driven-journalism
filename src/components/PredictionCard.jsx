@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'semantic-ui-react';
+import { Card, Table, Container, Segment } from 'semantic-ui-react';
 import TinderNavigation from './TinderNavigation';
 
 const styles = {
@@ -55,6 +55,9 @@ const formatText = (title, hospitals, cities) => {
   ? enumerateToString(uniqueCities)
   : uniqueCities[0]}.`;
 };
+
+const PredictorDisplay = ({ name, value }) => <p>{`${name}: ${value}`}</p>;
+
 const PredictionCard = ({
   title,
   info,
@@ -67,25 +70,32 @@ const PredictionCard = ({
   const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
   return (
-    <Card>
-      <Card.Content>
-        <Card.Header>{title}</Card.Header>
-        <Card.Description>
-          {
-            <div>
-              <p>{info}</p>
-              <p>{infoText}</p>
-            </div>
-          }
-        </Card.Description>
-        <Card.Content extra>
-          {predictors.map((p, idx) => <p key={idx}>{`${p.name}: ${predictorValues[idx]}`}</p>)}
+    <Container text>
+      <Card>
+        <Card.Content>
+          <Card.Header size="huge">{title}</Card.Header>
+          <Card.Meta>{infoText}</Card.Meta>
+          <Card.Content extra>
+            <Segment>
+              <Table basic="very" celled collapsing>
+                <Table.Body>
+                  {predictors.map((p, id) => (
+                    <Table.Row>
+                      <Table.Cell>{p.name}</Table.Cell>
+                      <Table.Cell>{predictorValues[id]}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Segment>
+          </Card.Content>
         </Card.Content>
         <Card.Content extra>
-          <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
+          <p>{info}</p>
         </Card.Content>
-      </Card.Content>
-    </Card>
+        <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
+      </Card>
+    </Container>
   );
 };
 PredictionCard.propTypes = {

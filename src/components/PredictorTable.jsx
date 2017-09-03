@@ -38,7 +38,11 @@ const PredictorTable = ({ data }) => {
       <Table.Body>
         {numberOfEntries > 1 &&
           data.map(n => (
-            <Table.Row key={n.ods}>
+            <Table.Row
+              key={n.ods}
+              positive={n.guess === n.trueValue}
+              negative={n.guess !== n.trueValue}
+            >
               <Table.Cell>{n.trustName}</Table.Cell>
               <Table.Cell>{n.guess.toString()}</Table.Cell>
               <Table.Cell>{n.trueValue.toString()}</Table.Cell>
@@ -47,7 +51,7 @@ const PredictorTable = ({ data }) => {
         <Table.Row>
           <Table.Cell>Total correct</Table.Cell>
           <Table.Cell />
-          <Table.Cell>{`You got ${percentageCorrect}% correct.`}</Table.Cell>
+          <Table.Cell>{`You got ${percentageCorrect.toFixed(2)}% correct.`}</Table.Cell>
         </Table.Row>
       </Table.Body>
     </Table>

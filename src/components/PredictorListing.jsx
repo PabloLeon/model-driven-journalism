@@ -31,7 +31,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
       <Segment padded size="small">
         <Header>Choose from all available predictors:</Header>
         <Container style={{}}>
-          <Card.Group itemsPerRow={3}>
+          <Card.Group itemsPerRow={4}>
             {availablePredictors.map(a => (
               <Predictor
                 label={a.name}
@@ -46,7 +46,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
       <Segment padded size="small">
         <Header>Selected predictors</Header>
         <Container style={{}}>
-          <Card.Group itemsPerRow={3}>
+          <Card.Group itemsPerRow={4}>
             {selectedPredictors.map(p => (
               <Predictor
                 label={p.name}

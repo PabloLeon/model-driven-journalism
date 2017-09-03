@@ -4,19 +4,19 @@ import { Icon, Card } from 'semantic-ui-react';
 // TODO: onledete functionality
 const Predictor = ({ onDelete, onSelect, label }) => (
   <Card onClick={onSelect}>
-    <Card.Content>
-      {onDelete && (
-        <Icon
-          remove
-          name="remove"
-          onClick={onDelete}
-          style={{ position: 'absolute', top: '0', right: '0' }}
-        />
-      )}
-      <Card.Header>{label}</Card.Header>
-      <Card.Meta>Where does the predictor come from</Card.Meta>
-      <Card.Description />
-    </Card.Content>
+    {onDelete && (
+      <Icon
+        remove
+        name="remove"
+        onClick={onDelete}
+        style={{ position: 'absolute', top: '0', right: '0' }}
+      />
+    )}
+    <Card.Header size="small" style={{ color: 'black' }}>
+      {label}
+    </Card.Header>
+
+    <Card.Meta>Some meta information </Card.Meta>
   </Card>
 );
 Predictor.propTypes = {

@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 const TinderNavigation = ({ onSelect }) => (
-  <Grid columns={2} relaxed>
-    <Grid.Column>
-      <Button
-        content="Not on target"
-        icon="thumbs up"
-        labelPosition="right"
-        onClick={() => onSelect(false)}
-      />
-    </Grid.Column>
-    <Grid.Column>
-      <Button
-        content="On target"
-        icon="thumbs down"
-        labelPosition="left"
-        onClick={() => onSelect(true)}
-      />
-    </Grid.Column>
-  </Grid>
+  <Button.Group attached="bottom" fluid>
+    <Button onClick={() => onSelect(false)}>
+      <Icon name="thumbs down" />
+    </Button>
+    <Button.Or />
+    <Button onClick={() => onSelect(true)}>
+      <Icon name="thumbs up" />
+    </Button>
+  </Button.Group>
 );
 
 TinderNavigation.propTypes = {
