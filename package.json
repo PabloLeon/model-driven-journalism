@@ -37,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
     "prettier-eslint": "^7.1.0",
-    "storybook-addon-material-ui": "^0.8.0"
+    "storybook-addon-material-ui": "^0.8.0",
+    "@kadira/storybook": "^2.21.0"
   }
 }

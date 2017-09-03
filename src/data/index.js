@@ -2,11 +2,12 @@ export const slidesNHS = [
   {
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
-    subheader: 'Which factors determine the ability of your regional NHS to fulfill the cancer waiting time targets?',
+    subheader:
+      'Which factors determine the ability of your regional NHS to fulfill the cancer waiting time targets?',
   },
   {
     type: 'article',
-    header: 'NHS targets for referreal to treatment for cancer.',
+    header: 'NHS targets for referreal to treatment for cancer',
     text:
       '[How succesful](id0) is [the NHS](id1) at delivering on the targets for referral to treatment for [cancer patients](id2) in the UK?',
 
@@ -32,7 +33,6 @@ export const slidesNHS = [
               label: 'Scot & Wales',
               style: { align: 'right' },
               context: 'In Scotland and Wales the aim is to refer **95%** in time.',
-
             },
           },
         },
@@ -46,7 +46,8 @@ export const slidesNHS = [
       id2: {
         type: 'choice',
         header: 'Same targets for different types of cancer?',
-        info: 'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. Different targets could be set for different cancer types depending on their mortality index. Another option would be to look at different risks groups in the population and set the targets accordingly.',
+        info:
+          'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. Different targets could be set for different cancer types depending on their mortality index. Another option would be to look at different risks groups in the population and set the targets accordingly.',
         choices: [
           {
             choiceId: 'c1',
