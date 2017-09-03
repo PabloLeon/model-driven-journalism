@@ -115,32 +115,32 @@ export const predictorInfo = {
       'The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (night ​ only)​ ​ for​ ​ general​ ​ and acute',
   },
   cat_Anaesthetics: {
-    name: 'Number of Anaesthetics',
+    name: 'Anaesthetics',
     description: '',
   },
   cat_Clinical_oncology: {
-    name: 'Number of clinical oncologists',
+    name: 'Clinical oncologists',
     description: '',
   },
   cat_Emergency_Medicine: {
-    name: 'Number of emergency medicine staff',
+    name: 'Emergency medicine staff',
     description: '',
   },
   cat_General_medicine_group: {
-    name: 'Number of general medicine staff',
+    name: 'General medicine staff',
     description: '',
   },
   cat_Radiology_group: {
-    name: 'Number of radiology staff',
+    name: 'Radiology staff',
     description: '',
   },
   cat_Surgical_group: {
-    name: 'Number of surgical staff',
+    name: 'Surgical staff',
     description: '',
   },
  cat_Nurse_HealthVisitors: {
     name: 'Nurses and Health visitors',
-    description: 'Nurses​ ​ & ​ ​ health​ ​ visitors',
+    description: 'Nurses​  & health​ visitors',
   },
   cat_STT: {
     name: 'Scientific & technical staff',

@@ -28,7 +28,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
 
   return (
     <Container>
-      <Segment padded size="small">
+      <Segment size="small">
         <Header>Choose from all available predictors:</Header>
         <Container style={{}}>
           <Card.Group itemsPerRow={4}>
@@ -43,7 +43,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
           </Card.Group>
         </Container>
       </Segment>
-      <Segment padded size="small">
+      <Segment size="small">
         <Header>Selected predictors</Header>
         <Container style={{}}>
           <Card.Group itemsPerRow={4}>

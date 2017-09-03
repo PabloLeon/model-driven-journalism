@@ -59,7 +59,7 @@ class Article extends Component {
         },
         zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
-        currentMarkers: [],
+        currentMarkers: this.props.data.markers.slice(0, 80),
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -221,13 +221,13 @@ class Article extends Component {
           ...this.state.mapParameters,
           currentMarkers: newMarkers,
           center: newCenter,
-          zoom: 40,
+          zoom: 45,
         };
       }
       default:
         return {
           ...this.state.mapParameters,
-          zoom: 16,
+          zoom: 22,
           currentMarkers: [],
           center: { longitude: -4.2, latitude: 55.5 },
         };
