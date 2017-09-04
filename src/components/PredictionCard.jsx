@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Table, Container, Segment } from 'semantic-ui-react';
+import { Card, Table, Segment } from 'semantic-ui-react';
 import TinderNavigation from './TinderNavigation';
 
 const enumerateToString = (arrElems) => {

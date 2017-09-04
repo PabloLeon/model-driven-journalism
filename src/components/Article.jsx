@@ -61,6 +61,7 @@ class Article extends Component {
         zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
         currentMarkers: this.props.data.markers.slice(0, 80),
+        xOffset: 0,
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -219,6 +220,7 @@ class Article extends Component {
           currentMarkers: newMarkers,
           center: newCenter,
           zoom: 140,
+          xOffset: 8.5,
         };
       }
       default:
@@ -227,6 +229,7 @@ class Article extends Component {
           zoom: 20,
           currentMarkers: [],
           center: { longitude: -4.2, latitude: 55.5 },
+          xOffset: 0,
         };
     }
   }
@@ -312,7 +315,7 @@ class Article extends Component {
   render() {
     const currentSlideSpec = this.state.allSlideSpecs[this.state.currentPresentation];
     const currentSlideType = currentSlideSpec.type;
-    const { center, zoom, currentMarkers } = this.state.mapParameters;
+    const { center, zoom, currentMarkers, xOffset } = this.state.mapParameters;
 
     const currentArticleView = this.getArticleView(currentSlideSpec, currentSlideType);
     return (
@@ -325,6 +328,7 @@ class Article extends Component {
             center={center}
             zoom={zoom}
             markers={currentMarkers}
+            xOffset={xOffset}
           />
         </div>
         <div style={styles.wrapper}>
