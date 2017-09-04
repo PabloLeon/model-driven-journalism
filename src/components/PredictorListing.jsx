@@ -25,7 +25,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
         </Card.Group>
       </Segment>
       <Segment size="small">
-        <Header>Selected predictors</Header>
+        <Header>Selected predictors:</Header>
         <Card.Group itemsPerRow={4}>
           {selectedPredictors.map(p => (
             <Predictor

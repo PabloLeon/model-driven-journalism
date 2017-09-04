@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
 import LandingQuestion from './LandingQuestion';
 import MapView from './MapView';
 import TextBlock from './TextBlock';
@@ -22,7 +23,8 @@ const styles = {
     height: '100%',
   },
   content: {
-    padding: '50',
+    padding: '50px',
+    minWidth: '500px',
   },
   map: {
     position: 'absolute',
@@ -147,7 +149,6 @@ class Article extends Component {
           />
         );
       case 'predictionCards': {
-        console.log('prediction cards', article.state.currentCardIdx);
         const currentCardODSId = article.state.requiredPredictionIds[article.state.currentCardIdx];
         const trustInfo = article.state.trustInfo[currentCardODSId];
         const predictorInfo = article.state.selectedPredictors.map(
@@ -160,7 +161,6 @@ class Article extends Component {
         // for the 3 cancer types... I ignored that the whole time
         // the new and final dataset will include ALL cancer types, so that this issue should
         // not occur
-        console.log('card values', cardValues, currentCardODSId);
         const predictorValues = article.state.selectedPredictors.map(k => cardValues[k]);
         return (
           <PredictionCard
@@ -214,8 +214,6 @@ class Article extends Component {
           m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
         const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates));
-        console.log('new center', newCenter);
-        console.log('new markers', newMarkers);
 
         return {
           ...this.state.mapParameters,
@@ -279,7 +277,6 @@ class Article extends Component {
 
       // if the next presentation slide is a prediction presentatiaon
       const nextSlide = this.state.allSlideSpecs[this.state.currentPresentation + 1];
-      console.log('next slide');
       if (nextSlide.type === 'predictionCards' && this.state.currentCardIdx === 0) {
         // set the map Parameters
         this.setState({
@@ -333,7 +330,7 @@ class Article extends Component {
         </div>
         <div style={styles.wrapper}>
           <div style={styles.box}>
-            <div style={styles.content}>{currentArticleView}</div>
+            <Container style={styles.content}>{currentArticleView}</Container>
           </div>
         </div>
       </div>

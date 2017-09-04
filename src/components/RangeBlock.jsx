@@ -4,11 +4,11 @@ import { Container, Header } from 'semantic-ui-react';
 import Range from './Range';
 
 const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
-  <Container style={{ padding: '10' }}>
+  <Container style={{ padding: '10px' }}>
     <Header size="huge">{header}</Header>
     <p>{info}</p>
     <br />
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <Container style={{ display: 'flex', alignItems: 'center' }}>
       <Range
         value={value}
         min={range.min}
@@ -17,7 +17,7 @@ const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
         marks={range.marks}
         updateRange={v => onChoice({ id, payload: { rangeValue: v } })}
       />
-    </div>
+    </Container>
   </Container>
 );
 RangeBlock.propTypes = {

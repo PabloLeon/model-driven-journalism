@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Container, Header } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
 const ContextBlock = ({ header, info }) => (
-  <Container style={{ padding: '10' }}>
+  <Container style={{ padding: '10px' }}>
     <Header size="huge">{header}</Header>
     <p>{info}</p>
     <br />

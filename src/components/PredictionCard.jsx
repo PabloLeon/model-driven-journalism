@@ -42,17 +42,18 @@ const PredictionCard = ({
   const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
   return (
-    <Container text>
+    <Container>
       <Card>
         <Card.Content>
           <Card.Header size="huge">{title}</Card.Header>
           <Card.Meta>{infoText}</Card.Meta>
           <Card.Content extra>
+            <br />
             <Segment>
               <Table basic="very" celled collapsing>
                 <Table.Body>
                   {predictors.map((p, id) => (
-                    <Table.Row>
+                    <Table.Row key={id}>
                       <Table.Cell>{p.name}</Table.Cell>
                       <Table.Cell>{predictorValues[id]}</Table.Cell>
                     </Table.Row>

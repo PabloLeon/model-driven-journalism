@@ -67,9 +67,9 @@ const TextBlock = ({
   <Container text>
     <Segment>
       <Header size="huge">{header}</Header>
-      <p>{content}</p>
+      <Header.Subheader>{content}</Header.Subheader>
       {
-        <Modal style={{ padding: '5' }} modal={false} open={currentShowId !== 'undefined'}>
+        <Modal style={{ padding: '5px' }} open={currentShowId !== 'undefined'}>
           <Container>
             <Modal.Content>
               {currentShowId !== 'undefined' &&

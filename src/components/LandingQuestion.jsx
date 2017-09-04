@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, Segment, Container, Divider, Button } from 'semantic-ui-react';
+import { Header, Segment, Container, Button } from 'semantic-ui-react';
 
 const LandingQuestion = ({ header, subheader, onEnter }) => (
   <Container text>
     <Segment>
       <Header size="huge">{header} </Header>
-      <Container>{subheader}</Container>
+      <Header.Subheader>{subheader}</Header.Subheader>
       <br />
       <Button content="Next" icon="right arrow" labelPosition="right" onClick={onEnter} />
     </Segment>
@@ -22,9 +22,3 @@ LandingQuestion.defaultProps = {
 };
 
 export default LandingQuestion;
-// <div onClick={onEnter} role="button" tabIndex="0">
-//   <div style={styles.content}>
-//     <h1 style={styles.header}>{header}</h1>
-//     <h2 style={styles.subheader}>{subheader}</h2>
-//   </div>
-// </div>

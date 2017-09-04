@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Segment, Header } from 'semantic-ui-react';
+import { Container, Item, Header } from 'semantic-ui-react';
 import Choice from './Choice';
 
 // {needsAction && <Feedback style={styles.svgIcon} />
 
 const ChoiceBlock = ({ id, header, info, choices, makeChoice, selected }) => (
-  <Container style={{ padding: '10' }}>
+  <Container style={{ padding: '10px' }}>
     <Header size="huge">{header}</Header>
     <p>{info}</p>
-    <Segment>
-      {choices &&
-        choices.map((o) => {
-          console.log('choice block', o);
-          return (
+    <br />
+    <Container>
+      <Item.Group divided relaxed>
+        {choices &&
+          choices.map(o => (
             <Choice
               key={o.choiceId}
               choiceId={o.choiceId}
@@ -23,9 +23,9 @@ const ChoiceBlock = ({ id, header, info, choices, makeChoice, selected }) => (
               info={o.info}
               selected={o.choiceId === selected}
             />
-          );
-        })}
-    </Segment>
+          ))}
+      </Item.Group>
+    </Container>
   </Container>
 );
 

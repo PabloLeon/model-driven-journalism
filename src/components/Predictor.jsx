@@ -6,7 +6,6 @@ const Predictor = ({ onDelete, onSelect, label }) => (
   <Card onClick={onSelect}>
     {onDelete && (
       <Icon
-        remove
         name="remove"
         onClick={onDelete}
         style={{ position: 'absolute', top: '0', right: '0' }}

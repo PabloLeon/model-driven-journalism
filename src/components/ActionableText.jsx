@@ -9,10 +9,10 @@ const styles = {
   },
   svgIcon: {
     display: 'inlineFlex',
-    alignSelf: 'center',
+    alignSelf: 'left',
     height: '1em',
     width: '1em',
-    bottom: '0.25em',
+    bottom: '0.4em',
     position: 'relative',
     textDecoration: 'none',
   },

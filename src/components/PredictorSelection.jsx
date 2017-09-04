@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Header, Button, Segment, Container, Divider } from 'semantic-ui-react';
+import { Header, Button, Segment, Container } from 'semantic-ui-react';
 import PredictorListing from './PredictorListing';
 
 // TODO: with fixed, llisting: first available, then chosen
@@ -23,26 +23,30 @@ const PredictorSelection = ({
     .filter(k => selectedPredictors.indexOf(k) === -1)
     .map(k => ({ key: k, ...availablePredictors[k] }));
   return (
-    <Container text>
+    <Container style={{ padding: '10px' }}>
       <Segment>
         <Header size="huge">{header} </Header>
         <p>{info}</p>
-        <PredictorListing
-          selectedPredictors={selectedPredictors.map(k => ({
-            key: k,
-            ...availablePredictors[k],
-          }))}
-          availablePredictors={avblP}
-          onSelect={addPrediction}
-          onDelete={removePrediction}
-        />
-        <Button
-          disabled={!canProceed}
-          content="Next"
-          icon="right arrow"
-          labelPosition="right"
-          onClick={onNext}
-        />
+        <br />
+        <Container>
+          <PredictorListing
+            selectedPredictors={selectedPredictors.map(k => ({
+              key: k,
+              ...availablePredictors[k],
+            }))}
+            availablePredictors={avblP}
+            onSelect={addPrediction}
+            onDelete={removePrediction}
+          />
+          <br />
+          <Button
+            disabled={!canProceed}
+            content="Next"
+            icon="right arrow"
+            labelPosition="right"
+            onClick={onNext}
+          />
+        </Container>
       </Segment>
     </Container>
   );

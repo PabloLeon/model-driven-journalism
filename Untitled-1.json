@@ -1,0 +1,7 @@
+{
+  numtreat_total: {
+    name: "Total treated",
+    description:
+      "Total​ ​number​ of​ ​people receiving​ first​ ​treatment​ ​for cancer"
+  }
+}
