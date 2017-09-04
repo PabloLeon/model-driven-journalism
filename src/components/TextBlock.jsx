@@ -6,15 +6,6 @@ import ContextBlock from './ContextBlock';
 import RangeBlock from './RangeBlock';
 import ChoiceBlock from './ChoiceBlock';
 
-const styles = {
-  block: {},
-  svgIcon: {},
-  choice: {},
-  dialog: {
-    flex: true,
-  },
-};
-
 const showContext = (id, specs, takenChoices, closeContext, choiceFun) => {
   if (id in specs) {
     // get all choices for the id

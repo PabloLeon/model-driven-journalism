@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import { predictionsMock } from '../data/';
 
-const styles = {
-  paper: {
-    width: '100%',
-    marginTop: '6em',
-    overflowX: 'auto',
-  },
-};
-
 const getTotals = (d) => {
   const length = d.length;
   if (length > 0) {

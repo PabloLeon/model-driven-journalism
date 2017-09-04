@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Header } from 'semantic-ui-react';
 import Range from './Range';
-import { Container, Segment, Header } from 'semantic-ui-react';
 
 const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
   <Container style={{ padding: '10' }}>

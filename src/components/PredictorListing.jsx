@@ -4,23 +4,6 @@ import Predictor from './Predictor';
 
 import { Header, Segment, Container, Card } from 'semantic-ui-react';
 
-const styles = {
-  selected: {
-    display: 'flex',
-    maxHeight: '400px',
-    justifyContent: 'left',
-    flexWrap: 'wrap',
-    overflow: 'scroll',
-  },
-  options: {
-    display: 'flex',
-    maxHeight: '400px',
-    justifyContent: 'left',
-    flexWrap: 'wrap',
-    overflow: 'scroll',
-  },
-};
-
 const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, onSelect }) => {
   // TODO: really should check how many predictors there are and only show say 6
   // have pagination below for more ...back etc

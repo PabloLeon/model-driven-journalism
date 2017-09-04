@@ -2,20 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Segment, Container, Divider, Button } from 'semantic-ui-react';
 
-const styles = {
-  header: {
-    fontVariant: 'small-caps',
-  },
-  subheader: {
-    fontStyle: 'italic',
-  },
-  content: {
-    flexDirection: 'column',
-  },
-  box: {},
-};
 const LandingQuestion = ({ header, subheader, onEnter }) => (
-  <Container text style={styles.box}>
+  <Container text>
     <Segment>
       <Header size="huge">{header} </Header>
       <Container>{subheader}</Container>

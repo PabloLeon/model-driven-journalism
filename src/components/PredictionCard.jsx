@@ -3,32 +3,6 @@ import PropTypes from 'prop-types';
 import { Card, Table, Container, Segment } from 'semantic-ui-react';
 import TinderNavigation from './TinderNavigation';
 
-const styles = {
-  card: {
-    minWidth: 400,
-    maxWidth: 600,
-  },
-  heading: {},
-  content: {
-    minHeight: 300,
-    maxHeight: 600,
-  },
-  avatar: {
-    maxWidth: 50,
-    maxHeight: 50,
-  },
-  navigation: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: 8,
-    paddingBottom: 8,
-  },
-  icons: {
-    height: 38,
-    width: 38,
-  },
-};
-
 const enumerateToString = (arrElems) => {
   const l = arrElems.length;
   if (l < 2) {
@@ -55,8 +29,6 @@ const formatText = (title, hospitals, cities) => {
   ? enumerateToString(uniqueCities)
   : uniqueCities[0]}.`;
 };
-
-const PredictorDisplay = ({ name, value }) => <p>{`${name}: ${value}`}</p>;
 
 const PredictionCard = ({
   title,
