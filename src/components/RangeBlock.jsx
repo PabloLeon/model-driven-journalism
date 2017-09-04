@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Range from './Range';
+import { Container, Segment, Header } from 'semantic-ui-react';
 
 const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
-  <div>
-    <h1>{header}</h1>
+  <Container style={{ padding: '10' }}>
+    <Header size="huge">{header}</Header>
     <p>{info}</p>
-    <Range
-      value={value}
-      min={range.min}
-      max={range.max}
-      step={range.step}
-      marks={range.marks}
-      updateRange={v => onChoice({ id, payload: { rangeValue: v } })}
-    />
-  </div>
+    <br />
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Range
+        value={value}
+        min={range.min}
+        max={range.max}
+        step={range.step}
+        marks={range.marks}
+        updateRange={v => onChoice({ id, payload: { rangeValue: v } })}
+      />
+    </div>
+  </Container>
 );
 RangeBlock.propTypes = {
   id: PropTypes.string.isRequired,

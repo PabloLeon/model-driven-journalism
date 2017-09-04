@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Segment, Container, Header } from 'semantic-ui-react';
 
 const ContextBlock = ({ header, info }) => (
-  <div>
-    <h1>{header}</h1>
+  <Container style={{ padding: '10' }}>
+    <Header size="huge">{header}</Header>
     <p>{info}</p>
-  </div>
+    <br />
+  </Container>
 );
 ContextBlock.propTypes = {
   header: PropTypes.string.isRequired,

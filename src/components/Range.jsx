@@ -4,18 +4,16 @@ import 'rc-slider/assets/index.css'; // I would like to get rid of  this depende
 import PropTypes from 'prop-types';
 
 const Range = ({ value, step, min, max, marks, updateRange }) => (
-  <div>
-    <Slider
-      dots
-      min={min}
-      max={max}
-      step={step}
-      onChange={rV => updateRange(rV)}
-      defaultValue={value}
-      style={{ width: 700, margin: 10 }}
-      marks={marks}
-    />
-  </div>
+  <Slider
+    dots
+    min={min}
+    max={max}
+    step={step}
+    onChange={rV => updateRange(rV)}
+    defaultValue={value}
+    style={{ width: 700, margin: 10 }}
+    marks={marks}
+  />
 );
 
 Range.propTypes = {

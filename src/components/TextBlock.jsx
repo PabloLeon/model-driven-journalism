@@ -73,14 +73,14 @@ const TextBlock = ({
   selected,
   onNext,
 }) => (
-  <Container>
+  <Container text>
     <Segment>
       <Header size="huge">{header}</Header>
       <p>{content}</p>
       {
-        <Modal style={{}} modal={false} open={currentShowId !== 'undefined'}>
+        <Modal style={{ padding: '5' }} modal={false} open={currentShowId !== 'undefined'}>
           <Container>
-            <Modal.Content image>
+            <Modal.Content>
               {currentShowId !== 'undefined' &&
                 showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
             </Modal.Content>

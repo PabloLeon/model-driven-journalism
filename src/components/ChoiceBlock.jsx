@@ -1,29 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { Container, Segment, Header } from 'semantic-ui-react';
 import Choice from './Choice';
 
 // {needsAction && <Feedback style={styles.svgIcon} />
 
 const ChoiceBlock = ({ id, header, info, choices, makeChoice, selected }) => (
-  <div>
-    <h1>{header}</h1>
+  <Container style={{ padding: '10' }}>
+    <Header size="huge">{header}</Header>
     <p>{info}</p>
-    <div>
+    <Segment>
       {choices &&
-        choices.map(o => (
-          <Choice
-            key={o.choiceId}
-            choiceId={o.choiceId}
-            onChoice={cid => makeChoice({ id, payload: { choiceId: cid } })}
-            header={o.header}
-            summary={o.summary}
-            text={o.text}
-            selected={o.choiceId === selected}
-            expanded={false}
-          />
-        ))}
-    </div>
-  </div>
+        choices.map((o) => {
+          console.log('choice block', o);
+          return (
+            <Choice
+              key={o.choiceId}
+              choiceId={o.choiceId}
+              onChoice={cid => makeChoice({ id, payload: { choiceId: cid } })}
+              header={o.header}
+              info={o.info}
+              selected={o.choiceId === selected}
+            />
+          );
+        })}
+    </Segment>
+  </Container>
 );
 
 ChoiceBlock.propTypes = {

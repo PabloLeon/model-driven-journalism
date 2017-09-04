@@ -1,35 +1,39 @@
 import React from 'react';
-import { Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Grid, Checkbox, Item, Header } from 'semantic-ui-react';
 
-const styles = {
-  block: {},
-  checkbox: {},
-};
 const Choice = (props) => {
-  const { choiceId, header, summary, text, selected, expanded, onChoice } = props;
+  const { choiceId, header, info, selected, onChoice } = props;
   return (
-    <div>
-      <h1>{header}</h1>
-      <p>{summary}</p>
-      <p>{text}</p>
-      <Checkbox style={styles.checkbox} checked={selected} onChange={() => onChoice(choiceId)} />
-    </div>
+    <Item>
+      <Item.Content>
+        <Header size="small">{header}</Header>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={14}>
+              <p>{info}</p>
+            </Grid.Column>
+            <Grid.Column width={2}>
+              <Checkbox checked={selected} onChange={() => onChoice(choiceId)} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <br />
+      </Item.Content>
+    </Item>
   );
 };
 
 Choice.propTypes = {
   choiceId: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
-  summary: PropTypes.string,
   onChoice: PropTypes.func.isRequired,
-  text: PropTypes.string,
+  info: PropTypes.string,
   selected: PropTypes.bool.isRequired,
-  expanded: PropTypes.bool.isRequired,
 };
 
 Choice.defaultProps = {
-  summary: '',
   text: '',
+  info: '',
 };
 export default Choice;
