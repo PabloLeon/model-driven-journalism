@@ -65,7 +65,7 @@ const TextBlock = ({
   onNext,
 }) => (
   <Container text>
-    <Segment>
+    <Segment clearing>
       <Header size="huge">{header}</Header>
       <Header.Subheader>{content}</Header.Subheader>
       {
@@ -75,13 +75,14 @@ const TextBlock = ({
               {currentShowId !== 'undefined' &&
                 showContext(currentShowId, contextInfo, selected, closeContext, makeChoice)}
             </Modal.Content>
-            <Button content={'OK'} onClick={closeContext} />
+            <Button content={'OK'} onClick={closeContext} floated="right" />
           </Container>
         </Modal>
       }
       <Button
         disabled={!canProceed}
         content="Next"
+        floated="right"
         icon="right arrow"
         labelPosition="right"
         onClick={onNext}

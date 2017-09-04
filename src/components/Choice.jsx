@@ -13,7 +13,7 @@ const Choice = (props) => {
             <Grid.Column width={14}>
               <p>{info}</p>
             </Grid.Column>
-            <Grid.Column width={2}>
+            <Grid.Column width={1} floated="right">
               <Checkbox checked={selected} onChange={() => onChoice(choiceId)} />
             </Grid.Column>
           </Grid.Row>

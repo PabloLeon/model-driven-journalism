@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Icon } from 'semantic-ui-react';
 
 const TinderNavigation = ({ onSelect }) => (
-  <Button.Group attached="bottom" fluid>
+  <Button.Group attached="bottom" fluid size="huge">
     <Button onClick={() => onSelect(false)}>
       <Icon name="thumbs down" />
     </Button>

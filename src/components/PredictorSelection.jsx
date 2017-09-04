@@ -24,7 +24,7 @@ const PredictorSelection = ({
     .map(k => ({ key: k, ...availablePredictors[k] }));
   return (
     <Container style={{ padding: '10px' }}>
-      <Segment>
+      <Segment clearing>
         <Header size="huge">{header} </Header>
         <p>{info}</p>
         <br />
@@ -44,6 +44,7 @@ const PredictorSelection = ({
             content="Next"
             icon="right arrow"
             labelPosition="right"
+            floated="right"
             onClick={onNext}
           />
         </Container>

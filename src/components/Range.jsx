@@ -11,7 +11,7 @@ const Range = ({ value, step, min, max, marks, updateRange }) => (
     step={step}
     onChange={rV => updateRange(rV)}
     defaultValue={value}
-    style={{ width: 700, margin: 10 }}
+    style={{ margin: 10 }}
     marks={marks}
   />
 );

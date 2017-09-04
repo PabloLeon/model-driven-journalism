@@ -8,7 +8,7 @@ const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
     <Header size="huge">{header}</Header>
     <p>{info}</p>
     <br />
-    <Container style={{ display: 'flex', alignItems: 'center' }}>
+    <Container style={{ width: '85%', margin: '0 auto' }}>
       <Range
         value={value}
         min={range.min}

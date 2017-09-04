@@ -42,33 +42,31 @@ const PredictionCard = ({
   const infoText = formatText(title, trustInformation.hospitals, trustInformation.city);
 
   return (
-    <Container>
-      <Card>
-        <Card.Content>
-          <Card.Header size="huge">{title}</Card.Header>
-          <Card.Meta>{infoText}</Card.Meta>
-          <Card.Content extra>
-            <br />
-            <Segment>
-              <Table basic="very" celled collapsing>
-                <Table.Body>
-                  {predictors.map((p, id) => (
-                    <Table.Row key={id}>
-                      <Table.Cell>{p.name}</Table.Cell>
-                      <Table.Cell>{predictorValues[id]}</Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
-            </Segment>
-          </Card.Content>
-        </Card.Content>
+    <Card style={{ width: '50%', height: '50%' }}>
+      <Card.Content>
+        <Card.Header size="huge">{title}</Card.Header>
+        <Card.Meta>{infoText}</Card.Meta>
         <Card.Content extra>
-          <p>{info}</p>
+          <br />
+          <Segment>
+            <Table basic="very" celled collapsing>
+              <Table.Body>
+                {predictors.map((p, id) => (
+                  <Table.Row key={id}>
+                    <Table.Cell>{p.name}</Table.Cell>
+                    <Table.Cell>{predictorValues[id]}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </Segment>
         </Card.Content>
-        <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
-      </Card>
-    </Container>
+      </Card.Content>
+      <Card.Content extra>
+        <p>{info}</p>
+      </Card.Content>
+      <TinderNavigation onSelect={e => onSelect({ id: odsCode, payload: { prediction: e } })} />
+    </Card>
   );
 };
 PredictionCard.propTypes = {

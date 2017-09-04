@@ -4,11 +4,17 @@ import { Header, Segment, Container, Button } from 'semantic-ui-react';
 
 const LandingQuestion = ({ header, subheader, onEnter }) => (
   <Container text>
-    <Segment>
+    <Segment clearing>
       <Header size="huge">{header} </Header>
       <Header.Subheader>{subheader}</Header.Subheader>
       <br />
-      <Button content="Next" icon="right arrow" labelPosition="right" onClick={onEnter} />
+      <Button
+        content="Next"
+        icon="right arrow"
+        labelPosition="right"
+        onClick={onEnter}
+        floated="right"
+      />
     </Segment>
   </Container>
 );

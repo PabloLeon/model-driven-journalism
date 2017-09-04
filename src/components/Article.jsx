@@ -24,7 +24,6 @@ const styles = {
   },
   content: {
     padding: '50px',
-    minWidth: '500px',
   },
   map: {
     position: 'absolute',
