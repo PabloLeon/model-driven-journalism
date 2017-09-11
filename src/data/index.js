@@ -41,7 +41,7 @@ export const slidesNHS = [
         type: 'context',
         header: 'The National Health Service',
         info:
-          'There is a different organizing body in England and Scotland... We could put other information here',
+          'There is a different organizing body in England and Scotland. Here we only look at the NHS England data.',
       },
       id2: {
         type: 'choice',
