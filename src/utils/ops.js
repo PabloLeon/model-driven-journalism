@@ -6,7 +6,7 @@
 // FIXME: Actually stupid...mode should be used
 // since many values around london should not shift the center of the map there
 
-export const getCenterGeo = (arrayOfCoordinates) => {
+export const getCenterGeo = (arrayOfCoordinates, xOffset = 0, yOffset = 0) => {
   // the array currently looks like this:
   // {Longitude, Latitude}
   if (arrayOfCoordinates.length > 1) {
@@ -20,11 +20,11 @@ export const getCenterGeo = (arrayOfCoordinates) => {
       },
       [0.0, 0.0],
     );
-    return { longitude: longSum / length, latitude: latSum / length };
+    return { longitude: longSum / length + xOffset, latitude: latSum / length + yOffset };
   }
   return {
-    longitude: parseFloat(arrayOfCoordinates[0][0]),
-    latitude: parseFloat(arrayOfCoordinates[0][1]),
+    longitude: parseFloat(arrayOfCoordinates[0][0] + xOffset),
+    latitude: parseFloat(arrayOfCoordinates[0][1] + yOffset),
   };
 };
 

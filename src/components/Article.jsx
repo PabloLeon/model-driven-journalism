@@ -61,7 +61,6 @@ class Article extends Component {
         zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
         currentMarkers: this.props.data.markers.slice(0, 80),
-        xOffset: 0,
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -156,11 +155,6 @@ class Article extends Component {
         );
         const cardValues = article.state.waitingTimes.find(wT => wT.ods_code === currentCardODSId);
 
-        // FIXME
-        // this is only required because currently some trust have more than one statistic
-        // for the 3 cancer types... I ignored that the whole time
-        // the new and final dataset will include ALL cancer types, so that this issue should
-        // not occur
         const predictorValues = article.state.selectedPredictors.map(k => cardValues[k]);
         return (
           <PredictionCard
@@ -213,14 +207,13 @@ class Article extends Component {
         const newMarkers = this.state.mapParameters.allMarkers.filter(
           m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
-        const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates));
+        const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates), 8.5, 0);
 
         return {
           ...this.state.mapParameters,
           currentMarkers: newMarkers,
           center: newCenter,
           zoom: 140,
-          xOffset: 8.5,
         };
       }
       default:
@@ -229,7 +222,6 @@ class Article extends Component {
           zoom: 20,
           currentMarkers: [],
           center: { longitude: -4.2, latitude: 55.5 },
-          xOffset: 0,
         };
     }
   }

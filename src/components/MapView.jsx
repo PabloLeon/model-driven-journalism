@@ -44,10 +44,10 @@ const MapView = ({ path, width, height, zoom, center, markers }) => (
       height={height}
       projectionConfig={{
         scale: 160,
-        xOffset: 0, // 8.5
         yOffset: 0,
         rotation: [0, 0, 0],
         precision: 0.1,
+        xOffset: 8.5,
       }}
     >
       <ZoomableGroup center={[center.longitude, center.latitude]} zoom={zoom} disablePanning>

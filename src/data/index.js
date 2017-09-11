@@ -41,7 +41,7 @@ export const slidesNHS = [
         type: 'context',
         header: 'The National Health Service',
         info:
-          'There is a different organizing body in England and Scotland. ',
+          'There is a different organizing body in England and Scotland. Here we only look at data from NHS England.',
       },
       id2: {
         type: 'choice',
@@ -58,7 +58,8 @@ export const slidesNHS = [
           {
             choiceId: 'c2',
             header: 'Distinguish cancer types based on aggresiveness',
-            info: 'Waiting times may differ for more complicated cancers. In these cases, patients may wait longer to start treatment due to the need for specialised scans which are sometimes only available at larger hospitals located elsewhere. On the other hand, for more aggressive cancers, patients would be expected to be prioritised so that they receive treatment faster.',
+            info:
+              'Waiting times may differ for more complicated cancers. In these cases, patients may wait longer to start treatment due to the need for specialised scans which are sometimes only available at larger hospitals located elsewhere. On the other hand, for more aggressive cancers, patients would be expected to be prioritised so that they receive treatment faster.',
           },
         ],
       },
