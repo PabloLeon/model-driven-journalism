@@ -73,7 +73,7 @@ export const slidesNHS = [
   },
   {
     type: 'predictionCards',
-    info: 'Based on your predictors, do you think the trust is on target?'
+    info: 'Based on your predictors, do you think the trust is on target?',
   },
   {
     type: 'predictionEvaluation',
@@ -96,81 +96,108 @@ export const predictionsMock = [
 
 export const predictorInfo = {
   numtreat_total: {
-    name: 'Total treated',
-    description: 'Total​ ​number​ of​ ​people receiving​ first​ ​treatment​ ​for cancer',
+    name: 'Total number of patients treated',
+    description: 'The total number of people receiving first treatment for cancer at the NHS trust',
   },
   shmi_ind: {
     name: 'SHMI Index',
     description:
-      "This​ ​ variable​ ​ is​ ​ calculated​ ​ from the​ ​ ratio​ ​ between​ ​ the​ ​ actual number​ ​ of​ ​ patients​ ​ who​ ​ die following​ ​ hospitalisation​ ​ at​ ​ the trust​ ​ ( ​ observed_deaths​ ) ​ ​ and the​ ​ number​ ​ that​ ​ would​ ​ be expected​ ​ to​ ​ die​ ​ on​ ​ the​ ​ basis​ ​ of average​ ​ England​ ​ figures (​ expected_deaths​ ),​ ​ given​ ​ the characteristics​ ​ of​ ​ the​ ​ patients treated​ ​ there.​ ​ ​ It​ ​ includes deaths​ ​ which​ ​ occur​ ​ in​ ​ hospital and​ ​ deaths​ ​ which​ ​ occur outside​ ​ of​ ​ hospital​ ​ within​ ​ 30 days​ ​ (inclusive)​ ​ of​ ​ discharge. The​ ​ SHMI​ ​ gives​ ​ an​ ​ indication for​ ​ each​ ​ non-specialist​ ​ acute NHS​ ​ trust​ ​ in​ ​ England​ ​ whether the​ ​ observed​ ​ number​ ​ of deaths​ ​ within​ ​ 30​ ​ days​ ​ of discharge​ ​ from​ ​ hospital​ ​ was 'above​ ​ expected'​ ​ (SHMI value>1)​ ​ or​ ​ 'lower​ ​ than expected'​ ​ (SHMI​ ​ value<1). Breast​ ​ cancer​ ​ = ​ ​ diagnosis category​ ​ group​ ​ 18 Colon​ ​ cancer​ ​ = ​ ​ diagnosis category​ ​ group 10 Lung​ ​ cancer​ ​ = ​ ​ diagnosis category​ ​ group​ ​ 15",
+      "This is calculated from the ratio between the actual number of patients who die following hospitalisation at the trust and the number that would be expected to die on the basis of average England figures given the characteristics of the patients treated there. ? It includes deaths which occur in hospital and deaths which occur outside of hospital within 30 days (inclusive) of discharge. The SHMI gives an indication for each non-specialist acute NHS trust in England whether the observed number of deaths within 30 days of discharge from hospital was 'above expected' (SHMI value > 1) or 'lower than expected' (SHMI value < 1). This index is aggregated over all cancer diagnosis groups.",
   },
-  cat_beds_day: {
-    name: 'Available daybeds',
+  patient_admissions: {
+    name: 'Number of admitted patients',
+    description: 'Total number of patients admitted into hospitals within the NHS trust',
+  },
+  beds_day: {
+    name: 'Available day beds',
+    description: 'The total number of available beds (day only) for General & Acute',
+  },
+  beds_night: {
+    name: 'Available night beds',
+    description: 'The total number of available beds (night ? only) for General & Acute',
+  },
+  oncology_staff: {
+    name:
+      'Total number of medical staff (FTE) specialising or involved in treatment or diagnosis of cancer',
     description:
-      'The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (day​ ​ only)​ ​ for​ ​ general​ ​ and acute',
+      'This gives the total number of medical staff who either specialise, or are involved when treating or diagnosing the cancer of a patient. This has been aggregated for the number of staff (in FTE) from the following areas: Chemical Pathology, Clinical Oncology, Clinical Radiology, General Pathology, Heamatology, Histapothology, Medical Oncology and Palliative Medicine.',
   },
-  cat_beds_night: {
-    name: 'Available nightbeds',
+  cat__Clinical_oncology: {
+    name: 'Clinical Oncologists',
     description:
-      'The​ ​ total​ ​ number​ ​ of​ ​ available beds​ ​ (night ​ only)​ ​ for​ ​ general​ ​ and acute',
+      'Total number of medical staff working in Clincial Oncology (FTE). These are medical staff that use chemotherapy or radiotherapy (and other treatments) to treat cancer patients.',
   },
-  cat_Anaesthetics: {
-    name: 'Anaesthetics',
-    description: '',
+  cat__Clinical_radiology: {
+    name: 'Clinical Radiologists',
+    description:
+      'Total number of medical staff working in Clincial Radiology (FTE). These are medical staff that use imaging to diagnose, treat and manage various medical conditions and diseases which may also include cancer. They offer specialist expertise and guidance.',
   },
-  cat_Clinical_oncology: {
-    name: 'Clinical oncologists',
-    description: '',
+  cat__Chemical_pathology: {
+    name: 'Chemical Pathologists',
+    description:
+      'Total number of medical staff working in Chemical Pathology (FTE). They are doctors who use biochemical laboratory tests to diagnose a range of diseases and to manage patients.',
   },
-  cat_Emergency_Medicine: {
-    name: 'Emergency medicine staff',
-    description: '',
+  cat__General_pathology: {
+    name: 'General Pathologists',
+    description:
+      'Total number of medical staff working in General Pathology (FTE). These are doctors who practise both clinical (see Clinical Pathologists) and anatomical pathology. The latter entails diagnosis of diseases based macroscopic, microscopic, biochemical, immunologic and molecular examinations.',
   },
-  cat_General_medicine_group: {
-    name: 'General medicine staff',
-    description: '',
+  cat__Haematology: {
+    name: 'Haematologists',
+    description:
+      'Total number of medical staff working in Haematology (FTE). These doctors diagnose and clinically manage disorders of the bone and marrow.',
   },
-  cat_Radiology_group: {
-    name: 'Radiology staff',
-    description: '',
+  cat__Histopathology: {
+    name: 'Histopathologists',
+    description:
+      'Total number of medical staff working in Histopathology (FTE). These doctors diagnose and study disease through interpretation of cells and tissue samples. They are an integral component to managing cancer through staging and grading tumours.',
   },
-  cat_Surgical_group: {
-    name: 'Surgical staff',
-    description: '',
+  cat__Medical_oncology: {
+    name: 'Medical Oncologists',
+    description:
+      'Total number of medical staff working in Medical Oncology (FTE). Medical oncologists diagnose, assess, treat and manage cancer patients.',
   },
- cat_Nurse_HealthVisitors: {
-    name: 'Nurses and Health visitors',
-    description: 'Nurses​  & health​ visitors',
+  cat__admin_supp_DNM: {
+    name: 'Admin and Support Staff for Doctors, Nurses & Midwives',
+    description:
+      'Total number of staff providing admin and support for doctors, nurses and midwives (FTE). This includes nursing support, clerical & administrative and maintenance staff.',
   },
-  cat_STT: {
-    name: 'Scientific & technical staff',
-    description: 'Scientific,​ ​ therapeutic​ ​ & technical​ ​ (STT)​ ​ staff',
+  cat_admin_supp_STT: {
+    name: 'Admin and Support Staff for Scientific, Therapeutic & Technical Staff',
+    description:
+      'Total number of staff providing admin and support for scientific, therapeutic and technical staff. This includes support to healthcare scientists and other ST&T staff, clerical & administrative and maintenance staff.',
   },
-  cat_Support_Clinical: {
-    name: 'Support​​ Staff medical',
-    description: 'Support​ ​ to​ ​ doctors,​ ​ nurses​ ​ & midwives',
+  cat__nursing_staff: {
+    name: 'Nursing Staff',
+    description: 'Total number of Nurses for adult care (FTE).',
   },
-  cat_Support_STT: {
-    name: 'Support​ staff ST&T​',
-    description: 'Support​ ​ to​ ​ ST&T​ ​ staff',
+  cat__stt_staff: {
+    name: 'Scientific, Therapeutic & Technical Staff (ST&T)',
+    description: 'Total number of ST&T staff (FTE).',
+  },
+  cat__management_staff: {
+    name: 'Management Staff',
+    description: 'Total number of managers and senior managers employed at the NHS trust (FTE).',
   },
   planactual_diff: {
-    name: '£ difference planned-actual',
-    description: 'ytd_plan​ ​ minus​ ​ ytd_actual',
+    name:
+      'The absolute £ difference between planned and actual year-to-date (YTD) financial performance',
+    description:
+      'Year-to-date refers to the period from the beginning of the financial year to the present. This variable represents the absolute difference between planned and actual numbers.',
   },
   ytd_plan_miss: {
-    name: 'Financial performance',
+    name: 'Did the NHS trust financially perform as expected?',
     description:
-      '1 = trust​ did​ not​​ reach​​ planned YTD​​ balance,​ 0​ = trust​​ reached or​ ​did​​ better​ than​​ forecasted',
+      '1 = trust did not reach planned YTD balance, 0 = trust reached or did better than forecasted',
   },
   deficit: {
-    name: 'Financial deficit',
+    name: 'Financial deficit.',
     description:
-      '1 = trusts​ that​ are​​ in​​ deficit​ ​i.e with​ a​ negative​​ balance,​ 0​ = trusts​ ​ not​ ​ in​ ​ deficit',
+      'This tells you whether the NHS trust was in deficit i.e. with negative balance. Those in deficit are shown by "1", and those not in deficit are shown as "0".',
   },
   hospitalN: {
     name: 'Number of hospitals',
-    description: 'Number of hospitals in trust',
+    description: 'Number of hospitals within the NHS trust',
   },
 };
 
