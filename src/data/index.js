@@ -3,7 +3,7 @@ export const slidesNHS = [
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
     subheader:
-      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to hit this target since 2014 and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
+      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to [hit this target since 2014](http://scienceblog.cancerresearchuk.org/2016/10/13/cancer-waiting-times-whats-causing-the-delays/) and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
   },
   {
     type: 'article',
