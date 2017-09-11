@@ -3,7 +3,7 @@ export const slidesNHS = [
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
     subheader:
-      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to [hit this target since 2014](https://www.google.com) and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
+      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to [hit this target since 2014](http://scienceblog.cancerresearchuk.org/2016/10/13/cancer-waiting-times-whats-causing-the-delays/) and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
   },
   {
     type: 'article',
@@ -41,7 +41,7 @@ export const slidesNHS = [
         type: 'context',
         header: 'The National Health Service',
         info:
-          'There is a different organizing body in England and Scotland. Here we only look at the NHS England data.',
+          'There is a different organizing body in England and Scotland. ',
       },
       id2: {
         type: 'choice',
@@ -53,12 +53,12 @@ export const slidesNHS = [
             choiceId: 'c1',
             header: 'Aggregate all cancer types',
             info:
-              'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types. There could be much more text here and also some *markdown*!',
+              'The NHS currently does not distinguish between cancer types when establishing the targets for cancer types and aggregates them.',
           },
           {
             choiceId: 'c2',
-            header: 'Split by cancer groups',
-            info: 'You can also look at the different cancer types.',
+            header: 'Distinguish cancer types based on aggresiveness',
+            info: 'Waiting times may differ for more complicated cancers. In these cases, patients may wait longer to start treatment due to the need for specialised scans which are sometimes only available at larger hospitals located elsewhere. On the other hand, for more aggressive cancers, patients would be expected to be prioritised so that they receive treatment faster.',
           },
         ],
       },

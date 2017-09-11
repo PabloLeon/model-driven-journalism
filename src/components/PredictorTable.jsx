@@ -14,6 +14,7 @@ const getTotals = (d) => {
   }
   return 0.0;
 };
+const displayT = v => (v ? 'On target' : 'Not on target');
 
 const PredictorTable = ({ data }) => {
   const percentageCorrect = getTotals(data);
@@ -36,8 +37,8 @@ const PredictorTable = ({ data }) => {
               negative={n.guess !== n.trueValue}
             >
               <Table.Cell>{n.trustName}</Table.Cell>
-              <Table.Cell>{n.guess.toString()}</Table.Cell>
-              <Table.Cell>{n.trueValue.toString()}</Table.Cell>
+              <Table.Cell>{displayT(n.guess)}</Table.Cell>
+              <Table.Cell>{displayT(n.trueValue)}</Table.Cell>
             </Table.Row>
           ))}
         <Table.Row>
