@@ -3,7 +3,7 @@ export const slidesNHS = [
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
     subheader:
-      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to [hit this target since 2014](http://scienceblog.cancerresearchuk.org/2016/10/13/cancer-waiting-times-whats-causing-the-delays/) and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
+      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to [hit this target since 2014](https://www.google.com) and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
   },
   {
     type: 'article',
@@ -95,7 +95,7 @@ export const predictionsMock = [
 ];
 
 export const predictorInfo = {
-  numtreat_total: {
+  cat_numtreat_total: {
     name: 'Total number of patients treated',
     description: 'The total number of people receiving first treatment for cancer at the NHS trust',
   },
@@ -104,7 +104,7 @@ export const predictorInfo = {
     description:
       "This is calculated from the ratio between the actual number of patients who die following hospitalisation at the trust and the number that would be expected to die on the basis of average England figures given the characteristics of the patients treated there. ? It includes deaths which occur in hospital and deaths which occur outside of hospital within 30 days (inclusive) of discharge. The SHMI gives an indication for each non-specialist acute NHS trust in England whether the observed number of deaths within 30 days of discharge from hospital was 'above expected' (SHMI value > 1) or 'lower than expected' (SHMI value < 1). This index is aggregated over all cancer diagnosis groups.",
   },
-  patient_admissions: {
+  cat_patient_admissions: {
     name: 'Number of admitted patients',
     description: 'Total number of patients admitted into hospitals within the NHS trust',
   },
@@ -116,7 +116,7 @@ export const predictorInfo = {
     name: 'Available night beds',
     description: 'The total number of available beds (night ? only) for General & Acute',
   },
-  oncology_staff: {
+  cat_oncology_staff: {
     name:
       'Total number of medical staff (FTE) specialising or involved in treatment or diagnosis of cancer',
     description:
@@ -174,12 +174,6 @@ export const predictorInfo = {
   cat__management_staff: {
     name: 'Management Staff',
     description: 'Total number of managers and senior managers employed at the NHS trust (FTE).',
-  },
-  planactual_diff: {
-    name:
-      'The absolute £ difference between planned and actual year-to-date (YTD) financial performance',
-    description:
-      'Year-to-date refers to the period from the beginning of the financial year to the present. This variable represents the absolute difference between planned and actual numbers.',
   },
   ytd_plan_miss: {
     name: 'Did the NHS trust financially perform as expected?',
