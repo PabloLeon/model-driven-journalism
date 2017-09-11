@@ -48,7 +48,7 @@ class Article extends Component {
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
-      requiredPredictionIds: ['R1F', 'RAE', 'RJC'], // add real ones
+      requiredPredictionIds: ['RRV', 'RWE', 'R1F', 'RAE', 'RJC'], // TODO: fetch these dynamically
       currentCardIdx: 0,
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
