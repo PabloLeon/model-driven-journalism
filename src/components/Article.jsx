@@ -189,9 +189,8 @@ class Article extends Component {
           ods: waitingTime.ods,
           trustName: this.state.trustInfo[waitingTime.ods].organisation[0],
           guess: this.state.predictions.find(p => p.id === waitingTime.ods).payload.prediction,
-          trueValue: waitingTime.percVal <= wtpSelected,
+          trueValue: waitingTime.percVal >= wtpSelected,
         }));
-
         return <PredictorTable data={guesses} />;
       }
 

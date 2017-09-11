@@ -20,7 +20,7 @@ export const slidesNHS = [
         range: {
           min: 0,
           max: 100,
-          step: 10,
+          step: 5,
           unit: '%',
           marks: {
             85: {
