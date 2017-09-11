@@ -20,6 +20,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
               context={a.description}
               key={a.key}
               onSelect={() => onSelect(a.key)}
+              additionalInfo={a.description}
             />
           ))}
         </Card.Group>
@@ -30,7 +31,7 @@ const PredictorListing = ({ selectedPredictors, availablePredictors, onDelete, o
           {selectedPredictors.map(p => (
             <Predictor
               label={p.name}
-              context={p.description}
+              additionalInfo={p.description}
               key={p.key}
               onDelete={() => onDelete(p.key)}
             />

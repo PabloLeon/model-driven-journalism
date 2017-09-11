@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Card } from 'semantic-ui-react';
+import { Icon, Card, Popup } from 'semantic-ui-react';
 // TODO: onledete functionality
-const Predictor = ({ onDelete, onSelect, label }) => (
+const card = (onDelete, onSelect, label) => (
   <Card onClick={onSelect}>
+    <Card.Header size="small" style={{ color: 'black' }}>
+      {label}
+    </Card.Header>
     {onDelete && (
       <Icon
         name="remove"
@@ -11,17 +14,19 @@ const Predictor = ({ onDelete, onSelect, label }) => (
         style={{ position: 'absolute', top: '0', right: '0' }}
       />
     )}
-    <Card.Header size="small" style={{ color: 'black' }}>
-      {label}
-    </Card.Header>
-
-    <Card.Meta>Some meta information </Card.Meta>
   </Card>
+);
+const Predictor = ({ onDelete, onSelect, label, additionalInfo }) => (
+  <Popup trigger={card(onDelete, onSelect, label)} content={additionalInfo} />
 );
 Predictor.propTypes = {
   onDelete: PropTypes.func,
   onSelect: PropTypes.func,
   label: PropTypes.string.isRequired,
+  additionalInfo: PropTypes.string,
+};
+Predictor.defaultProps = {
+  additionalInfo: '',
 };
 
 export default Predictor;
