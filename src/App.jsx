@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { csv } from 'd3-request'; // this should work differently with the final version
 import Article from './components/Article';
-import { trustInfo, predictorInfo } from './data/';
 import './App.css';
 
 class App extends Component {
@@ -9,64 +8,81 @@ class App extends Component {
     super(props);
     this.state = {
       geolocation: { longitude: -4.2, latitude: 55.5 }, // [undefined, undefined],
-      dataPaths: [],
-      canProceed: false,
-      predictorInfo,
+      specsLoaded: false,
+      hospitalsLoaded: false,
+      waitingtimeLoaded: false,
       hospitals: undefined,
       waitingTimes: undefined,
       markers: undefined,
       predictors: undefined,
-      trustInfos: undefined,
+      canProceed: false,
     };
-    this.loadData = this.loadData.bind(this);
+    this.fetchArticleSpec = this.fetchArticleSpecs.bind(this);
+    this.fetchWaitingTimesSpecs = this.fetchWaitingTimesSpecs.bind(this);
+    this.fetchHospitalSpecs = this.fetchHospitalSpecs.bind(this);
     this.createMarkers = this.createMarkers.bind(this);
+    this.allLoaded = this.allLoaded.bind(this);
   }
   componentDidMount() {
-    this.loadData();
-    // console.info('Establishing user location');
-    // navigator.geolocation.getCurrentPosition(
-    //   (position) => {
-    //     console.log('succesfully localized the user: ', position.coords);
-    //     this.setState({
-    //       ...this.state,
-    //       geolocation: [position.coords.longitude, position.coords.latitude],
-    //     });
-
-    //     this.loadData();
-    //   },
-    //   (error) => {
-    //     console.log('error localizing the user', error.message);
-    //     this.setState({ ...this.state, geolocation: [undefined, undefined], canProceed: false });
-    //   },
-    //   { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
-    // );
+    this.fetchArticleSpecs();
+    this.fetchWaitingTimesSpecs();
+    this.fetchHospitalSpecs();
   }
 
-  loadData() {
-    console.info('Loading data sources');
-    csv('hospitals.csv', (error, d) => {
-      if (error) {
-        console.error('data loding error at hospital data');
-        this.setState({ canProceed: false });
-      }
-      this.setState({
-        hospitals: d,
+  fetchArticleSpecs() {
+    fetch('https://raw.githubusercontent.com/PabloLeon/journalismData/master/articleSpec.json')
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({ specsLoaded: true, articleSpecs: data });
       });
-    });
-    csv('waitingtimes.csv', (error, d) => {
-      if (error) {
-        console.error('data loding error at waiting time data');
-        this.setState({ canProceed: false });
-      }
-      this.setState({
-        waitingTimes: d,
-      });
-      // now get the markers
-      this.createMarkers();
-    });
   }
-  createMarkers() {
-    const marks = this.state.hospitals.map(h => ({
+  fetchWaitingTimesSpecs() {
+    csv(
+      'https://raw.githubusercontent.com/PabloLeon/journalismData/master/waitingtimes.csv',
+      (error, d) => {
+        if (error) {
+          console.log('error', error.message);
+        } else {
+          this.setState({
+            waitingTimes: d,
+            waitingtimeLoaded: true,
+          });
+        }
+      },
+    );
+  }
+  fetchHospitalSpecs() {
+    csv(
+      'https://raw.githubusercontent.com/PabloLeon/journalismData/master/hospitals.csv',
+      (error, d) => {
+        if (error) {
+          console.error('data loding error at hospital data');
+        } else {
+          console.error('data loaded', d);
+          this.setState({
+            hospitals: d,
+            hospitalsLoaded: true,
+          });
+          this.createMarkers(d);
+        }
+      },
+    );
+  }
+  allLoaded() {
+    if (
+      this.state.canProceed &&
+      this.state.hospitalsLoaded &&
+      this.state.waitingtimeLoaded &&
+      this.state.specsLoaded
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  createMarkers(d) {
+    console.log('creating markers', d);
+    const marks = d.map(h => ({
       name: h.OrganisationName,
       odsCode: h.ParentODSCode,
       coordinates: [parseFloat(h.Longitude), parseFloat(h.Latitude)],
@@ -74,10 +90,8 @@ class App extends Component {
     this.setState({
       ...this.state,
       markers: marks,
+      canProceed: true,
     });
-
-    // TODO: there should be some checks here if everything loaded correctly
-    this.setState({ canProceed: true });
   }
   render() {
     return (
@@ -90,15 +104,16 @@ class App extends Component {
           alignContent: 'center',
         }}
       >
-        {this.state.canProceed ? (
+        {this.allLoaded() ? (
           <Article
             geolocation={this.state.geolocation}
             data={{
-              allPredictors: this.state.predictorInfo,
+              allPredictors: this.state.articleSpecs.predictorInfo,
               hospitals: this.state.hospitals,
               waitingTimes: this.state.waitingTimes,
               markers: this.state.markers,
-              trustInfo,
+              trustInfo: this.state.articleSpecs.trustInfo,
+              slideSpec: this.state.articleSpecs.slides,
             }}
           />
         ) : (

@@ -39,7 +39,7 @@ class Article extends Component {
     this.state = {
       height: window.innerHeight,
       width: window.innerWidth,
-      allSlideSpecs: slidesNHS,
+      allSlideSpecs: this.props.data.slideSpec,
       geolocation: this.props.geolocation,
       currentContextShownID: 'undefined',
       choices: [], // contains the choices made in the context
@@ -206,6 +206,7 @@ class Article extends Component {
         const newMarkers = this.state.mapParameters.allMarkers.filter(
           m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
+        console.log('get map aparameters', newMarkers, this.state.mapParameters);
         const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates), 8.5, 0);
 
         return {
