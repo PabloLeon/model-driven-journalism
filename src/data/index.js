@@ -2,7 +2,8 @@ export const slidesNHS = [
   {
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
-    subheader: 'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time. However, NHS England have struggled to hit this target since 2014 and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
+    subheader:
+      'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time.\n\n However, NHS England have struggled to hit this target since 2014 and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
   },
   {
     type: 'article',
@@ -15,7 +16,7 @@ export const slidesNHS = [
         type: 'range',
         header: 'Measuring success',
         info:
-          'Success can be measured in many different ways and different measures have been used in the past. The NHS measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed. In England the aim is to referr 85% of the patients in 62 days. In Scotland and Wales the target is 95% referrals.',
+          'Success can be measured in many different ways and different measures have been used in the past. The NHS measures success by looking at the number of patients (in percentage) that are still waiting for treatment after the aimed target ellapsed.\n\n In England the aim is to referr 85% of the patients in 62 days. In Scotland and Wales the target is 95% referrals.',
         range: {
           min: 0,
           max: 100,

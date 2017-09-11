@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import parse from '../utils/parser';
 import { Container, Item, Header } from 'semantic-ui-react';
 import Choice from './Choice';
 
@@ -9,7 +9,7 @@ import Choice from './Choice';
 const ChoiceBlock = ({ id, header, info, choices, makeChoice, selected }) => (
   <Container style={{ padding: '10px' }}>
     <Header size="huge">{header}</Header>
-    <p>{info}</p>
+    <p>{parse(info, {})}</p>
     <br />
     <Container>
       <Item.Group divided relaxed>
@@ -20,7 +20,7 @@ const ChoiceBlock = ({ id, header, info, choices, makeChoice, selected }) => (
               choiceId={o.choiceId}
               onChoice={cid => makeChoice({ id, payload: { choiceId: cid } })}
               header={o.header}
-              info={o.info}
+              info={parse(o.info, {})}
               selected={o.choiceId === selected}
             />
           ))}

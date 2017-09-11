@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Header } from 'semantic-ui-react';
 import Range from './Range';
+import parse from '../utils/parser';
 
 const RangeBlock = ({ id, value, header, info, range, onChoice }) => (
   <Container style={{ padding: '10px' }}>
     <Header size="huge">{header}</Header>
-    <p>{info}</p>
+    <p>{parse(info, {})}</p>
     <br />
     <Container style={{ width: '85%', margin: '0 auto' }}>
       <Range

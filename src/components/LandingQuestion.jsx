@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Segment, Container, Button } from 'semantic-ui-react';
+import parse from '../utils/parser';
 
 const LandingQuestion = ({ header, subheader, onEnter }) => (
   <Container text>
     <Segment clearing>
       <Header size="huge">{header} </Header>
-      <Header.Subheader>{subheader}</Header.Subheader>
+      <Header.Subheader>{parse(subheader, {})}</Header.Subheader>
       <br />
       <Button
         content="Next"
