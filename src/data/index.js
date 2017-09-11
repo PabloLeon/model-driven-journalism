@@ -2,8 +2,7 @@ export const slidesNHS = [
   {
     type: 'landing',
     header: 'How succesful is the NHS at delivering on referral to treatment targets for cancer?',
-    subheader:
-      'Which factors determine the ability of your regional NHS to fulfill the cancer waiting time targets?',
+    subheader: 'After referral following a cancer diagnosis, as outlined by the Cancer Reform Strategy (2007), patients should expect to wait no longer than 62 days until their first treatment. In fact, the government have set a target in England that at least 85% of patients waiting for first cancer treatment should not exceed this time. However, NHS England have struggled to hit this target since 2014 and we are still unable to pin-point exactly (with evidence) what factors contribute to this lack in performance.',
   },
   {
     type: 'article',
@@ -108,11 +107,11 @@ export const predictorInfo = {
     name: 'Number of admitted patients',
     description: 'Total number of patients admitted into hospitals within the NHS trust',
   },
-  beds_day: {
+  cat_beds_day: {
     name: 'Available day beds',
     description: 'The total number of available beds (day only) for General & Acute',
   },
-  beds_night: {
+  cat_beds_night: {
     name: 'Available night beds',
     description: 'The total number of available beds (night ? only) for General & Acute',
   },
@@ -162,7 +161,7 @@ export const predictorInfo = {
     description:
       'Total number of staff providing admin and support for doctors, nurses and midwives (FTE). This includes nursing support, clerical & administrative and maintenance staff.',
   },
-  cat_admin_supp_STT: {
+  cat__admin_supp_STT: {
     name: 'Admin and Support Staff for Scientific, Therapeutic & Technical Staff',
     description:
       'Total number of staff providing admin and support for scientific, therapeutic and technical staff. This includes support to healthcare scientists and other ST&T staff, clerical & administrative and maintenance staff.',
@@ -170,10 +169,6 @@ export const predictorInfo = {
   cat__nursing_staff: {
     name: 'Nursing Staff',
     description: 'Total number of Nurses for adult care (FTE).',
-  },
-  cat__stt_staff: {
-    name: 'Scientific, Therapeutic & Technical Staff (ST&T)',
-    description: 'Total number of ST&T staff (FTE).',
   },
   cat__management_staff: {
     name: 'Management Staff',
@@ -194,10 +189,6 @@ export const predictorInfo = {
     name: 'Financial deficit.',
     description:
       'This tells you whether the NHS trust was in deficit i.e. with negative balance. Those in deficit are shown by "1", and those not in deficit are shown as "0".',
-  },
-  hospitalN: {
-    name: 'Number of hospitals',
-    description: 'Number of hospitals within the NHS trust',
   },
 };
 
