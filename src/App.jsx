@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { csv } from 'd3-request'; // this should work differently with the final version
+import { Loader } from 'semantic-ui-react';
 import Article from './components/Article';
 import './App.css';
 
@@ -117,7 +118,7 @@ class App extends Component {
             }}
           />
         ) : (
-          <div>Loading resources</div>
+          <Loader>Loading resources</Loader>
         )}
       </div>
     );
