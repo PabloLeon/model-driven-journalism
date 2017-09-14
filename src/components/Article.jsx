@@ -169,6 +169,10 @@ class Article extends Component {
         );
       }
       case 'predictionEvaluation': {
+        //TODO: this is not the way this should be in the final version
+        this.sendUserData()
+
+
         // data format array of object
         // with o.trustName, o.guess (bool), o.trueValue (bool)
         // FIXME: currently there is more than one but this should not be
