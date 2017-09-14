@@ -59,7 +59,7 @@ class Article extends Component {
         },
         zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
-        currentMarkers: []//this.props.data.markers.slice(0, 80),
+        currentMarkers: this.props.data.markers, // [], // this.props.data.markers.slice(0, 80),
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -169,10 +169,8 @@ class Article extends Component {
         );
       }
       case 'predictionEvaluation': {
-        //TODO: this is not the way this should be in the final version
-        this.sendUserData()
-
-
+        // TODO: this is not the way this should be in the final version
+        this.sendUserData();
         // data format array of object
         // with o.trustName, o.guess (bool), o.trueValue (bool)
         // FIXME: currently there is more than one but this should not be
@@ -217,14 +215,14 @@ class Article extends Component {
           ...this.state.mapParameters,
           currentMarkers: newMarkers,
           center: newCenter,
-          zoom: 140,
+          zoom: 250,
         };
       }
       default:
         return {
           ...this.state.mapParameters,
           zoom: 20,
-          currentMarkers: [],
+          currentMarkers: this.state.mapParameters.allMarkers,
           center: { longitude: -4.2, latitude: 55.5 },
         };
     }
