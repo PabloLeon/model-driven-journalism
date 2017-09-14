@@ -8,8 +8,6 @@ import PredictionCard from './PredictionCard';
 import PredictorSelection from './PredictorSelection';
 import PredictorTable from './PredictorTable';
 import ActionableText from './ActionableText';
-
-import { slidesNHS } from '../data/';
 import parse from '../utils/parser';
 import { getCenterGeo } from '../utils/ops';
 
@@ -41,6 +39,7 @@ class Article extends Component {
       width: window.innerWidth,
       allSlideSpecs: this.props.data.slideSpec,
       geolocation: this.props.geolocation,
+      userLocation: this.props.userLocation,
       currentContextShownID: 'undefined',
       choices: [], // contains the choices made in the context
       predictions: [],
@@ -48,7 +47,7 @@ class Article extends Component {
       canProceed: false,
       selectedPredictors: [], // for now simply like this...later have a inventory system
       allPredictors: this.props.data.allPredictors,
-      requiredPredictionIds: ['RRV', 'RWE', 'R1F', 'RAE', 'RJC'], // TODO: fetch these dynamically
+      requiredPredictionIds: this.props.data.requiredTrusts, // ['RRV', 'RWE', 'R1F', 'RAE', 'RJC'], // TODO: fetch these dynamically
       currentCardIdx: 0,
       trustInfo: this.props.data.trustInfo,
       hospitals: this.props.data.hospitals,
@@ -60,7 +59,7 @@ class Article extends Component {
         },
         zoom: 20, // 16 with current shows all uk
         allMarkers: this.props.data.markers,
-        currentMarkers: this.props.data.markers.slice(0, 80),
+        currentMarkers: []//this.props.data.markers.slice(0, 80),
       },
     };
     this.numberOfSlides = this.state.allSlideSpecs.length;
@@ -68,13 +67,14 @@ class Article extends Component {
     this.nextSlide = this.nextSlide.bind(this);
     this.addPredictor = this.addPredictor.bind(this);
     this.removePredictor = this.removePredictor.bind(this);
-    this.zoomToGeo = this.zoomToGeo.bind(this);
     this.makePrediction = this.makePrediction.bind(this);
     this.getMapParameters = this.getMapParameters.bind(this);
     this.closeContext = this.closeContext.bind(this);
     this.selectContext = this.selectContext.bind(this);
     this.makeChoice = this.makeChoice.bind(this);
     this.getRequiredChoices = this.getRequiredChoices.bind(this);
+    this.sendUserData = this.sendUserData.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
   }
 
   getRequiredChoices() {
@@ -242,18 +242,6 @@ class Article extends Component {
       this.nextSlide();
     }
   }
-  zoomToGeo() {
-    this.setState({
-      ...this.state,
-      mapParameters: {
-        ...this.state.mapParameters,
-        currentCenter: this.state.geolocation,
-        currentZoom: 20,
-      },
-    });
-    this.nextSlide();
-  }
-
   addPredictor(predictor) {
     this.setState({
       selectedPredictors: [...this.state.selectedPredictors, predictor],
@@ -287,6 +275,32 @@ class Article extends Component {
         });
       }
     }
+  }
+  getUserLocation() {
+    console.log('getting user location');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        console.log('locaiton', location.coords);
+        this.setState({ userLocation: location.coords });
+      });
+    } else {
+      console.log('no user location');
+      this.setState({ userLocation: undefined });
+    }
+  }
+
+  sendUserData() {
+    // send the user interactions
+    const ts = Math.floor(Date.now() / 1000);
+    const d = JSON.stringify({
+      timestamp: ts,
+      userLocation: this.state.userLocation,
+      selectedChoices: this.state.choices,
+      selectedPredictors: this.state.selectedPredictors,
+      requiredPredictions: this.state.requiredPredictionIds,
+      userPredictions: this.state.predictions,
+    });
+    console.log('send stored user data', d);
   }
   selectContext(id) {
     this.setState({

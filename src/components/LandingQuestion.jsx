@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Header, Segment, Container, Button } from 'semantic-ui-react';
 import parse from '../utils/parser';
 
+// TODO: add geolocation here!
 const LandingQuestion = ({ header, subheader, onEnter }) => (
   <Container text>
     <Segment clearing>

@@ -23,13 +23,13 @@ class App extends Component {
     this.fetchHospitalSpecs = this.fetchHospitalSpecs.bind(this);
     this.createMarkers = this.createMarkers.bind(this);
     this.allLoaded = this.allLoaded.bind(this);
+    this.sampleTrusts = this.sampleTrusts.bind(this);
   }
   componentDidMount() {
     this.fetchArticleSpecs();
     this.fetchWaitingTimesSpecs();
     this.fetchHospitalSpecs();
   }
-
   fetchArticleSpecs() {
     fetch('https://raw.githubusercontent.com/PabloLeon/journalismData/master/articleSpec.json')
       .then(response => response.json())
@@ -44,9 +44,11 @@ class App extends Component {
         if (error) {
           console.log('error', error.message);
         } else {
+          const requiredTrusts = this.sampleTrusts(d, 10);
           this.setState({
             waitingTimes: d,
             waitingtimeLoaded: true,
+            requiredTrusts,
           });
         }
       },
@@ -80,9 +82,23 @@ class App extends Component {
     }
     return false;
   }
+  sampleTrusts(t, n) {
+    const shuffle = (array) => {
+      let counter = array.length;
+      while (counter > 0) {
+        const index = Math.floor(Math.random() * counter);
+        counter--;
+        const temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+      }
+      return array;
+    };
 
+    const trusts = t.map(t => t.ParentODSCode);
+    return shuffle(t.map(t => t.ods_code)).slice(0, n);
+  }
   createMarkers(d) {
-    console.log('creating markers', d);
     const marks = d.map(h => ({
       name: h.OrganisationName,
       odsCode: h.ParentODSCode,
@@ -107,14 +123,15 @@ class App extends Component {
       >
         {this.allLoaded() ? (
           <Article
-            geolocation={this.state.geolocation}
             data={{
+              geolocation: this.state.geolocation,
               allPredictors: this.state.articleSpecs.predictorInfo,
               hospitals: this.state.hospitals,
               waitingTimes: this.state.waitingTimes,
               markers: this.state.markers,
               trustInfo: this.state.articleSpecs.trustInfo,
               slideSpec: this.state.articleSpecs.slides,
+              requiredTrusts: this.state.requiredTrusts,
             }}
           />
         ) : (
