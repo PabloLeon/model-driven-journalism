@@ -208,7 +208,6 @@ class Article extends Component {
         const newMarkers = this.state.mapParameters.allMarkers.filter(
           m => m.odsCode === this.state.requiredPredictionIds[cardIdx],
         );
-        console.log('get map aparameters', newMarkers, this.state.mapParameters);
         const newCenter = getCenterGeo(newMarkers.map(m => m.coordinates), 8.5, 0);
 
         return {
@@ -303,6 +302,12 @@ class Article extends Component {
       userPredictions: this.state.predictions,
     });
     console.log('send stored user data', d);
+    fetch('http://mdj-logging-service.azurewebsites.net/log/test', {
+      method: 'POST',
+      body: d,
+    }).catch((error) => {
+      console.log('Request failed', error);
+    });
   }
   selectContext(id) {
     this.setState({
