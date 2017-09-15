@@ -2,6 +2,7 @@
   "name": "model-driven-journalism",
   "homepage": "https://PabloLeon.github.io/model-driven-journalism",
   "version": "0.1.0",
+  "license": "MIT",
   "dependencies": {
     "d3-request": "^1.0.5",
     "marksy": "^5.0.0",
@@ -22,14 +23,9 @@
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
-    "@storybook/addon-actions": "^3.2.0",
-    "@storybook/react": "^3.2.5",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
